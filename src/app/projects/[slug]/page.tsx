@@ -2,105 +2,113 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-const data: Record<
-  string,
-  {
-    title: string;
-    description: string;
-  }
-> = {
-  "web-application-security": {
-    title: "Introduction to Web Application Security",
+const projects = {
+  "recon-research-notes": {
+    title: "Recon Research Notes",
+    category: "RECONNAISSANCE / OSINT",
     description:
-      "An introductory note covering web application security concepts, authorized testing, and responsible reporting.",
+      "A structured collection of reconnaissance research, methodology, tools, and responsible information-gathering notes.",
+    details:
+      "This project organizes reconnaissance learning into clear research notes, helping document methodology, observations, and useful references.",
+    status: "Research & Documentation",
   },
+  "security-workflow-toolkit": {
+    title: "Security Workflow Toolkit",
+    category: "SECURITY / WORKFLOW",
+    description:
+      "A project focused on organizing security workflows, assessment notes, and repeatable documentation processes.",
+    details:
+      "The goal is to make security work easier to track through structured notes, consistent workflows, and responsible assessment documentation.",
+    status: "Project in Development",
+  },
+  "web-application-security-lab": {
+    title: "Web Application Security Lab",
+    category: "WEB APPLICATION SECURITY",
+    description:
+      "A learning-focused lab for exploring web application security concepts and authorized testing techniques.",
+    details:
+      "The lab is intended for controlled environments and applications where testing permission has been granted. Findings should be documented with clear explanations and remediation guidance.",
+    status: "Learning & Practice",
+  },
+} as const;
 
-  "osint-recon-fundamentals": {
-    title: "Reconnaissance and OSINT Fundamentals",
-    description:
-      "An introduction to passive reconnaissance, reliable public sources, and responsible OSINT practices.",
-  },
-
-  "responsible-security-research": {
-    title: "Responsible Security Research",
-    description:
-      "Notes on authorization, defining scope, documenting findings, and responsible vulnerability disclosure.",
-  },
-};
+type ProjectSlug = keyof typeof projects;
 
 export function generateStaticParams() {
-  return Object.keys(data).map((slug) => ({ slug }));
+  return Object.keys(projects).map((slug) => ({ slug }));
 }
 
-async function ResearchContent({
+async function ProjectDetails({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const item = data[slug];
 
-  if (!item) {
+  if (!Object.prototype.hasOwnProperty.call(projects, slug)) {
     notFound();
   }
+
+  const project = projects[slug as ProjectSlug];
 
   return (
     <article className="mx-auto w-full max-w-3xl">
       <Link
-        href="/#research"
-        className="inline-flex items-center text-lime-300 transition-colors hover:text-lime-200"
+        href="/#projects"
+        className="inline-flex text-sm text-[#B83A46] transition-colors hover:text-[#F0EFEA]"
       >
-        ← Back to research
+        &larr; Back to projects
       </Link>
 
-      <p className="mt-12 font-mono text-sm tracking-widest text-lime-300">
-        THE RED DEVIL / RESEARCH
+      <p className="mt-12 font-mono text-xs tracking-[0.2em] text-[#B83A46]">
+        THE RED DEVIL / PROJECTS
       </p>
 
-      <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-        {item.title}
+      <p className="mt-6 text-xs uppercase tracking-[0.18em] text-white/50">
+        {project.category}
+      </p>
+
+      <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-6xl">
+        {project.title}
       </h1>
 
-      <p className="mt-6 text-base leading-8 text-slate-300">
-        {item.description}
+      <p className="mt-6 text-lg leading-8 text-white/70">
+        {project.description}
       </p>
 
-      <div className="mt-10 rounded-xl border border-white/10 bg-white/[0.03] p-6">
-        <h2 className="text-lg font-semibold text-white">
-          Research Documentation
-        </h2>
-
-        <p className="mt-3 leading-7 text-slate-400">
-          Detailed research notes, methodology, references, and findings will
-          be added here.
+      <section className="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+        <p className="text-xs uppercase tracking-[0.18em] text-[#B83A46]">
+          {project.status}
         </p>
-      </div>
+        <h2 className="mt-4 text-xl font-semibold">About this project</h2>
+        <p className="mt-4 leading-8 text-white/65">{project.details}</p>
+      </section>
 
       <Link
-        href="/#research"
-        className="mt-8 inline-flex rounded-lg border border-lime-300/30 px-4 py-2 text-sm text-lime-300 transition-colors hover:bg-lime-300/10"
+        href="/#projects"
+        className="mt-8 inline-flex rounded-lg border border-white/15 px-4 py-3 text-sm transition-colors hover:border-[#B83A46] hover:text-[#B83A46]"
       >
-        Back to all research
+        Return to portfolio
       </Link>
     </article>
   );
 }
 
-export default function Page({
+export default function ProjectDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   return (
-    <main className="min-h-screen bg-[#070a08] px-6 py-16 text-white sm:px-10">
+    <main className="min-h-screen bg-[#111315] px-6 py-16 text-[#F0EFEA] sm:px-10">
       <Suspense
         fallback={
-          <p className="mx-auto max-w-3xl font-mono text-sm text-lime-300">
-            Loading research...
+          <p className="mx-auto max-w-3xl font-mono text-sm text-[#B83A46]">
+            Loading project...
           </p>
         }
       >
-        <ResearchContent params={params} />
+        <ProjectDetails params={params} />
       </Suspense>
     </main>
   );
