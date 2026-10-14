@@ -1,116 +1,188 @@
 "use client";
 
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useRef, useState, type FormEvent, type ReactNode } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
 
-const C = {
-  bg: "#111315",
-  panel: "#191C1F",
-  panelLight: "#202428",
-  text: "#F0EFEA",
-  muted: "#A1A3A5",
-  red: "#B83A46",
-  redLight: "#E45B66",
-  border: "rgba(240,239,234,0.11)",
-};
+import CustomCursor from "./components/CustomCursor";
+import HorizontalProjects from "./components/HorizontalProjects";
+import Magnetic from "./components/Magnetic";
+import ScrambleText from "./components/ScrambleText";
+import SectionCounter from "./components/SectionCounter";
+import { projects } from "./lib/data";
+import profilePic from "../../public/images/profile.jpg";
 
-const skills = [
-  "Web Application Security",
-  "Penetration Testing",
+/* ===================== DATA ===================== */
+
+const skillBars = [
+  { label: "Web Application Security", value: 90 },
+  { label: "Penetration Testing Practice", value: 85 },
+  { label: "Linux & Command Line", value: 82 },
+  { label: "OSINT & Reconnaissance", value: 80 },
+  { label: "Security Tooling & Automation", value: 75 },
+];
+
+const marqueeItems = [
+  "WEB APPLICATION SECURITY",
+  "PENETRATION TESTING",
   "OSINT",
-  "Reconnaissance",
-  "Linux",
-  "Networking",
-  "Burp Suite",
-  "Nmap",
-  "Git & GitHub",
-  "Security Research",
+  "RECONNAISSANCE",
+  "LINUX",
+  "NETWORKING",
+  "BURP SUITE",
+  "NMAP",
+  "REVERSE ENGINEERING",
+  "SECURITY RESEARCH",
 ];
 
-const projects = [
+const expertise = [
   {
-    number: "001",
-    slug: "web-application-security-lab",
-    category: "WEB SECURITY",
-    title: "Web Application Security Lab",
+    category: "Offensive",
+    title: "Penetration Testing",
     description:
-      "A learning environment for exploring web security concepts, testing defensive controls, and documenting findings in authorized labs.",
-    status: "LEARNING",
-    tags: ["Web Security", "Lab", "Documentation"],
+      "Manual testing in authorized labs — mapping attack surfaces, identifying common vulnerability classes, and writing clear, actionable findings.",
   },
   {
-    number: "002",
-    slug: "recon-research-notes",
-    category: "RECONNAISSANCE",
-    title: "Recon Research Notes",
+    category: "Engineering",
+    title: "Web Application Security",
     description:
-      "A structured collection of reconnaissance concepts, tool references, and responsible research workflows.",
-    status: "IN PROGRESS",
-    tags: ["OSINT", "Recon", "Research"],
+      "Understanding application architecture, authentication flows, session handling, and the security assumptions behind modern web apps.",
   },
   {
-    number: "003",
-    slug: "security-workflow-toolkit",
-    category: "SECURITY TOOLING",
-    title: "Security Workflow Toolkit",
+    category: "Recon",
+    title: "OSINT & Reconnaissance",
     description:
-      "An evolving collection of scripts, checklists, and notes designed to make security learning more organized and repeatable.",
-    status: "PLANNED",
-    tags: ["Python", "Linux", "Automation"],
-  },
-];
-
-const researchNotes = [
-  {
-    number: "001",
-    slug: "web-application-security",
-    category: "WEB SECURITY",
-    title: "Introduction to Web Application Security",
-    description:
-      "Core concepts, common risks, testing methodology, and a structured learning path.",
+      "Attack-surface mapping, source verification, and responsible use of publicly available information for research.",
   },
   {
-    number: "002",
-    slug: "osint-recon-fundamentals",
-    category: "OSINT & RECON",
-    title: "Reconnaissance and OSINT Fundamentals",
+    category: "Systems",
+    title: "Linux & Networking",
     description:
-      "Research methodology, source verification, and responsible use of publicly available information.",
+      "Command-line confidence, service enumeration, and understanding how packets, ports, and protocols actually behave.",
   },
   {
-    number: "003",
-    slug: "responsible-security-research",
-    category: "METHODOLOGY",
-    title: "Responsible Security Research",
+    category: "Analysis",
+    title: "Reverse Engineering",
     description:
-      "Scope, authorization, evidence collection, clear reporting, and ethical boundaries.",
+      "Examining software structure, program behavior, and implementation details to understand what runs beneath the surface.",
+  },
+  {
+    category: "Writing",
+    title: "Technical Documentation",
+    description:
+      "Turning labs, notes, and experiments into structured write-ups that are easy to review, reproduce, and learn from.",
   },
 ];
 
-function ArrowIcon() {
+const experience = [
+  {
+    role: "Independent Security Researcher",
+    org: "Self-directed",
+    period: "2026 — Present",
+    type: "Ongoing",
+    location: "Bangladesh · Remote",
+    bullets: [
+      "Building a structured learning practice around web application security, reconnaissance, and ethical testing methodology.",
+      "Documenting labs, tool notes, and experiment write-ups as part of an open, ongoing research log.",
+      "Practicing responsible disclosure habits: scoped testing, evidence collection, and clear reporting.",
+    ],
+    tags: ["Web Security", "OSINT", "Linux", "Reporting"],
+  },
+  {
+    role: "Security Lab Practice",
+    org: "Home Lab & Authorized Platforms",
+    period: "2025 — Present",
+    type: "Practice",
+    location: "Remote",
+    bullets: [
+      "Working through hands-on labs covering authentication flaws, access control, and common web vulnerability classes.",
+      "Using Burp Suite, Nmap, and Linux tooling to practice structured testing and evidence capture.",
+      "Turning each lab into repeatable checklists and notes for future reference.",
+    ],
+    tags: ["Burp Suite", "Nmap", "Linux", "OWASP"],
+  },
+  {
+    role: "Learning in Public",
+    org: "The Red Devil Portfolio",
+    period: "2026",
+    type: "Project",
+    location: "Remote",
+    bullets: [
+      "Designing and building this portfolio as a transparent record of projects, notes, and lessons learned.",
+      "Focused on presenting security work clearly — status, scope, and reproducibility.",
+    ],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+  },
+];
+
+/* ===================== PRIMITIVES ===================== */
+
+function ArrowIcon({ className = "" }: { className?: string }) {
   return (
     <svg
       aria-hidden="true"
-      width="17"
-      height="17"
+      width="16"
+      height="16"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.7"
+      strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
+      className={className}
     >
       <path d="M7 17 17 7M7 7h10v10" />
     </svg>
   );
 }
 
-function SectionLabel({ children }: { children: ReactNode }) {
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 220,
+    damping: 40,
+    restDelta: 0.001,
+  });
   return (
-    <p className="mb-5 font-mono text-xs tracking-[0.2em] text-[#E45B66]">
-      {children}
-    </p>
+    <motion.div
+      aria-hidden="true"
+      style={{ scaleX }}
+      className="fixed left-0 right-0 top-0 z-[60] h-[2px] origin-left bg-[#D97757]"
+    />
+  );
+}
+
+function SectionHeading({
+  kicker,
+  title,
+  count,
+}: {
+  kicker: string;
+  title: string;
+  count?: string;
+}) {
+  return (
+    <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
+          {kicker}
+        </p>
+        <h2 className="mt-3 text-4xl font-semibold uppercase leading-[0.95] tracking-[-0.035em] text-[#F0EBE0] sm:text-5xl lg:text-6xl">
+          {title}
+        </h2>
+      </div>
+      {count && (
+        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5A554C]">
+          {count}
+        </span>
+      )}
+    </div>
   );
 }
 
@@ -124,7 +196,6 @@ function Reveal({
   delay?: number;
 }) {
   const reduceMotion = useReducedMotion();
-
   return (
     <motion.div
       initial={reduceMotion ? false : { opacity: 0, y: 22 }}
@@ -142,8 +213,208 @@ function Reveal({
   );
 }
 
-export default function Home() {
+function SkillBar({ label, value }: { label: string; value: number }) {
   const reduceMotion = useReducedMotion();
+  return (
+    <div>
+      <div className="flex items-center justify-between">
+        <span className="text-sm font-medium text-[#C9C2B4]">{label}</span>
+        <span className="font-mono text-xs text-[#5A554C]">{value}%</span>
+      </div>
+      <div className="mt-2.5 h-[2px] w-full overflow-hidden bg-white/[0.06]">
+        <motion.div
+          initial={reduceMotion ? { width: `${value}%` } : { width: 0 }}
+          whileInView={{ width: `${value}%` }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{
+            duration: reduceMotion ? 0 : 1.2,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="h-full bg-[#D97757]"
+        />
+      </div>
+    </div>
+  );
+}
+
+/* ===================== PHOTO REVEAL ===================== */
+
+function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const photoScale = useTransform(
+    scrollYProgress,
+    [0, 0.35, 0.7, 1],
+    [0.65, 1, 1, 0.92],
+  );
+  const photoRotate = useTransform(
+    scrollYProgress,
+    [0, 0.35, 0.7, 1],
+    [-6, 0, 0, 5],
+  );
+  const photoOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.85, 1],
+    [0.25, 1, 1, 0.4],
+  );
+  const photoY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const textY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const ringRotate = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const ringScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [0.85, 1.1, 1.25],
+  );
+
+  return (
+    <section
+      ref={ref}
+      className="relative isolate overflow-hidden border-b border-white/[0.06] bg-[#0A0908]"
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D97757]/[0.07] blur-[140px]"
+      />
+
+      <div className="relative mx-auto grid min-h-[110vh] max-w-7xl items-center gap-14 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.1fr] lg:gap-20 lg:px-8 lg:py-32">
+        <motion.div
+          style={{ y: reduceMotion ? 0 : textY }}
+          className="relative z-10"
+        >
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
+            // Operator
+          </p>
+          <h2 className="mt-4 text-4xl font-semibold uppercase leading-[0.95] tracking-[-0.035em] text-[#F0EBE0] sm:text-5xl lg:text-6xl">
+            Behind
+            <br />
+            <span className="text-[#5A554C]">the handle</span>
+          </h2>
+          <p className="mt-6 max-w-md text-base leading-8 text-[#8E887B]">
+            Somewhere between the terminal and the notebook — learning in
+            public, one lab at a time. Not claiming expertise. Documenting the
+            path toward it.
+          </p>
+
+          <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.04] sm:max-w-md">
+            {[
+              ["Handle", "7H3R3dD3v1L"],
+              ["Based in", "Bangladesh"],
+              ["Focus", "AppSec · Pentest"],
+              ["Since", "2026"],
+            ].map(([k, v]) => (
+              <div
+                key={k}
+                className="bg-[#0A0908] px-4 py-4 font-mono text-[11px]"
+              >
+                <p className="text-[#5A554C]">{k}</p>
+                <p className="mt-1.5 text-[#C9C2B4]">{v}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <div className="relative mx-auto w-full max-w-[480px]">
+          {!reduceMotion && (
+            <motion.div
+              aria-hidden="true"
+              style={{ rotate: ringRotate, scale: ringScale }}
+              className="pointer-events-none absolute inset-[-8%] rounded-full border border-dashed border-[#D97757]/25"
+            />
+          )}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-[-3%] rounded-full border border-[#D97757]/15"
+          />
+
+          <motion.div
+            style={{
+              scale: reduceMotion ? 1 : photoScale,
+              rotate: reduceMotion ? 0 : photoRotate,
+              opacity: reduceMotion ? 1 : photoOpacity,
+              y: reduceMotion ? 0 : photoY,
+            }}
+            className="relative origin-center"
+          >
+            <div className="absolute -inset-6 rounded-[2rem] bg-[#D97757]/[0.08] blur-3xl" />
+            <div className="relative rounded-[1.6rem] border border-white/[0.08] bg-[#12100E] p-2 shadow-2xl shadow-black/50">
+              <div className="overflow-hidden rounded-[1.2rem] border border-white/[0.05] bg-[#0A0908]">
+                <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3">
+                  <div className="flex items-center gap-1.5" aria-hidden="true">
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#5A554C]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#5A554C]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#D97757]/70" />
+                  </div>
+                  <span className="font-mono text-[10px] tracking-[0.14em] text-[#5A554C]">
+                    reddevil@local
+                  </span>
+                  <span className="flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-[#7EA88A]">
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#7EA88A]" />
+                    ONLINE
+                  </span>
+                </div>
+
+                <div className="relative aspect-[4/5]">
+                  <Image
+                    src={profilePic}
+                    alt="Hasnain Shahriar — cybersecurity researcher"
+                    fill
+                    priority
+                    sizes="(max-width: 640px) 90vw, 480px"
+                    placeholder="blur"
+                    className="object-cover object-[center_22%]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0908] via-transparent to-transparent" />
+                  <div className="absolute bottom-5 left-5 right-5">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#E89B7B]">
+                      // The Red Devil
+                    </p>
+                    <p className="mt-2 text-2xl font-semibold tracking-tight text-white">
+                      Hasnain Shahriar
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ===================== MARQUEE ===================== */
+
+function Marquee({ reduceMotion }: { reduceMotion: boolean }) {
+  const items = [...marqueeItems, ...marqueeItems];
+  return (
+    <section className="relative overflow-hidden border-b border-white/[0.06] bg-[#0A0908] py-6">
+      <div
+        className={`flex w-max gap-10 whitespace-nowrap ${
+          reduceMotion ? "" : "animate-marquee"
+        }`}
+      >
+        {items.map((item, i) => (
+          <span
+            key={`${item}-${i}`}
+            className="flex items-center gap-10 font-mono text-[11px] uppercase tracking-[0.3em] text-[#5A554C]"
+          >
+            {item}
+            <span className="text-[#D97757]">◆</span>
+          </span>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ===================== PAGE ===================== */
+
+export default function Home() {
+  const reduceMotion = Boolean(useReducedMotion());
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [contactForm, setContactForm] = useState({
@@ -155,19 +426,26 @@ export default function Home() {
   const [contactStatus, setContactStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroNameY = useTransform(heroProgress, [0, 1], [0, -120]);
+  const heroNameOpacity = useTransform(heroProgress, [0, 0.9], [1, 0]);
+  const heroNameScale = useTransform(heroProgress, [0, 1], [1, 0.92]);
+  const heroGlowScale = useTransform(heroProgress, [0, 1], [1, 1.4]);
+
   const navigation = [
     ["About", "#about"],
-    ["Expertise", "#skills"],
+    ["Expertise", "#expertise"],
     ["Projects", "#projects"],
-    ["Research", "#research"],
-    ["Journey", "#journey"],
+    ["Experience", "#experience"],
   ];
 
   async function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
     if (isSubmitting) return;
-
     setIsSubmitting(true);
     setContactStatus("");
 
@@ -177,26 +455,15 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contactForm),
       });
-
       const result = await response.json();
-
       if (!response.ok || !result.success) {
-        setContactStatus(
-          result.message || "Unable to submit your message.",
-        );
+        setContactStatus(result.message || "Unable to submit your message.");
         return;
       }
-
       setContactStatus(
         result.message || "Your message was submitted successfully.",
       );
-
-      setContactForm({
-        name: "",
-        email: "",
-        message: "",
-        website: "",
-      });
+      setContactForm({ name: "", email: "", message: "", website: "" });
     } catch {
       setContactStatus(
         "Network error. Please check your connection and try again.",
@@ -209,33 +476,39 @@ export default function Home() {
   return (
     <main
       id="home"
-      className="min-h-screen overflow-x-clip bg-[#111315] text-[#F0EFEA] selection:bg-[#B83A46]/40 selection:text-white"
+      className="min-h-screen overflow-x-clip bg-[#0A0908] text-[#F0EBE0] selection:bg-[#D97757]/30 selection:text-white"
     >
-      {/* Navigation */}
-      <header className="sticky top-0 z-50 border-b border-white/[0.08] bg-[#111315]/90 backdrop-blur-xl">
+      <CustomCursor />
+      <ScrollProgress />
+      <SectionCounter />
+
+      {/* ================= NAV ================= */}
+      <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-[#0A0908]/85 backdrop-blur-xl">
         <nav
           aria-label="Main navigation"
           className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8"
         >
-          <a
-            href="#home"
-            onClick={() => setMobileNavOpen(false)}
-            className="flex items-center gap-3"
-          >
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#B83A46] font-mono text-sm font-bold text-white">
-              R/
-            </span>
-            <span className="text-base font-semibold tracking-tight">
-              Hasnain Shahriar<span className="text-[#E45B66]">.</span>
-            </span>
-          </a>
+          <Magnetic strength={0.4}>
+            <a
+              href="#home"
+              onClick={() => setMobileNavOpen(false)}
+              className="flex items-center gap-2.5"
+            >
+              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#D97757] font-mono text-xs font-bold text-[#0A0908]">
+                R/
+              </span>
+              <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F0EBE0]">
+                Red Devil
+              </span>
+            </a>
+          </Magnetic>
 
-          <div className="hidden items-center gap-7 lg:flex">
+          <div className="hidden items-center gap-8 lg:flex">
             {navigation.map(([label, href]) => (
               <a
                 key={href}
                 href={href}
-                className="text-sm text-[#A1A3A5] transition hover:text-white"
+                className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#8E887B] transition hover:text-[#F0EBE0]"
               >
                 {label}
               </a>
@@ -243,504 +516,392 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-2">
-            <a
-              href="#contact"
-              onClick={() => setMobileNavOpen(false)}
-              className="hidden rounded-lg bg-[#B83A46] px-4 py-2.5 text-sm font-medium text-white transition hover:bg-[#D14855] sm:inline-flex"
-            >
-              Get in touch <span className="ml-2">↗</span>
-            </a>
+            <Magnetic strength={0.3}>
+              <a
+                href="#contact"
+                onClick={() => setMobileNavOpen(false)}
+                className="hidden rounded-md bg-[#D97757] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0908] transition hover:bg-[#E89B7B] sm:inline-flex"
+              >
+                Contact
+              </a>
+            </Magnetic>
 
             <button
               type="button"
               aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileNavOpen}
               onClick={() => setMobileNavOpen((open) => !open)}
-              className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-xl lg:hidden"
+              className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 text-base lg:hidden"
             >
-              {mobileNavOpen ? "×" : "☰"}
+              {mobileNavOpen ? "✕" : "☰"}
             </button>
           </div>
         </nav>
 
         {mobileNavOpen && (
-          <div className="border-t border-white/10 px-4 py-3 lg:hidden">
-            {[...navigation, ["Contact", "#contact"]].map(
-              ([label, href]) => (
-                <a
-                  key={href}
-                  href={href}
-                  onClick={() => setMobileNavOpen(false)}
-                  className="block rounded-lg px-3 py-3 text-sm text-[#D0D0CD] hover:bg-white/5 hover:text-white"
-                >
-                  {label}
-                  <span className="float-right text-[#E45B66]">↗</span>
-                </a>
-              ),
-            )}
+          <div className="border-t border-white/[0.06] px-4 py-3 sm:px-6 lg:hidden">
+            {[...navigation, ["Contact", "#contact"]].map(([label, href]) => (
+              <a
+                key={href}
+                href={href}
+                onClick={() => setMobileNavOpen(false)}
+                className="flex items-center justify-between rounded-md px-3 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#C9C2B4] hover:bg-white/[0.04]"
+              >
+                {label}
+                <span className="text-[#E89B7B]">↗</span>
+              </a>
+            ))}
           </div>
         )}
       </header>
 
-      {/* Hero */}
-      <section className="relative isolate overflow-hidden border-b border-white/[0.07]">
+      {/* ================= HERO ================= */}
+      <section
+        ref={heroRef}
+        className="relative isolate overflow-hidden border-b border-white/[0.06]"
+      >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-[#B83A46]/10 blur-[130px]"
+          className="pointer-events-none absolute inset-0 opacity-40"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(217,119,87,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(217,119,87,0.05) 1px, transparent 1px)",
+            backgroundSize: "72px 72px",
+            maskImage:
+              "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)",
+          }}
         />
-
-        <div
+        <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-[#B83A46]/60 to-transparent"
+          style={{ scale: reduceMotion ? 1 : heroGlowScale }}
+          className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#D97757]/[0.08] blur-[160px]"
         />
 
-        <div className="mx-auto grid min-h-[680px] max-w-7xl items-center gap-14 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-24">
+        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-36">
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+            style={{
+              y: reduceMotion ? 0 : heroNameY,
+              opacity: reduceMotion ? 1 : heroNameOpacity,
+              scale: reduceMotion ? 1 : heroNameScale,
+            }}
+            initial={reduceMotion ? false : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.7 }}
-            className="relative z-10"
+            transition={{ duration: reduceMotion ? 0 : 0.9, ease: "easeOut" }}
+            className="text-center"
           >
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#B83A46]/40 bg-[#B83A46]/10 px-3 py-2 text-xs text-[#F2A0A6]">
-              <span className="h-2 w-2 rounded-full bg-[#E45B66]" />
-              Independent Security Research
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-[#7EA88A]/25 bg-[#7EA88A]/[0.06] px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-[#B8D4BE]">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#7EA88A] opacity-60" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#7EA88A]" />
+              </span>
+              Available for collaboration
             </div>
 
-            <p className="mb-5 font-mono text-xs tracking-[0.18em] text-[#E45B66]">
-              HELLO, WORLD — I AM
-            </p>
-
-            <h1 className="text-[clamp(3.8rem,9vw,7.6rem)] font-semibold leading-[0.86] tracking-[-0.075em]">
-              THE RED
-              <br />
-              <span className="text-[#E45B66]">DEVIL</span>
-              <span className="text-[#F0EFEA]">.</span>
+            <h1 className="mt-8 font-semibold uppercase leading-[0.82] tracking-[-0.055em] text-[#F0EBE0]">
+              <span className="block text-[clamp(4.5rem,17vw,15rem)]">
+                <ScrambleText text="HASNAIN" delay={200} />
+              </span>
+              <span className="block text-[clamp(4.5rem,17vw,15rem)] text-[#5A554C]">
+                <ScrambleText text="SHAHRIAR" delay={600} />
+              </span>
             </h1>
 
-            <p className="mt-8 max-w-xl text-lg leading-8 text-[#D0D0CD] sm:text-xl">
-              Exploring what lies beneath the surface.
-              <span className="text-[#85888B]">
-                {" "}
-                Building skills to make the digital world safer.
-              </span>
-            </p>
-
-            <p className="mt-4 max-w-xl text-sm leading-7 text-[#A1A3A5] sm:text-base">
-              My focus is web application security, penetration testing,
-              OSINT, and responsible security research. This portfolio
-              documents the work, experiments, and lessons behind that
-              journey.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              <motion.a
-                href="#projects"
-                whileHover={reduceMotion ? undefined : { y: -3 }}
-                whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-                className="inline-flex items-center gap-2 rounded-xl bg-[#B83A46] px-5 py-3.5 font-medium text-white transition hover:bg-[#D14855]"
-              >
-                Explore my work <ArrowIcon />
-              </motion.a>
-
-              <motion.a
-                href="#contact"
-                whileHover={reduceMotion ? undefined : { y: -3 }}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/15 px-5 py-3.5 text-[#F0EFEA] transition hover:border-[#B83A46] hover:text-[#F2A0A6]"
-              >
-                Let&apos;s connect <ArrowIcon />
-              </motion.a>
-            </div>
-
-            <div className="mt-10 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/10 pt-5 font-mono text-[10px] tracking-[0.15em] text-[#85888B] sm:text-xs">
-              <span>WEB SECURITY</span>
-              <span>OSINT & RECON</span>
-              <span>RESEARCH</span>
-              <span>LINUX</span>
-            </div>
-          </motion.div>
-
-          {/* Profile panel */}
-          <motion.div
-            initial={
-              reduceMotion ? false : { opacity: 0, x: 24, scale: 0.97 }
-            }
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{
-              duration: reduceMotion ? 0 : 0.75,
-              delay: reduceMotion ? 0 : 0.12,
-            }}
-            className="relative mx-auto w-full max-w-[440px] lg:ml-auto"
-          >
-            <div className="rounded-[1.6rem] border border-white/10 bg-[#191C1F] p-3 shadow-2xl shadow-black/30">
-              <div className="rounded-[1.2rem] border border-white/[0.07] bg-[#141618] p-5 sm:p-7">
-                <div className="mb-5 flex items-center justify-between font-mono text-[10px] tracking-[0.15em] text-[#A1A3A5]">
-                  <span>HASNAIN SHAHRIAR / PROFILE</span>
-                  <span className="text-[#E45B66]">● ACTIVE</span>
-                </div>
-
-                <div className="relative overflow-hidden rounded-xl border border-[#B83A46]/40 bg-[#111315]">
-                  <div className="relative aspect-[3/4]">
-                    <Image
-                      src="/images/profile.jpg"
-                      alt="The Red Devil — cybersecurity learner and independent security researcher"
-                      fill
-                      priority
-                      sizes="(max-width: 640px) 85vw, 400px"
-                      className="object-cover object-[center_22%]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#111315] via-transparent to-black/10" />
-
-                    <div className="absolute bottom-5 left-5 right-5">
-                      <p className="font-mono text-[10px] tracking-[0.2em] text-[#F2A0A6]">
-                        THE RED DEVIL
-                      </p>
-                      <p className="mt-2 text-xl font-semibold">
-                        Research. Build. Secure.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 border-t border-white/10 pt-5">
-                  <p className="font-mono text-[10px] tracking-[0.18em] text-[#85888B]">
-                    CURRENT MISSION
-                  </p>
-                  <p className="mt-2 text-2xl font-semibold tracking-tight">
-                    Understand. Test. Improve.
-                  </p>
-                  <div className="mt-4 flex items-center justify-between text-xs text-[#85888B]">
-                    <span>Learning in public</span>
-                    <span className="font-mono text-[#E45B66]">v.2026</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* About */}
-      <section id="about" className="scroll-mt-24 border-b border-white/[0.07]">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-16 sm:px-6 sm:py-20 md:grid-cols-[0.7fr_1.3fr] lg:px-8 lg:py-24">
-          <Reveal>
-            <SectionLabel>01 / ABOUT</SectionLabel>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Curiosity drives
-              <br />
-              <span className="text-[#85888B]">the research.</span>
-            </h2>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <div className="max-w-2xl">
-              <h3 className="text-xl font-semibold tracking-tight text-[#F0EFEA]">
-                Hasnain Shahriar
-              </h3>
-              <p className="mt-2 text-sm font-medium leading-7 text-[#E45B66]">
-                Cybersecurity Researcher · Penetration Testing · Web Application Security · Reverse Engineering
+            <div className="mx-auto mt-10 max-w-2xl">
+              <p className="text-2xl font-light tracking-tight text-[#C9C2B4] sm:text-3xl">
+                Breaking Beyond the Surface
               </p>
-              <p className="mt-4 text-base leading-8 text-[#A1A3A5]">
-                I am an aspiring cybersecurity professional focused on penetration testing, web application security, and reverse engineering. My interests include vulnerability analysis, software behavior analysis, application security testing, and understanding the underlying mechanisms of digital systems.
-              </p>
-              <p className="mt-4 text-base leading-8 text-[#A1A3A5]">
-                I actively develop my technical expertise through independent research, hands-on security labs, and open-source tools. My approach emphasizes analytical thinking, continuous learning, and responsible security practices.
-              </p>
-              <h4 className="mt-6 font-semibold text-[#F0EFEA]">Areas of Focus</h4>
-              <ul className="mt-3 space-y-3 text-sm leading-7 text-[#A1A3A5]">
-                <li><strong className="text-[#D0D0CD]">Penetration Testing:</strong> Identifying and assessing security vulnerabilities in authorized environments.</li>
-                <li><strong className="text-[#D0D0CD]">Web Application Security:</strong> Analyzing application architectures, authentication mechanisms, and common security flaws.</li>
-                <li><strong className="text-[#D0D0CD]">Reverse Engineering:</strong> Examining software structure, program behavior, and implementation details.</li>
-                <li><strong className="text-[#D0D0CD]">Security Research:</strong> Exploring security tools, vulnerability analysis, and defensive improvements.</li>
-              </ul>
-              <h4 className="mt-6 font-semibold text-[#F0EFEA]">Professional Objective</h4>
-              <p className="mt-3 text-base leading-8 text-[#A1A3A5]">
-                To build advanced expertise in cybersecurity through practical research, continuous skill development, and ethical security testing, contributing to the development of more secure and resilient digital systems.
+              <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.28em] text-[#5A554C]">
+                A Little Bit
               </p>
             </div>
-          </Reveal>
-        </div>
-      </section>
 
-      {/* Expertise */}
-      <section
-        id="skills"
-        className="scroll-mt-24 border-b border-white/[0.07] bg-[#191C1F]/50"
-      >
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-          <Reveal>
-            <SectionLabel>02 / EXPERTISE</SectionLabel>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-              Skills in progress.
-            </h2>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-[#A1A3A5] sm:text-base">
-              The core areas and tools I&apos;m exploring as I develop a
-              stronger foundation in cybersecurity.
-            </p>
-          </Reveal>
-
-          <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {skills.map((skill, index) => (
-              <Reveal key={skill} delay={index * 0.035}>
-                <div className="group flex min-h-[78px] items-center gap-4 rounded-xl border border-white/[0.08] bg-[#191C1F] p-4 transition duration-300 hover:-translate-y-1 hover:border-[#B83A46]/50 hover:bg-[#202428]">
-                  <span className="font-mono text-xs text-[#E45B66]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-sm text-[#D0D0CD] transition group-hover:text-white">
-                    {skill}
-                  </span>
-                  <span className="ml-auto text-[#B83A46]">↗</span>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects */}
-      <section
-        id="projects"
-        className="scroll-mt-24 mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24"
-      >
-        <Reveal>
-          <div className="flex flex-wrap items-end justify-between gap-5">
-            <div>
-              <SectionLabel>03 / SELECTED WORK</SectionLabel>
-              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-                Projects & experiments.
-              </h2>
-              <p className="mt-4 max-w-xl text-sm leading-7 text-[#A1A3A5] sm:text-base">
-                A growing collection of labs, research notes, and practical
-                security workflows.
-              </p>
-            </div>
-            <span className="font-mono text-[10px] tracking-[0.15em] text-[#85888B]">
-              PORTFOLIO / 2026
-            </span>
-          </div>
-        </Reveal>
-
-        <div className="mt-9 grid gap-5 lg:grid-cols-3">
-          {projects.map((project, index) => (
-            <motion.article
-              key={project.number}
-              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.12 }}
-              transition={{
-                duration: reduceMotion ? 0 : 0.45,
-                delay: reduceMotion ? 0 : index * 0.08,
-              }}
-              whileHover={reduceMotion ? undefined : { y: -5 }}
-              className="group overflow-hidden rounded-2xl border border-white/[0.09] bg-[#191C1F] transition-colors hover:border-[#B83A46]/50"
-            >
-              <div className="relative flex h-48 items-center justify-center overflow-hidden border-b border-white/[0.08] bg-[#151719]">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 opacity-30"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(rgba(184,58,70,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(184,58,70,.12) 1px,transparent 1px)",
-                    backgroundSize: "24px 24px",
-                  }}
-                />
-
-                {index === 0 ? (
-                  <div className="relative w-[78%] rounded-xl border border-[#B83A46]/35 bg-[#111315] p-4 font-mono text-[10px]">
-                    <p className="text-[#85888B]">
-                      $ security-lab --scope authorized
-                    </p>
-                    <p className="mt-3 text-[#E45B66]">
-                      [+] request review
-                    </p>
-                    <p className="mt-1 text-[#D0D0CD]">
-                      [+] test / document / improve
-                    </p>
-                    <div className="mt-4 h-1 w-full bg-white/10">
-                      <div className="h-1 w-2/3 bg-[#B83A46]" />
-                    </div>
-                  </div>
-                ) : index === 1 ? (
-                  <div className="relative grid w-40 grid-cols-3 gap-2">
-                    {Array.from({ length: 9 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className={`aspect-square rounded-md border ${
-                          i === 4
-                            ? "border-[#E45B66]/70 bg-[#B83A46]/30"
-                            : "border-[#B83A46]/20 bg-[#B83A46]/[0.05]"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="relative w-[76%] rounded-xl border border-[#B83A46]/30 bg-[#111315] p-4 font-mono text-xs">
-                    <p className="text-[#E45B66]">workflow.yml</p>
-                    <p className="mt-3 text-[#A1A3A5]">recon:</p>
-                    <p className="pl-3 text-[#D0D0CD]">- collect</p>
-                    <p className="pl-3 text-[#D0D0CD]">- validate</p>
-                    <p className="pl-3 text-[#D0D0CD]">- document</p>
-                  </div>
-                )}
-
-                <span className="absolute left-4 top-4 font-mono text-[10px] text-[#F2A0A6]">
-                  PROJECT / {project.number}
-                </span>
-              </div>
-
-              <div className="p-5 sm:p-6">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="font-mono text-[9px] tracking-[0.16em] text-[#E45B66]">
-                    {project.category}
-                  </p>
-                  <span className="rounded-full border border-white/10 px-2 py-1 font-mono text-[9px] text-[#A1A3A5]">
-                    {project.status}
-                  </span>
-                </div>
-
-                <h3 className="mt-3 text-xl font-semibold text-[#F0EFEA] transition-colors group-hover:text-[#F2A0A6]">
-                  {project.title}
-                </h3>
-
-                <p className="mt-3 text-sm leading-6 text-[#A1A3A5]">
-                  {project.description}
-                </p>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-md bg-white/[0.05] px-2 py-1 text-[10px] text-[#A1A3A5]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <a
-                  href={`/projects/${project.slug}`}
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#E45B66] transition hover:text-white"
+            <div className="mt-10 flex flex-wrap justify-center gap-3">
+              <Magnetic strength={0.4}>
+                <motion.a
+                  href="#projects"
+                  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+                  className="group inline-flex items-center gap-2 rounded-md bg-[#D97757] px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0908] shadow-lg shadow-[#D97757]/10 transition hover:bg-[#E89B7B]"
                 >
-                  View project details <ArrowIcon />
-                </a>
-              </div>
-            </motion.article>
-          ))}
+                  View Work
+                  <ArrowIcon className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </motion.a>
+              </Magnetic>
+
+              <Magnetic strength={0.4}>
+                <motion.a
+                  href="#contact"
+                  className="group inline-flex items-center gap-2 rounded-md border border-white/12 px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#C9C2B4] transition hover:border-[#D97757]/50 hover:text-[#F0EBE0]"
+                >
+                  Get in Touch
+                  <ArrowIcon className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </motion.a>
+              </Magnetic>
+            </div>
+          </motion.div>
         </div>
 
-        <p className="mt-5 text-xs leading-6 text-[#85888B]">
-          Project cards represent work in progress. Replace each entry with a
-          verified repository, write-up, or completed lab when ready.
-        </p>
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.6, duration: 0.6 }}
+          className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.24em] text-[#5A554C]"
+        >
+          <span className="flex flex-col items-center gap-2">
+            Scroll
+            <motion.span
+              animate={reduceMotion ? undefined : { y: [0, 6, 0] }}
+              transition={{
+                duration: 1.6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="block h-6 w-px bg-[#D97757]/60"
+            />
+          </span>
+        </motion.div>
       </section>
 
-      {/* Research */}
+      {/* ================= PHOTO REVEAL ================= */}
+      <PhotoReveal reduceMotion={reduceMotion} />
+
+      {/* ================= MARQUEE ================= */}
+      <Marquee reduceMotion={reduceMotion} />
+
+      {/* ================= ABOUT ================= */}
       <section
-        id="research"
-        className="scroll-mt-24 border-y border-white/[0.07] bg-[#191C1F]/50"
+        id="about"
+        className="scroll-mt-20 border-b border-white/[0.06]"
       >
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
+          <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
+            <Reveal>
+              <SectionHeading kicker="A Little Bit" title="About Me" />
+              <div className="space-y-5 text-base leading-8 text-[#8E887B]">
+                <p>
+                  I&apos;m{" "}
+                  <span className="text-[#F0EBE0]">Hasnain Shahriar</span>, an
+                  aspiring cybersecurity professional focused on penetration
+                  testing, web application security, and reverse engineering.
+                  My interests include vulnerability analysis, software
+                  behavior analysis, and understanding how the systems we
+                  trust actually work.
+                </p>
+                <p>
+                  I develop my skills through independent research, hands-on
+                  security labs, and open-source tools. My approach emphasizes
+                  analytical thinking, continuous learning, and responsible
+                  security practices.
+                </p>
+                <p className="text-[#C9C2B4]">
+                  My goal is to build systems — and an understanding of
+                  systems — that are fast, reliable, and hard to break.
+                </p>
+              </div>
+
+              <div className="mt-10 space-y-6">
+                {skillBars.map((skill, i) => (
+                  <Reveal key={skill.label} delay={i * 0.06}>
+                    <SkillBar label={skill.label} value={skill.value} />
+                  </Reveal>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.15}>
+              <div className="relative">
+                <div className="absolute -inset-4 rounded-[2rem] bg-[#D97757]/[0.06] blur-3xl" />
+                <div className="relative flex h-full items-center rounded-2xl border border-white/[0.07] bg-[#12100E] p-8 sm:p-10">
+                  <blockquote className="text-xl leading-9 text-[#C9C2B4] sm:text-2xl sm:leading-[2.6rem]">
+                    <span className="mr-2 font-mono text-3xl text-[#D97757]">
+                      &ldquo;
+                    </span>
+                    Learn a concept. Practice it in a safe environment.
+                    Document the result. Improve the process. Repeat.
+                    <span className="ml-2 font-mono text-3xl text-[#D97757]">
+                      &rdquo;
+                    </span>
+                    <footer className="mt-6 font-mono text-[11px] uppercase tracking-[0.22em] text-[#5A554C]">
+                      — My approach to security
+                    </footer>
+                  </blockquote>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= EXPERTISE ================= */}
+      <section
+        id="expertise"
+        className="scroll-mt-20 border-b border-white/[0.06] bg-[#0A0908]"
+      >
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
           <Reveal>
-            <SectionLabel>04 / RESEARCH NOTES</SectionLabel>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Learning in public.
-            </h2>
-            <p className="mt-4 max-w-2xl leading-7 text-[#A1A3A5]">
-              A space for technical write-ups, lab notes, and practical lessons
-              learned while exploring cybersecurity.
+            <SectionHeading
+              kicker="My Core"
+              title="Expertise"
+              count={`${expertise.length} Areas`}
+            />
+            <p className="-mt-6 mb-12 max-w-2xl text-base leading-7 text-[#8E887B]">
+              I combine security thinking with a builder&apos;s mindset —
+              understanding how systems work, how they break, and how to make
+              them resilient.
             </p>
           </Reveal>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {researchNotes.map((note, index) => (
-              <motion.article
-                key={note.number}
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.05] sm:grid-cols-2 lg:grid-cols-3">
+            {expertise.map((item, index) => (
+              <motion.div
+                key={item.title}
                 initial={reduceMotion ? false : { opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{
                   duration: reduceMotion ? 0 : 0.45,
-                  delay: reduceMotion ? 0 : index * 0.08,
+                  delay: reduceMotion ? 0 : index * 0.05,
                 }}
-                whileHover={reduceMotion ? undefined : { y: -4 }}
-                className="rounded-2xl border border-white/[0.08] bg-[#191C1F] p-5 transition hover:border-[#B83A46]/50 sm:p-6"
+                className="group relative flex flex-col bg-[#0A0908] p-6 transition hover:bg-[#12100E] sm:p-7 lg:p-8"
               >
-                <p className="font-mono text-xs text-[#E45B66]">
-                  NOTE / {note.number}
-                </p>
-                <p className="mt-4 font-mono text-[10px] tracking-[0.15em] text-[#85888B]">
-                  {note.category}
-                </p>
-                <h3 className="mt-3 font-semibold leading-6 text-[#F0EFEA]">
-                  {note.title}
+                <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#D97757]">
+                  {item.category}
+                </span>
+                <h3 className="mt-4 text-xl font-semibold tracking-tight text-[#F0EBE0] transition group-hover:text-white sm:text-2xl">
+                  {item.title}
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-[#A1A3A5]">
-                  {note.description}
+                <p className="mt-4 text-sm leading-7 text-[#8E887B]">
+                  {item.description}
                 </p>
-                <a
-                  href={`/research/${note.slug}`}
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#E45B66] transition hover:text-white"
-                >
-                  Read note <ArrowIcon />
-                </a>
-              </motion.article>
+                <span className="mt-6 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/[0.08] text-[#5A554C] transition group-hover:border-[#D97757]/50 group-hover:text-[#E89B7B]">
+                  <ArrowIcon className="h-3.5 w-3.5" />
+                </span>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Journey */}
+      {/* ================= PROJECTS ================= */}
       <section
-        id="journey"
-        className="scroll-mt-24 border-b border-white/[0.07]"
+        id="projects"
+        className="scroll-mt-20 border-b border-white/[0.06]"
       >
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[0.78fr_1.22fr] lg:px-8 lg:py-24">
+        <HorizontalProjects projects={projects} />
+
+        <div className="lg:hidden">
+          <div className="px-4 py-16 sm:px-6 sm:py-20">
+            <Reveal>
+              <SectionHeading
+                kicker="Some Selected"
+                title="Projects"
+                count={`${projects.length} Projects`}
+              />
+            </Reveal>
+            <div className="space-y-4">
+              {projects.map((project, index) => (
+                <Reveal key={project.number} delay={index * 0.06}>
+                  <article className="rounded-2xl border border-white/[0.07] bg-[#12100E] p-6">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-3xl font-semibold text-[#D97757]">
+                        /{project.number}
+                      </span>
+                      <span className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-[#8E887B]">
+                        {project.status}
+                      </span>
+                    </div>
+                    <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-[#E89B7B]">
+                      {project.category}
+                    </p>
+                    <h3 className="mt-2 text-2xl font-semibold text-[#F0EBE0]">
+                      {project.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-[#8E887B]">
+                      {project.description}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#8E887B]"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <a
+                      href={`/projects/${project.slug}`}
+                      className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#E89B7B]"
+                    >
+                      View details <ArrowIcon />
+                    </a>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= EXPERIENCE ================= */}
+      <section
+        id="experience"
+        className="scroll-mt-20 border-b border-white/[0.06] bg-[#0A0908]"
+      >
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
           <Reveal>
-            <SectionLabel>05 / THE JOURNEY</SectionLabel>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-              Learning by
-              <br />
-              <span className="text-[#85888B]">doing.</span>
-            </h2>
-            <p className="mt-5 max-w-md text-sm leading-7 text-[#A1A3A5] sm:text-base">
-              A work in progress. The focus is consistency: learn a concept,
-              practice it in a safe environment, document the result, and
-              improve the process.
+            <SectionHeading kicker="Career Path" title="Experience" />
+            <p className="-mt-6 mb-12 max-w-2xl text-base leading-7 text-[#8E887B]">
+              A record of learning, labs, and building — focused on turning
+              theory into repeatable practice.
             </p>
           </Reveal>
 
-          <div className="relative border-l border-[#B83A46]/40 pl-6 sm:pl-8">
-            {[
-              {
-                date: "2026 — PRESENT",
-                title: "Independent cybersecurity learning",
-                description:
-                  "Studying web application security, recon, OSINT, Linux, and testing methodology through notes and authorized practice.",
-              },
-              {
-                date: "ONGOING",
-                title: "Research notes & practical labs",
-                description:
-                  "Turning concepts into structured notes, repeatable checklists, and documented experiments.",
-              },
-              {
-                date: "IN PROGRESS",
-                title: "The Red Devil portfolio",
-                description:
-                  "Building a personal space to present projects, share learning, and make security research easier to follow.",
-              },
-            ].map((item, index) => (
-              <Reveal key={item.title} delay={index * 0.08}>
-                <article className="relative border-b border-white/[0.08] py-6 first:pt-0 last:border-b-0">
-                  <span className="absolute -left-[31px] top-7 h-3 w-3 rounded-full border-2 border-[#E45B66] bg-[#111315] sm:-left-[39px]" />
-                  <p className="font-mono text-[10px] tracking-[0.16em] text-[#E45B66]">
-                    {item.date}
-                  </p>
-                  <h3 className="mt-2 text-lg font-semibold sm:text-xl">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 max-w-2xl text-sm leading-7 text-[#A1A3A5]">
-                    {item.description}
-                  </p>
+          <div className="space-y-5">
+            {experience.map((item, index) => (
+              <Reveal key={item.role} delay={index * 0.06}>
+                <article className="rounded-2xl border border-white/[0.07] bg-[#12100E] p-6 transition hover:border-[#D97757]/35 sm:p-8">
+                  <div className="flex flex-wrap items-start justify-between gap-4">
+                    <div>
+                      <h3 className="text-xl font-semibold tracking-tight text-[#F0EBE0] sm:text-2xl">
+                        {item.role}
+                      </h3>
+                      <p className="mt-1 text-sm text-[#E89B7B]">{item.org}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-mono text-xs uppercase tracking-[0.16em] text-[#8E887B]">
+                        {item.period}
+                      </p>
+                      <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-[#5A554C]">
+                        {item.type} · {item.location}
+                      </p>
+                    </div>
+                  </div>
+                  <ul className="mt-6 space-y-3">
+                    {item.bullets.map((bullet) => (
+                      <li
+                        key={bullet}
+                        className="flex gap-3 text-sm leading-7 text-[#8E887B]"
+                      >
+                        <span
+                          className="mt-3 h-1 w-1 shrink-0 rounded-full bg-[#D97757]"
+                          aria-hidden="true"
+                        />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-6 flex flex-wrap gap-1.5 border-t border-white/[0.06] pt-5">
+                    {item.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#8E887B]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </article>
               </Reveal>
             ))}
@@ -748,188 +909,209 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact */}
-      <section
-        id="contact"
-        className="scroll-mt-24 border-b border-white/[0.07] bg-[#191C1F]/50"
-      >
-        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-          <Reveal>
-            <div className="text-center">
-              <SectionLabel>06 / CONTACT</SectionLabel>
-              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-                Let&apos;s connect.
-              </h2>
-              <p className="mx-auto mt-5 max-w-xl leading-7 text-[#A1A3A5]">
+      {/* ================= CONTACT ================= */}
+      <section id="contact" className="scroll-mt-20">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
+          <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
+            <Reveal>
+              <SectionHeading kicker="Say Hello" title="Contact" />
+              <p className="-mt-6 max-w-md text-base leading-7 text-[#8E887B]">
                 Interested in cybersecurity, research, or building something
-                meaningful? Send me a message or connect through my public
-                profiles.
+                meaningful? Send a message or reach out through any of the
+                profiles below.
               </p>
-            </div>
 
-            <form
-              className="mx-auto mt-10 max-w-xl space-y-4"
-              onSubmit={handleContactSubmit}
-            >
-              {/* Honeypot field — keep it empty */}
-              <div
-                className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden"
-                aria-hidden="true"
-              >
-                <label htmlFor="contact-website">Leave empty</label>
-                <input
-                  id="contact-website"
-                  name="website"
-                  type="text"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  value={contactForm.website}
-                  onChange={(event) =>
-                    setContactForm({
-                      ...contactForm,
-                      website: event.target.value,
-                    })
-                  }
-                />
+              <div className="mt-10 space-y-2">
+                {[
+                  {
+                    label: "GitHub",
+                    handle: "@simplyshahriar",
+                    href: "https://github.com/simplyshahriar",
+                  },
+                  {
+                    label: "LinkedIn",
+                    handle: "in/hasnainshahriar",
+                    href: "https://www.linkedin.com/in/hasnainshahriar/",
+                  },
+                  {
+                    label: "Instagram",
+                    handle: "@simplyshahriar",
+                    href: "https://www.instagram.com/simplyshahriar/",
+                  },
+                  {
+                    label: "Facebook",
+                    handle: "/simplyshahriar",
+                    href: "https://www.facebook.com/simplyshahriar",
+                  },
+                  {
+                    label: "Email",
+                    handle: "hasnainshahriar2007@gmail.com",
+                    href: "mailto:hasnainshahriar2007@gmail.com",
+                  },
+                ].map((link) => (
+                  <Magnetic
+                    key={link.label}
+                    strength={0.25}
+                    className="block w-full"
+                  >
+                    <motion.a
+                      href={link.href}
+                      target={
+                        link.href.startsWith("mailto:") ? undefined : "_blank"
+                      }
+                      rel={
+                        link.href.startsWith("mailto:")
+                          ? undefined
+                          : "noopener noreferrer"
+                      }
+                      className="group flex items-center justify-between rounded-xl border border-white/[0.07] bg-[#12100E] px-4 py-3.5 transition hover:border-[#D97757]/40 hover:bg-[#1A1714]"
+                    >
+                      <span className="flex items-center gap-4">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5A554C]">
+                          {link.label}
+                        </span>
+                        <span className="text-sm text-[#C9C2B4] transition group-hover:text-white">
+                          {link.handle}
+                        </span>
+                      </span>
+                      <ArrowIcon className="text-[#5A554C] transition group-hover:text-[#E89B7B]" />
+                    </motion.a>
+                  </Magnetic>
+                ))}
               </div>
+            </Reveal>
 
-              <label className="block text-sm text-[#D0D0CD]">
-                Name
-                <input
-                  required
-                  minLength={2}
-                  maxLength={80}
-                  autoComplete="name"
-                  value={contactForm.name}
-                  onChange={(event) =>
-                    setContactForm({
-                      ...contactForm,
-                      name: event.target.value,
-                    })
-                  }
-                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#111315] px-4 py-3 text-base text-white outline-none transition focus:border-[#B83A46] focus:ring-4 focus:ring-[#B83A46]/10"
-                  placeholder="Your name"
-                />
-              </label>
+            <Reveal delay={0.12}>
+              <div className="rounded-2xl border border-white/[0.07] bg-[#12100E] p-6 sm:p-8">
+                <div className="mb-6 flex items-center justify-between">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#5A554C]">
+                    // Send a message
+                  </p>
+                  <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase text-[#7EA88A]">
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#7EA88A]" />
+                    Secure
+                  </span>
+                </div>
 
-              <label className="block text-sm text-[#D0D0CD]">
-                Email
-                <input
-                  required
-                  type="email"
-                  maxLength={254}
-                  autoComplete="email"
-                  value={contactForm.email}
-                  onChange={(event) =>
-                    setContactForm({
-                      ...contactForm,
-                      email: event.target.value,
-                    })
-                  }
-                  className="mt-2 w-full rounded-xl border border-white/10 bg-[#111315] px-4 py-3 text-base text-white outline-none transition focus:border-[#B83A46] focus:ring-4 focus:ring-[#B83A46]/10"
-                  placeholder="you@example.com"
-                />
-              </label>
+                <form onSubmit={handleContactSubmit} className="space-y-4">
+                  <div
+                    className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden"
+                    aria-hidden="true"
+                  >
+                    <label htmlFor="contact-website">Leave empty</label>
+                    <input
+                      id="contact-website"
+                      name="website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={contactForm.website}
+                      onChange={(e) =>
+                        setContactForm({
+                          ...contactForm,
+                          website: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
 
-              <label className="block text-sm text-[#D0D0CD]">
-                Message
-                <textarea
-                  required
-                  minLength={10}
-                  maxLength={3000}
-                  rows={5}
-                  value={contactForm.message}
-                  onChange={(event) =>
-                    setContactForm({
-                      ...contactForm,
-                      message: event.target.value,
-                    })
-                  }
-                  className="mt-2 w-full resize-y rounded-xl border border-white/10 bg-[#111315] px-4 py-3 text-base text-white outline-none transition focus:border-[#B83A46] focus:ring-4 focus:ring-[#B83A46]/10"
-                  placeholder="Tell me what you'd like to discuss..."
-                />
-              </label>
+                  <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#8E887B]">
+                    Name
+                    <input
+                      required
+                      minLength={2}
+                      maxLength={80}
+                      autoComplete="name"
+                      value={contactForm.name}
+                      onChange={(e) =>
+                        setContactForm({
+                          ...contactForm,
+                          name: e.target.value,
+                        })
+                      }
+                      className="mt-2 w-full rounded-xl border border-white/[0.07] bg-[#0A0908] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#5A554C] focus:border-[#D97757] focus:ring-4 focus:ring-[#D97757]/10"
+                      placeholder="Your name"
+                    />
+                  </label>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full rounded-xl bg-[#B83A46] px-5 py-3.5 font-semibold text-white transition hover:bg-[#D14855] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E45B66] focus-visible:ring-offset-2 focus-visible:ring-offset-[#191C1F] disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                {isSubmitting ? "Sending..." : "Submit message"}
-              </button>
+                  <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#8E887B]">
+                    Email
+                    <input
+                      required
+                      type="email"
+                      maxLength={254}
+                      autoComplete="email"
+                      value={contactForm.email}
+                      onChange={(e) =>
+                        setContactForm({
+                          ...contactForm,
+                          email: e.target.value,
+                        })
+                      }
+                      className="mt-2 w-full rounded-xl border border-white/[0.07] bg-[#0A0908] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#5A554C] focus:border-[#D97757] focus:ring-4 focus:ring-[#D97757]/10"
+                      placeholder="you@example.com"
+                    />
+                  </label>
 
-              {contactStatus && (
-                <p
-                  role="status"
-                  aria-live="polite"
-                  className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-[#D0D0CD]"
-                >
-                  {contactStatus}
-                </p>
-              )}
-            </form>
+                  <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#8E887B]">
+                    Message
+                    <textarea
+                      required
+                      minLength={10}
+                      maxLength={3000}
+                      rows={5}
+                      value={contactForm.message}
+                      onChange={(e) =>
+                        setContactForm({
+                          ...contactForm,
+                          message: e.target.value,
+                        })
+                      }
+                      className="mt-2 w-full resize-y rounded-xl border border-white/[0.07] bg-[#0A0908] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#5A554C] focus:border-[#D97757] focus:ring-4 focus:ring-[#D97757]/10"
+                      placeholder="Tell me what you'd like to discuss..."
+                    />
+                  </label>
 
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <motion.a
-                href="https://github.com/simplyshahriar"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={reduceMotion ? undefined : { y: -3 }}
-                className="inline-flex items-center gap-2 rounded-xl bg-[#B83A46] px-5 py-3 font-medium text-white transition hover:bg-[#D14855]"
-              >
-                GitHub <ArrowIcon />
-              </motion.a>
+                  <Magnetic strength={0.15} className="block w-full">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full rounded-xl bg-[#D97757] px-5 py-3.5 font-mono text-[11px] uppercase tracking-[0.2em] text-[#0A0908] shadow-lg shadow-[#D97757]/10 transition hover:bg-[#E89B7B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E89B7B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#12100E] disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {isSubmitting ? "Sending..." : "Send Message"}
+                    </button>
+                  </Magnetic>
 
-              <motion.a
-                href="https://www.instagram.com/simplyshahriar/"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={reduceMotion ? undefined : { y: -3 }}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-3 text-[#D0D0CD] transition hover:border-[#B83A46]/60 hover:text-white"
-              >
-                Instagram <ArrowIcon />
-              </motion.a>
-
-              <motion.a
-                href="https://www.facebook.com/simplyshahriar"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={reduceMotion ? undefined : { y: -3 }}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-3 text-[#D0D0CD] transition hover:border-[#B83A46]/60 hover:text-white"
-              >
-                Facebook <ArrowIcon />
-              </motion.a>
-
-              <motion.a
-                href="https://www.linkedin.com/in/hasnainshahriar/"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={reduceMotion ? undefined : { y: -3 }}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-3 text-[#D0D0CD] transition hover:border-[#B83A46]/60 hover:text-white"
-              >
-                LinkedIn <ArrowIcon />
-              </motion.a>
-
-              <motion.a
-                href="mailto:hasnainshahriar2007@gmail.com"
-                whileHover={reduceMotion ? undefined : { y: -3 }}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-3 text-[#D0D0CD] transition hover:border-[#B83A46]/60 hover:text-white"
-              >
-                Email <ArrowIcon />
-              </motion.a>
-            </div>
-          </Reveal>
+                  {contactStatus && (
+                    <p
+                      role="status"
+                      aria-live="polite"
+                      className="rounded-xl border border-white/[0.07] bg-white/[0.03] px-4 py-3 text-sm text-[#C9C2B4]"
+                    >
+                      {contactStatus}
+                    </p>
+                  )}
+                </form>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
+      {/* ================= FOOTER ================= */}
       <footer className="border-t border-white/[0.06]">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-xs text-[#85888B] sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
-          <p>
-            <span className="font-semibold text-[#F0EFEA]">The Red Devil</span>
-            {" "}— Research. Build. Secure.
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+          <p className="flex items-center gap-3 text-xs text-[#5A554C]">
+            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#D97757] font-mono text-[10px] font-bold text-[#0A0908]">
+              R/
+            </span>
+            <span className="font-mono uppercase tracking-[0.18em] text-[#C9C2B4]">
+              The Red Devil
+            </span>
           </p>
-          <p>Independent learning. Responsible security research.</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5A554C]">
+            Independent Learning · Responsible Security Research
+          </p>
         </div>
       </footer>
     </main>

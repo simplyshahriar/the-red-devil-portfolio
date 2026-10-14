@@ -1,115 +1,194 @@
-﻿import Link from "next/link";
-import { notFound } from "next/navigation";
-import { Suspense } from "react";
+﻿import { notFound } from "next/navigation";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { projects, getProjectBySlug } from "../../lib/data";
 
-const projects = {
-  "recon-research-notes": {
-    title: "Recon Research Notes",
-    category: "RECONNAISSANCE / OSINT",
-    description:
-      "A structured collection of reconnaissance research, methodology, tools, and responsible information-gathering notes.",
-    details:
-      "This project organizes reconnaissance learning into clear research notes, helping document methodology, observations, and useful references.",
-    status: "Research & Documentation",
-  },
-  "security-workflow-toolkit": {
-    title: "Security Workflow Toolkit",
-    category: "SECURITY / WORKFLOW",
-    description:
-      "A project focused on organizing security workflows, assessment notes, and repeatable documentation processes.",
-    details:
-      "The goal is to make security work easier to track through structured notes, consistent workflows, and responsible assessment documentation.",
-    status: "Project in Development",
-  },
-  "web-application-security-lab": {
-    title: "Web Application Security Lab",
-    category: "WEB APPLICATION SECURITY",
-    description:
-      "A learning-focused lab for exploring web application security concepts and authorized testing techniques.",
-    details:
-      "The lab is intended for controlled environments and applications where testing permission has been granted. Findings should be documented with clear explanations and remediation guidance.",
-    status: "Learning & Practice",
-  },
-} as const;
-
-type ProjectSlug = keyof typeof projects;
-
-export function generateStaticParams() {
-  return Object.keys(projects).map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  return projects.map((p) => ({ slug: p.slug }));
 }
 
-async function ProjectDetails({
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
+  if (!project) return { title: "Project not found" };
+  return {
+    title: `${project.title} — The Red Devil`,
+    description: project.description,
+  };
+}
+
+function ArrowIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M7 17 17 7M7 7h10v10" />
+    </svg>
+  );
+}
+
+export default async function ProjectPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-
-  if (!Object.prototype.hasOwnProperty.call(projects, slug)) {
-    notFound();
-  }
-
-  const project = projects[slug as ProjectSlug];
+  const project = getProjectBySlug(slug);
+  if (!project) notFound();
 
   return (
-    <article className="mx-auto w-full max-w-3xl">
-      <Link
-        href="/#projects"
-        className="inline-flex text-sm text-[#B83A46] transition-colors hover:text-[#F0EFEA]"
-      >
-        &larr; Back to projects
-      </Link>
+    <main className="min-h-screen bg-[#0A0908] text-[#F0EBE0]">
+      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        {/* back */}
+        <Link
+          href="/#projects"
+          className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-[#8E887B] transition hover:text-[#F0EBE0]"
+        >
+          <span aria-hidden="true">←</span> Back to portfolio
+        </Link>
 
-      <p className="mt-12 font-mono text-xs tracking-[0.2em] text-[#B83A46]">
-        THE RED DEVIL / PROJECTS
-      </p>
+        {/* header */}
+        <header className="mt-10 border-b border-white/[0.07] pb-10">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#E89B7B]">
+              {project.category}
+            </span>
+            <span className="rounded-full border border-white/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-[#8E887B]">
+              {project.status}
+            </span>
+          </div>
 
-      <p className="mt-6 text-xs uppercase tracking-[0.18em] text-white/50">
-        {project.category}
-      </p>
+          <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+            {project.title}
+          </h1>
 
-      <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-6xl">
-        {project.title}
-      </h1>
-
-      <p className="mt-6 text-lg leading-8 text-white/70">
-        {project.description}
-      </p>
-
-      <section className="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-        <p className="text-xs uppercase tracking-[0.18em] text-[#B83A46]">
-          {project.status}
-        </p>
-        <h2 className="mt-4 text-xl font-semibold">About this project</h2>
-        <p className="mt-4 leading-8 text-white/65">{project.details}</p>
-      </section>
-
-      <Link
-        href="/#projects"
-        className="mt-8 inline-flex rounded-lg border border-white/15 px-4 py-3 text-sm transition-colors hover:border-[#B83A46] hover:text-[#B83A46]"
-      >
-        Return to portfolio
-      </Link>
-    </article>
-  );
-}
-
-export default function ProjectDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  return (
-    <main className="min-h-screen bg-[#111315] px-6 py-16 text-[#F0EFEA] sm:px-10">
-      <Suspense
-        fallback={
-          <p className="mx-auto max-w-3xl font-mono text-sm text-[#B83A46]">
-            Loading project...
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-[#C9C2B4]">
+            {project.description}
           </p>
-        }
-      >
-        <ProjectDetails params={params} />
-      </Suspense>
+
+          <div className="mt-8 flex flex-wrap gap-1.5">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#8E887B]"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {project.started && (
+            <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-[#5A554C]">
+              Started · {project.started}
+            </p>
+          )}
+        </header>
+
+        {/* body */}
+        <div className="mt-12 space-y-14">
+          {project.longDescription && (
+            <section>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
+                Overview
+              </h2>
+              <p className="mt-4 text-base leading-8 text-[#C9C2B4]">
+                {project.longDescription}
+              </p>
+            </section>
+          )}
+
+          {project.objectives && project.objectives.length > 0 && (
+            <section>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
+                Objectives
+              </h2>
+              <ul className="mt-4 space-y-3">
+                {project.objectives.map((o) => (
+                  <li key={o} className="flex gap-3 text-base leading-8 text-[#C9C2B4]">
+                    <span className="mt-4 h-1 w-1 shrink-0 rounded-full bg-[#D97757]" />
+                    <span>{o}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {project.approach && project.approach.length > 0 && (
+            <section>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
+                Approach
+              </h2>
+              <ul className="mt-4 space-y-3">
+                {project.approach.map((a) => (
+                  <li key={a} className="flex gap-3 text-base leading-8 text-[#C9C2B4]">
+                    <span className="mt-4 h-1 w-1 shrink-0 rounded-full bg-[#D97757]" />
+                    <span>{a}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {project.findings && project.findings.length > 0 && (
+            <section>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
+                Notes &amp; Findings
+              </h2>
+              <ul className="mt-4 space-y-3">
+                {project.findings.map((f) => (
+                  <li key={f} className="flex gap-3 text-base leading-8 text-[#C9C2B4]">
+                    <span className="mt-4 h-1 w-1 shrink-0 rounded-full bg-[#D97757]" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {project.links && project.links.length > 0 && (
+            <section>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
+                Links
+              </h2>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {project.links.map((l) => (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl border border-white/[0.07] bg-[#12100E] px-4 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-[#E89B7B] transition hover:border-[#D97757]/50 hover:text-white"
+                  >
+                    {l.label} <ArrowIcon />
+                  </a>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+
+        {/* footer */}
+        <div className="mt-16 border-t border-white/[0.07] pt-8">
+          <Link
+            href="/#projects"
+            className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-[#E89B7B] transition hover:text-white"
+          >
+            ← Back to all projects
+          </Link>
+        </div>
+      </div>
     </main>
   );
 }
