@@ -19,6 +19,7 @@ import CopyEmail from "./components/CopyEmail";
 import CursorGlow from "./components/CursorGlow";
 import GrainOverlay from "./components/GrainOverlay";
 import CommandPalette from "./components/CommandPalette";
+import Certifications from "./components/Certifications";
 import { projects } from "./lib/data";
 import profilePic from "../../public/images/profile.jpg";
 
@@ -373,7 +374,6 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
                     placeholder="blur"
                     className="object-cover object-[center_22%]"
                   />
-                  {/* Duotone effect */}
                   <div
                     aria-hidden="true"
                     className="pointer-events-none absolute inset-0 bg-[#D97757] mix-blend-color opacity-[0.22]"
@@ -454,6 +454,7 @@ export default function Home() {
     ["About", "#about"],
     ["Expertise", "#expertise"],
     ["Projects", "#projects"],
+    ["Certifications", "#certifications"],
     ["Experience", "#experience"],
   ];
 
@@ -520,7 +521,7 @@ export default function Home() {
             </a>
           </Magnetic>
 
-          <div className="hidden items-center gap-8 lg:flex">
+          <div className="hidden items-center gap-7 lg:flex">
             {navigation.map(([label, href]) => (
               <a
                 key={href}
@@ -861,6 +862,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ================= CERTIFICATIONS ================= */}
+      <Certifications />
+
       {/* ================= EXPERIENCE ================= */}
       <section
         id="experience"
@@ -985,7 +989,6 @@ export default function Home() {
                   </Magnetic>
                 ))}
 
-                {/* Copy-to-clipboard email */}
                 <div className="relative">
                   <CopyEmail
                     email="hasnainshahriar2007@gmail.com"

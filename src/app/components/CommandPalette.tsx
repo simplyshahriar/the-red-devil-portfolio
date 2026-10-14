@@ -44,6 +44,7 @@ export default function CommandPalette() {
     { id: "about", label: "Go to About", group: "Navigate", action: () => go("#about") },
     { id: "expertise", label: "Go to Expertise", group: "Navigate", action: () => go("#expertise") },
     { id: "projects", label: "Go to Projects", group: "Navigate", action: () => go("#projects") },
+    { id: "certifications", label: "Go to Certifications", group: "Navigate", action: () => go("#certifications") },
     { id: "experience", label: "Go to Experience", group: "Navigate", action: () => go("#experience") },
     { id: "contact", label: "Go to Contact", group: "Navigate", action: () => go("#contact") },
     {
@@ -90,7 +91,6 @@ export default function CommandPalette() {
 
   return (
     <>
-      {/* Trigger button */}
       <button
         type="button"
         onClick={() => setOpen(true)}
