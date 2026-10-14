@@ -1,126 +1,21 @@
-
 @import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+}
 
 html {
   scroll-behavior: smooth;
 }
 
-.redtrace-grid {
-  background-image:
-    linear-gradient(rgba(34, 211, 238, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 211, 238, 0.045) 1px, transparent 1px);
-  background-size: 48px 48px;
-  animation: redtrace-grid-drift 18s linear infinite;
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@keyframes redtrace-grid-drift {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 48px 48px;
-  }
-}
-
-.redtrace-glow {
-  animation: redtrace-pulse 3s ease-in-out infinite;
-}
-
-@keyframes redtrace-pulse {
-  0%, 100% {
-    opacity: 0.45;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-.redtrace-cursor {
-  animation: redtrace-blink 1s steps(1) infinite;
-}
-
-@keyframes redtrace-blink {
-  0%, 48% {
-    opacity: 1;
-  }
-  49%, 100% {
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .redtrace-grid,
-  .redtrace-glow,
-  .redtrace-cursor {
-    animation: none !important;
-  }
-}
-
-@import "tailwindcss";
-
-html {
-  scroll-behavior: smooth;
-}
-
-.redtrace-grid {
-  background-image:
-    linear-gradient(rgba(34, 211, 238, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 211, 238, 0.045) 1px, transparent 1px);
-  background-size: 48px 48px;
-  animation: redtrace-grid-drift 18s linear infinite;
-}
-
-@keyframes redtrace-grid-drift {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 48px 48px;
-  }
-}
-
-.redtrace-glow {
-  animation: redtrace-pulse 3s ease-in-out infinite;
-}
-
-@keyframes redtrace-pulse {
-  0%, 100% {
-    opacity: 0.45;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-.redtrace-cursor {
-  animation: redtrace-blink 1s steps(1) infinite;
-}
-
-@keyframes redtrace-blink {
-  0%, 48% {
-    opacity: 1;
-  }
-  49%, 100% {
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .redtrace-grid,
-  .redtrace-glow,
-  .redtrace-cursor {
-    animation: none !important;
-  }
-}
-
+/* ============ MARQUEE ============ */
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -131,6 +26,56 @@ html {
   will-change: transform;
 }
 
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ============ CUSTOM SCROLLBAR ============ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0908;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3A332C;
+  border-radius: 10px;
+  border: 2px solid #0A0908;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D97757;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3A332C #0A0908;
+}
+
+/* ============ SELECTION ============ */
+::selection {
+  background: rgba(217, 119, 87, 0.3);
+  color: #fff;
+}
+
+/* ============ FOCUS ============ */
+:focus-visible {
+  outline: 2px solid #D97757;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ REDUCED MOTION ============ */
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .animate-marquee { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

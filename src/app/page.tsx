@@ -15,6 +15,10 @@ import HorizontalProjects from "./components/HorizontalProjects";
 import Magnetic from "./components/Magnetic";
 import ScrambleText from "./components/ScrambleText";
 import SectionCounter from "./components/SectionCounter";
+import CopyEmail from "./components/CopyEmail";
+import CursorGlow from "./components/CursorGlow";
+import GrainOverlay from "./components/GrainOverlay";
+import CommandPalette from "./components/CommandPalette";
 import { projects } from "./lib/data";
 import profilePic from "../../public/images/profile.jpg";
 
@@ -219,7 +223,9 @@ function SkillBar({ label, value }: { label: string; value: number }) {
     <div>
       <div className="flex items-center justify-between">
         <span className="text-sm font-medium text-[#C9C2B4]">{label}</span>
-        <span className="font-mono text-xs text-[#5A554C]">{value}%</span>
+        <span className="font-mono text-xs tabular-nums text-[#5A554C]">
+          {value}%
+        </span>
       </div>
       <div className="mt-2.5 h-[2px] w-full overflow-hidden bg-white/[0.06]">
         <motion.div
@@ -367,7 +373,15 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
                     placeholder="blur"
                     className="object-cover object-[center_22%]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0908] via-transparent to-transparent" />
+                  {/* Duotone effect */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 bg-[#D97757] mix-blend-color opacity-[0.22]"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0A0908]/20 via-transparent to-[#0A0908]/70"
+                  />
                   <div className="absolute bottom-5 left-5 right-5">
                     <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#E89B7B]">
                       // The Red Devil
@@ -476,11 +490,14 @@ export default function Home() {
   return (
     <main
       id="home"
-      className="min-h-screen overflow-x-clip bg-[#0A0908] text-[#F0EBE0] selection:bg-[#D97757]/30 selection:text-white"
+      className="relative min-h-screen overflow-x-clip bg-[#0A0908] text-[#F0EBE0] selection:bg-[#D97757]/30 selection:text-white"
     >
+      <GrainOverlay />
+      <CursorGlow />
       <CustomCursor />
       <ScrollProgress />
       <SectionCounter />
+      <CommandPalette />
 
       {/* ================= NAV ================= */}
       <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-[#0A0908]/85 backdrop-blur-xl">
@@ -943,11 +960,6 @@ export default function Home() {
                     handle: "/simplyshahriar",
                     href: "https://www.facebook.com/simplyshahriar",
                   },
-                  {
-                    label: "Email",
-                    handle: "hasnainshahriar2007@gmail.com",
-                    href: "mailto:hasnainshahriar2007@gmail.com",
-                  },
                 ].map((link) => (
                   <Magnetic
                     key={link.label}
@@ -956,14 +968,8 @@ export default function Home() {
                   >
                     <motion.a
                       href={link.href}
-                      target={
-                        link.href.startsWith("mailto:") ? undefined : "_blank"
-                      }
-                      rel={
-                        link.href.startsWith("mailto:")
-                          ? undefined
-                          : "noopener noreferrer"
-                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="group flex items-center justify-between rounded-xl border border-white/[0.07] bg-[#12100E] px-4 py-3.5 transition hover:border-[#D97757]/40 hover:bg-[#1A1714]"
                     >
                       <span className="flex items-center gap-4">
@@ -978,6 +984,14 @@ export default function Home() {
                     </motion.a>
                   </Magnetic>
                 ))}
+
+                {/* Copy-to-clipboard email */}
+                <div className="relative">
+                  <CopyEmail
+                    email="hasnainshahriar2007@gmail.com"
+                    className="w-full"
+                  />
+                </div>
               </div>
             </Reveal>
 

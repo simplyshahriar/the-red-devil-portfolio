@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import { sans, mono } from "./fonts";
 import "./globals.css";
 
 const SITE_URL =
@@ -40,25 +41,17 @@ export const metadata: Metadata = {
     description:
       "Cybersecurity researcher focused on web application security, penetration testing, and OSINT.",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  icons: {
-    icon: "/icon",
-    apple: "/apple-icon",
-  },
+  robots: { index: true, follow: true },
+  icons: { icon: "/icon", apple: "/apple-icon" },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body>
-        {children}
-        <Analytics />
-      </body>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+      <body>{children}</body>
+      <Analytics />
     </html>
   );
 }
