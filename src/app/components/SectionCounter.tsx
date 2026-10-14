@@ -43,22 +43,22 @@ export default function SectionCounter() {
             <span
               className={`font-mono text-[10px] uppercase tracking-[0.2em] transition-opacity duration-300 ${
                 active === i
-                  ? "text-[#D97757] opacity-100"
-                  : "text-[#5A554C] opacity-0"
+                  ? "text-[#7B8FE8] opacity-100"
+                  : "text-[#545A66] opacity-0"
               }`}
             >
               {section.label}
             </span>
             <span
               className={`h-px transition-all duration-500 ${
-                active === i ? "w-8 bg-[#D97757]" : "w-3 bg-white/20"
+                active === i ? "w-8 bg-[#7B8FE8]" : "w-3 bg-white/20"
               }`}
             />
           </li>
         ))}
       </ol>
-      <p className="mt-4 text-right font-mono text-[10px] tracking-[0.22em] text-[#5A554C]">
-        <span className="text-[#D97757]">
+      <p className="mt-4 text-right font-mono text-[10px] tracking-[0.22em] text-[#545A66]">
+        <span className="text-[#7B8FE8]">
           {String(active + 1).padStart(2, "0")}
         </span>
         <span className="mx-1">/</span>

@@ -33,23 +33,23 @@ function ArrowIcon() {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="group flex w-[min(72vw,600px)] shrink-0 flex-col rounded-2xl border border-white/[0.07] bg-[#12100E] p-8 transition hover:border-[#D97757]/40 hover:bg-[#1A1714] sm:p-10">
+    <article className="group flex w-[min(72vw,600px)] shrink-0 flex-col rounded-2xl border border-white/[0.07] bg-[#12151A] p-8 transition hover:border-[#7B8FE8]/40 hover:bg-[#1A1E24] sm:p-10">
       <div className="flex items-start justify-between">
-        <span className="font-mono text-6xl font-semibold tracking-tight text-[#D97757] lg:text-7xl">
+        <span className="font-mono text-6xl font-semibold tracking-tight text-[#7B8FE8] lg:text-7xl">
           /{project.number}
         </span>
-        <span className="rounded-full border border-white/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-[#8E887B]">
+        <span className="rounded-full border border-white/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-[#858B99]">
           {project.status}
         </span>
       </div>
 
-      <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.22em] text-[#E89B7B]">
+      <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.22em] text-[#98A7ED]">
         {project.category}
       </p>
-      <h3 className="mt-3 text-3xl font-semibold tracking-tight text-[#F0EBE0] sm:text-4xl">
+      <h3 className="mt-3 text-3xl font-semibold tracking-tight text-[#E7E9EE] sm:text-4xl">
         {project.title}
       </h3>
-      <p className="mt-4 max-w-xl text-base leading-8 text-[#8E887B]">
+      <p className="mt-4 max-w-xl text-base leading-8 text-[#858B99]">
         {project.description}
       </p>
 
@@ -57,7 +57,7 @@ function ProjectCard({ project }: { project: Project }) {
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#8E887B]"
+            className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#858B99]"
           >
             {tag}
           </span>
@@ -66,7 +66,7 @@ function ProjectCard({ project }: { project: Project }) {
 
       <a
         href={`/projects/${project.slug}`}
-        className="group/link mt-auto inline-flex items-center gap-2 pt-10 font-mono text-[11px] uppercase tracking-[0.18em] text-[#E89B7B] transition hover:text-white"
+        className="group/link mt-auto inline-flex items-center gap-2 pt-10 font-mono text-[11px] uppercase tracking-[0.18em] text-[#98A7ED] transition hover:text-white"
       >
         View details
         <ArrowIcon />
@@ -104,7 +104,6 @@ export default function HorizontalProjects({ projects }: { projects: Project[] }
     };
   }, [scrollYProgress, x, reduceMotion]);
 
-  // progress bar width
   const progressWidth = useMotionValue(0);
   useEffect(() => {
     const unsub = scrollYProgress.on("change", (p) => {
@@ -116,22 +115,20 @@ export default function HorizontalProjects({ projects }: { projects: Project[] }
   return (
     <div ref={sectionRef} className="relative hidden h-[300vh] lg:block">
       <div className="sticky top-0 flex h-screen flex-col overflow-hidden">
-        {/* header */}
         <div className="mx-auto flex w-full max-w-7xl items-end justify-between gap-4 px-8 pb-10 pt-28">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
+            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#858B99]">
               Some Selected
             </p>
-            <h2 className="mt-3 text-5xl font-semibold uppercase leading-[0.95] tracking-[-0.035em] text-[#F0EBE0] lg:text-6xl">
+            <h2 className="mt-3 text-5xl font-semibold uppercase leading-[0.95] tracking-[-0.035em] text-[#E7E9EE] lg:text-6xl">
               Projects
             </h2>
           </div>
-          <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#5A554C]">
+          <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#545A66]">
             {projects.length} Projects — Scroll →
           </span>
         </div>
 
-        {/* track */}
         <div className="flex flex-1 items-center">
           <motion.div
             ref={trackRef}
@@ -143,7 +140,7 @@ export default function HorizontalProjects({ projects }: { projects: Project[] }
             ))}
 
             <div className="flex w-[min(45vw,420px)] shrink-0 items-center justify-center rounded-2xl border border-dashed border-white/[0.1] p-8">
-              <p className="text-center font-mono text-xs uppercase tracking-[0.22em] text-[#5A554C]">
+              <p className="text-center font-mono text-xs uppercase tracking-[0.22em] text-[#545A66]">
                 More
                 <br />
                 Coming
@@ -154,12 +151,11 @@ export default function HorizontalProjects({ projects }: { projects: Project[] }
           </motion.div>
         </div>
 
-        {/* progress line */}
         <div className="mx-auto w-full max-w-7xl px-8 pb-10">
           <div className="h-px w-full bg-white/[0.06]">
             <motion.div
               style={{ scaleX: progressWidth }}
-              className="h-px origin-left bg-[#D97757]"
+              className="h-px origin-left bg-[#7B8FE8]"
             />
           </div>
         </div>

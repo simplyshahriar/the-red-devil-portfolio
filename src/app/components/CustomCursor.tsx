@@ -59,7 +59,6 @@ export default function CustomCursor() {
         }
       `}</style>
 
-      {/* trailing ring */}
       <motion.div
         aria-hidden="true"
         style={{ x: sx, y: sy }}
@@ -71,11 +70,10 @@ export default function CustomCursor() {
             opacity: hovering ? 0.9 : 0.35,
           }}
           transition={{ type: "spring", stiffness: 250, damping: 22 }}
-          className="-ml-4 -mt-4 h-8 w-8 rounded-full border border-[#D97757]"
+          className="-ml-4 -mt-4 h-8 w-8 rounded-full border border-[#7B8FE8]"
         />
       </motion.div>
 
-      {/* instant dot */}
       <motion.div
         aria-hidden="true"
         style={{ x, y }}
@@ -84,7 +82,7 @@ export default function CustomCursor() {
         <motion.div
           animate={{ scale: hovering ? 2.2 : 1 }}
           transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          className="-ml-1 -mt-1 h-2 w-2 rounded-full bg-[#D97757]"
+          className="-ml-1 -mt-1 h-2 w-2 rounded-full bg-[#7B8FE8]"
         />
       </motion.div>
     </>

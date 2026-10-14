@@ -37,34 +37,33 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A0908;
+  background: #0A0C10;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3A332C;
+  background: #2F3540;
   border-radius: 10px;
-  border: 2px solid #0A0908;
+  border: 2px solid #0A0C10;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #D97757;
+  background: #7B8FE8;
 }
 
-/* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #3A332C #0A0908;
+  scrollbar-color: #2F3540 #0A0C10;
 }
 
 /* ============ SELECTION ============ */
 ::selection {
-  background: rgba(217, 119, 87, 0.3);
+  background: rgba(123, 143, 232, 0.3);
   color: #fff;
 }
 
 /* ============ FOCUS ============ */
 :focus-visible {
-  outline: 2px solid #D97757;
+  outline: 2px solid #7B8FE8;
   outline-offset: 3px;
   border-radius: 4px;
 }

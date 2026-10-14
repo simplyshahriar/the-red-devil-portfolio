@@ -95,11 +95,11 @@ export default function CommandPalette() {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Open command palette"
-        className="fixed bottom-6 left-6 z-40 hidden items-center gap-2 rounded-xl border border-white/[0.09] bg-[#12100E]/90 px-3.5 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#8E887B] backdrop-blur-md transition hover:border-[#D97757]/40 hover:text-[#F0EBE0] sm:flex"
+        className="fixed bottom-6 left-6 z-40 hidden items-center gap-2 rounded-xl border border-white/[0.09] bg-[#12151A]/90 px-3.5 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#858B99] backdrop-blur-md transition hover:border-[#7B8FE8]/40 hover:text-[#E7E9EE] sm:flex"
       >
-        <span className="text-[#5A554C]">⌘</span>
+        <span className="text-[#545A66]">⌘</span>
         <span>K</span>
-        <span className="ml-1 hidden text-[#5A554C] md:inline">· Menu</span>
+        <span className="ml-1 hidden text-[#545A66] md:inline">· Menu</span>
       </button>
 
       <AnimatePresence>
@@ -109,7 +109,7 @@ export default function CommandPalette() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-[100] flex items-start justify-center bg-[#0A0908]/70 px-4 pt-[15vh] backdrop-blur-md"
+            className="fixed inset-0 z-[100] flex items-start justify-center bg-[#0A0C10]/70 px-4 pt-[15vh] backdrop-blur-md"
             onClick={() => setOpen(false)}
           >
             <motion.div
@@ -122,7 +122,7 @@ export default function CommandPalette() {
             >
               <Command
                 label="Command menu"
-                className="overflow-hidden rounded-2xl border border-white/[0.09] bg-[#12100E] shadow-2xl shadow-black/50"
+                className="overflow-hidden rounded-2xl border border-white/[0.09] bg-[#12151A] shadow-2xl shadow-black/50"
               >
                 <div className="flex items-center gap-3 border-b border-white/[0.07] px-4 py-3">
                   <svg
@@ -133,7 +133,7 @@ export default function CommandPalette() {
                     stroke="currentColor"
                     strokeWidth="2"
                     strokeLinecap="round"
-                    className="text-[#5A554C]"
+                    className="text-[#545A66]"
                     aria-hidden="true"
                   >
                     <circle cx="11" cy="11" r="8" />
@@ -142,15 +142,15 @@ export default function CommandPalette() {
                   <Command.Input
                     autoFocus
                     placeholder="Search actions, sections, links..."
-                    className="w-full bg-transparent text-sm text-[#F0EBE0] outline-none placeholder:text-[#5A554C]"
+                    className="w-full bg-transparent text-sm text-[#E7E9EE] outline-none placeholder:text-[#545A66]"
                   />
-                  <kbd className="rounded border border-white/10 bg-white/[0.03] px-1.5 py-0.5 font-mono text-[10px] text-[#5A554C]">
+                  <kbd className="rounded border border-white/10 bg-white/[0.03] px-1.5 py-0.5 font-mono text-[10px] text-[#545A66]">
                     ESC
                   </kbd>
                 </div>
 
                 <Command.List className="max-h-[400px] overflow-y-auto p-2">
-                  <Command.Empty className="px-3 py-6 text-center font-mono text-[11px] uppercase tracking-[0.18em] text-[#5A554C]">
+                  <Command.Empty className="px-3 py-6 text-center font-mono text-[11px] uppercase tracking-[0.18em] text-[#545A66]">
                     No results
                   </Command.Empty>
 
@@ -158,7 +158,7 @@ export default function CommandPalette() {
                     <Command.Group
                       key={group}
                       heading={group}
-                      className="[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:pb-1.5 [&_[cmdk-group-heading]]:pt-3 [&_[cmdk-group-heading]]:font-mono [&_[cmdk-group-heading]]:text-[10px] [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-[0.2em] [&_[cmdk-group-heading]]:text-[#5A554C]"
+                      className="[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:pb-1.5 [&_[cmdk-group-heading]]:pt-3 [&_[cmdk-group-heading]]:font-mono [&_[cmdk-group-heading]]:text-[10px] [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-[0.2em] [&_[cmdk-group-heading]]:text-[#545A66]"
                     >
                       {items
                         .filter((i) => i.group === group)
@@ -166,11 +166,11 @@ export default function CommandPalette() {
                           <Command.Item
                             key={item.id}
                             onSelect={item.action}
-                            className="flex cursor-pointer items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm text-[#C9C2B4] transition data-[selected=true]:bg-white/[0.04] data-[selected=true]:text-white"
+                            className="flex cursor-pointer items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm text-[#B5B9C4] transition data-[selected=true]:bg-white/[0.04] data-[selected=true]:text-white"
                           >
                             <span>{item.label}</span>
                             {item.hint && (
-                              <span className="font-mono text-[10px] text-[#5A554C]">
+                              <span className="font-mono text-[10px] text-[#545A66]">
                                 {item.hint}
                               </span>
                             )}
@@ -180,7 +180,7 @@ export default function CommandPalette() {
                   ))}
                 </Command.List>
 
-                <div className="flex items-center justify-between border-t border-white/[0.07] px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#5A554C]">
+                <div className="flex items-center justify-between border-t border-white/[0.07] px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#545A66]">
                   <span>↑↓ navigate</span>
                   <span>↵ select</span>
                 </div>

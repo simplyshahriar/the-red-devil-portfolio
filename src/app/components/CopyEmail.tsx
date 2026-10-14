@@ -18,7 +18,6 @@ export default function CopyEmail({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // fallback: open mailto
       window.location.href = `mailto:${email}`;
     }
   }
@@ -28,13 +27,13 @@ export default function CopyEmail({
       type="button"
       onClick={handleCopy}
       aria-label={`Copy email ${email}`}
-      className={`group flex items-center justify-between rounded-xl border border-white/[0.07] bg-[#12100E] px-4 py-3.5 text-left transition hover:border-[#D97757]/40 hover:bg-[#1A1714] ${className}`}
+      className={`group flex items-center justify-between rounded-xl border border-white/[0.07] bg-[#12151A] px-4 py-3.5 text-left transition hover:border-[#7B8FE8]/40 hover:bg-[#1A1E24] ${className}`}
     >
       <span className="flex items-center gap-4">
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5A554C]">
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#545A66]">
           Email
         </span>
-        <span className="text-sm text-[#C9C2B4] transition group-hover:text-white">
+        <span className="text-sm text-[#B5B9C4] transition group-hover:text-white">
           {email}
         </span>
       </span>
@@ -52,7 +51,7 @@ export default function CopyEmail({
               height="16"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#7EA88A"
+              stroke="#6BCBA4"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -75,7 +74,7 @@ export default function CopyEmail({
               strokeWidth="1.8"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="text-[#5A554C] transition group-hover:text-[#E89B7B]"
+              className="text-[#545A66] transition group-hover:text-[#98A7ED]"
               aria-hidden="true"
             >
               <rect x="9" y="9" width="13" height="13" rx="2" />
@@ -85,7 +84,6 @@ export default function CopyEmail({
         </AnimatePresence>
       </span>
 
-      {/* Toast */}
       <AnimatePresence>
         {copied && (
           <motion.span
@@ -93,7 +91,7 @@ export default function CopyEmail({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 4 }}
             transition={{ duration: 0.2 }}
-            className="pointer-events-none absolute -bottom-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-[#7EA88A]/30 bg-[#0A0908] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#7EA88A]"
+            className="pointer-events-none absolute -bottom-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-[#6BCBA4]/30 bg-[#0A0C10] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#6BCBA4]"
           >
             Copied
           </motion.span>

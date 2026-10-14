@@ -44,7 +44,7 @@ export default function CursorGlow() {
       style={{ x: sx, y: sy }}
       className="pointer-events-none fixed left-0 top-0 z-[5] -translate-x-1/2 -translate-y-1/2"
     >
-      <div className="h-[600px] w-[600px] rounded-full bg-[#D97757]/[0.06] blur-[100px]" />
+      <div className="h-[600px] w-[600px] rounded-full bg-[#7B8FE8]/[0.06] blur-[100px]" />
     </motion.div>
   );
 }

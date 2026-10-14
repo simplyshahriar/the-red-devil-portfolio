@@ -158,7 +158,7 @@ function ScrollProgress() {
     <motion.div
       aria-hidden="true"
       style={{ scaleX }}
-      className="fixed left-0 right-0 top-0 z-[60] h-[2px] origin-left bg-[#D97757]"
+      className="fixed left-0 right-0 top-0 z-[60] h-[2px] origin-left bg-[#7B8FE8]"
     />
   );
 }
@@ -175,15 +175,15 @@ function SectionHeading({
   return (
     <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
       <div>
-        <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
+        <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#858B99]">
           {kicker}
         </p>
-        <h2 className="mt-3 text-4xl font-semibold uppercase leading-[0.95] tracking-[-0.035em] text-[#F0EBE0] sm:text-5xl lg:text-6xl">
+        <h2 className="mt-3 text-4xl font-semibold uppercase leading-[0.95] tracking-[-0.035em] text-[#E7E9EE] sm:text-5xl lg:text-6xl">
           {title}
         </h2>
       </div>
       {count && (
-        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#5A554C]">
+        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#545A66]">
           {count}
         </span>
       )}
@@ -223,8 +223,8 @@ function SkillBar({ label, value }: { label: string; value: number }) {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-[#C9C2B4]">{label}</span>
-        <span className="font-mono text-xs tabular-nums text-[#5A554C]">
+        <span className="text-sm font-medium text-[#B5B9C4]">{label}</span>
+        <span className="font-mono text-xs tabular-nums text-[#545A66]">
           {value}%
         </span>
       </div>
@@ -237,7 +237,7 @@ function SkillBar({ label, value }: { label: string; value: number }) {
             duration: reduceMotion ? 0 : 1.2,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="h-full bg-[#D97757]"
+          className="h-full bg-[#7B8FE8]"
         />
       </div>
     </div>
@@ -280,11 +280,11 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
   return (
     <section
       ref={ref}
-      className="relative isolate overflow-hidden border-b border-white/[0.06] bg-[#0A0908]"
+      className="relative isolate overflow-hidden border-b border-white/[0.06] bg-[#0A0C10]"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D97757]/[0.07] blur-[140px]"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7B8FE8]/[0.07] blur-[140px]"
       />
 
       <div className="relative mx-auto grid min-h-[110vh] max-w-7xl items-center gap-14 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.1fr] lg:gap-20 lg:px-8 lg:py-32">
@@ -292,15 +292,15 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
           style={{ y: reduceMotion ? 0 : textY }}
           className="relative z-10"
         >
-          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#858B99]">
             // Operator
           </p>
-          <h2 className="mt-4 text-4xl font-semibold uppercase leading-[0.95] tracking-[-0.035em] text-[#F0EBE0] sm:text-5xl lg:text-6xl">
+          <h2 className="mt-4 text-4xl font-semibold uppercase leading-[0.95] tracking-[-0.035em] text-[#E7E9EE] sm:text-5xl lg:text-6xl">
             Behind
             <br />
-            <span className="text-[#5A554C]">the handle</span>
+            <span className="text-[#545A66]">the handle</span>
           </h2>
-          <p className="mt-6 max-w-md text-base leading-8 text-[#8E887B]">
+          <p className="mt-6 max-w-md text-base leading-8 text-[#858B99]">
             Somewhere between the terminal and the notebook — learning in
             public, one lab at a time. Not claiming expertise. Documenting the
             path toward it.
@@ -315,10 +315,10 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
             ].map(([k, v]) => (
               <div
                 key={k}
-                className="bg-[#0A0908] px-4 py-4 font-mono text-[11px]"
+                className="bg-[#0A0C10] px-4 py-4 font-mono text-[11px]"
               >
-                <p className="text-[#5A554C]">{k}</p>
-                <p className="mt-1.5 text-[#C9C2B4]">{v}</p>
+                <p className="text-[#545A66]">{k}</p>
+                <p className="mt-1.5 text-[#B5B9C4]">{v}</p>
               </div>
             ))}
           </div>
@@ -329,12 +329,12 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
             <motion.div
               aria-hidden="true"
               style={{ rotate: ringRotate, scale: ringScale }}
-              className="pointer-events-none absolute inset-[-8%] rounded-full border border-dashed border-[#D97757]/25"
+              className="pointer-events-none absolute inset-[-8%] rounded-full border border-dashed border-[#7B8FE8]/25"
             />
           )}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-[-3%] rounded-full border border-[#D97757]/15"
+            className="pointer-events-none absolute inset-[-3%] rounded-full border border-[#7B8FE8]/15"
           />
 
           <motion.div
@@ -346,20 +346,20 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
             }}
             className="relative origin-center"
           >
-            <div className="absolute -inset-6 rounded-[2rem] bg-[#D97757]/[0.08] blur-3xl" />
-            <div className="relative rounded-[1.6rem] border border-white/[0.08] bg-[#12100E] p-2 shadow-2xl shadow-black/50">
-              <div className="overflow-hidden rounded-[1.2rem] border border-white/[0.05] bg-[#0A0908]">
+            <div className="absolute -inset-6 rounded-[2rem] bg-[#7B8FE8]/[0.08] blur-3xl" />
+            <div className="relative rounded-[1.6rem] border border-white/[0.08] bg-[#12151A] p-2 shadow-2xl shadow-black/50">
+              <div className="overflow-hidden rounded-[1.2rem] border border-white/[0.05] bg-[#0A0C10]">
                 <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3">
                   <div className="flex items-center gap-1.5" aria-hidden="true">
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#5A554C]" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#5A554C]" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#D97757]/70" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#545A66]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#545A66]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#7B8FE8]/70" />
                   </div>
-                  <span className="font-mono text-[10px] tracking-[0.14em] text-[#5A554C]">
+                  <span className="font-mono text-[10px] tracking-[0.14em] text-[#545A66]">
                     reddevil@local
                   </span>
-                  <span className="flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-[#7EA88A]">
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#7EA88A]" />
+                  <span className="flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-[#6BCBA4]">
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#6BCBA4]" />
                     ONLINE
                   </span>
                 </div>
@@ -376,14 +376,14 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
                   />
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-[#D97757] mix-blend-color opacity-[0.22]"
+                    className="pointer-events-none absolute inset-0 bg-[#7B8FE8] mix-blend-color opacity-[0.22]"
                   />
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0A0908]/20 via-transparent to-[#0A0908]/70"
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0A0C10]/20 via-transparent to-[#0A0C10]/70"
                   />
                   <div className="absolute bottom-5 left-5 right-5">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#E89B7B]">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#98A7ED]">
                       // The Red Devil
                     </p>
                     <p className="mt-2 text-2xl font-semibold tracking-tight text-white">
@@ -405,7 +405,7 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
 function Marquee({ reduceMotion }: { reduceMotion: boolean }) {
   const items = [...marqueeItems, ...marqueeItems];
   return (
-    <section className="relative overflow-hidden border-b border-white/[0.06] bg-[#0A0908] py-6">
+    <section className="relative overflow-hidden border-b border-white/[0.06] bg-[#0A0C10] py-6">
       <div
         className={`flex w-max gap-10 whitespace-nowrap ${
           reduceMotion ? "" : "animate-marquee"
@@ -414,10 +414,10 @@ function Marquee({ reduceMotion }: { reduceMotion: boolean }) {
         {items.map((item, i) => (
           <span
             key={`${item}-${i}`}
-            className="flex items-center gap-10 font-mono text-[11px] uppercase tracking-[0.3em] text-[#5A554C]"
+            className="flex items-center gap-10 font-mono text-[11px] uppercase tracking-[0.3em] text-[#545A66]"
           >
             {item}
-            <span className="text-[#D97757]">◆</span>
+            <span className="text-[#7B8FE8]">◆</span>
           </span>
         ))}
       </div>
@@ -491,7 +491,7 @@ export default function Home() {
   return (
     <main
       id="home"
-      className="relative min-h-screen overflow-x-clip bg-[#0A0908] text-[#F0EBE0] selection:bg-[#D97757]/30 selection:text-white"
+      className="relative min-h-screen overflow-x-clip bg-[#0A0C10] text-[#E7E9EE] selection:bg-[#7B8FE8]/30 selection:text-white"
     >
       <GrainOverlay />
       <CursorGlow />
@@ -500,8 +500,7 @@ export default function Home() {
       <SectionCounter />
       <CommandPalette />
 
-      {/* ================= NAV ================= */}
-      <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-[#0A0908]/85 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-[#0A0C10]/85 backdrop-blur-xl">
         <nav
           aria-label="Main navigation"
           className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8"
@@ -512,10 +511,10 @@ export default function Home() {
               onClick={() => setMobileNavOpen(false)}
               className="flex items-center gap-2.5"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#D97757] font-mono text-xs font-bold text-[#0A0908]">
+              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#7B8FE8] font-mono text-xs font-bold text-[#0A0C10]">
                 R/
               </span>
-              <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F0EBE0]">
+              <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#E7E9EE]">
                 Red Devil
               </span>
             </a>
@@ -526,7 +525,7 @@ export default function Home() {
               <a
                 key={href}
                 href={href}
-                className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#8E887B] transition hover:text-[#F0EBE0]"
+                className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#858B99] transition hover:text-[#E7E9EE]"
               >
                 {label}
               </a>
@@ -538,7 +537,7 @@ export default function Home() {
               <a
                 href="#contact"
                 onClick={() => setMobileNavOpen(false)}
-                className="hidden rounded-md bg-[#D97757] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0908] transition hover:bg-[#E89B7B] sm:inline-flex"
+                className="hidden rounded-md bg-[#7B8FE8] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0C10] transition hover:bg-[#98A7ED] sm:inline-flex"
               >
                 Contact
               </a>
@@ -563,17 +562,16 @@ export default function Home() {
                 key={href}
                 href={href}
                 onClick={() => setMobileNavOpen(false)}
-                className="flex items-center justify-between rounded-md px-3 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#C9C2B4] hover:bg-white/[0.04]"
+                className="flex items-center justify-between rounded-md px-3 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#B5B9C4] hover:bg-white/[0.04]"
               >
                 {label}
-                <span className="text-[#E89B7B]">↗</span>
+                <span className="text-[#98A7ED]">↗</span>
               </a>
             ))}
           </div>
         )}
       </header>
 
-      {/* ================= HERO ================= */}
       <section
         ref={heroRef}
         className="relative isolate overflow-hidden border-b border-white/[0.06]"
@@ -583,7 +581,7 @@ export default function Home() {
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(217,119,87,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(217,119,87,0.05) 1px, transparent 1px)",
+              "linear-gradient(rgba(123,143,232,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(123,143,232,0.05) 1px, transparent 1px)",
             backgroundSize: "72px 72px",
             maskImage:
               "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)",
@@ -594,7 +592,7 @@ export default function Home() {
         <motion.div
           aria-hidden="true"
           style={{ scale: reduceMotion ? 1 : heroGlowScale }}
-          className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#D97757]/[0.08] blur-[160px]"
+          className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#7B8FE8]/[0.08] blur-[160px]"
         />
 
         <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-36">
@@ -609,28 +607,28 @@ export default function Home() {
             transition={{ duration: reduceMotion ? 0 : 0.9, ease: "easeOut" }}
             className="text-center"
           >
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-[#7EA88A]/25 bg-[#7EA88A]/[0.06] px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-[#B8D4BE]">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-[#6BCBA4]/25 bg-[#6BCBA4]/[0.06] px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-[#A8D4C0]">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#7EA88A] opacity-60" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#7EA88A]" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#6BCBA4] opacity-60" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#6BCBA4]" />
               </span>
               Available for collaboration
             </div>
 
-            <h1 className="mt-8 font-semibold uppercase leading-[0.82] tracking-[-0.055em] text-[#F0EBE0]">
+            <h1 className="mt-8 font-semibold uppercase leading-[0.82] tracking-[-0.055em] text-[#E7E9EE]">
               <span className="block text-[clamp(4.5rem,17vw,15rem)]">
                 <ScrambleText text="HASNAIN" delay={200} />
               </span>
-              <span className="block text-[clamp(4.5rem,17vw,15rem)] text-[#5A554C]">
+              <span className="block text-[clamp(4.5rem,17vw,15rem)] text-[#545A66]">
                 <ScrambleText text="SHAHRIAR" delay={600} />
               </span>
             </h1>
 
             <div className="mx-auto mt-10 max-w-2xl">
-              <p className="text-2xl font-light tracking-tight text-[#C9C2B4] sm:text-3xl">
+              <p className="text-2xl font-light tracking-tight text-[#B5B9C4] sm:text-3xl">
                 Breaking Beyond the Surface
               </p>
-              <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.28em] text-[#5A554C]">
+              <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.28em] text-[#545A66]">
                 A Little Bit
               </p>
             </div>
@@ -640,7 +638,7 @@ export default function Home() {
                 <motion.a
                   href="#projects"
                   whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-                  className="group inline-flex items-center gap-2 rounded-md bg-[#D97757] px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0908] shadow-lg shadow-[#D97757]/10 transition hover:bg-[#E89B7B]"
+                  className="group inline-flex items-center gap-2 rounded-md bg-[#7B8FE8] px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0C10] shadow-lg shadow-[#7B8FE8]/10 transition hover:bg-[#98A7ED]"
                 >
                   View Work
                   <ArrowIcon className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -650,7 +648,7 @@ export default function Home() {
               <Magnetic strength={0.4}>
                 <motion.a
                   href="#contact"
-                  className="group inline-flex items-center gap-2 rounded-md border border-white/12 px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#C9C2B4] transition hover:border-[#D97757]/50 hover:text-[#F0EBE0]"
+                  className="group inline-flex items-center gap-2 rounded-md border border-white/12 px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#B5B9C4] transition hover:border-[#7B8FE8]/50 hover:text-[#E7E9EE]"
                 >
                   Get in Touch
                   <ArrowIcon className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -664,7 +662,7 @@ export default function Home() {
           initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.6, duration: 0.6 }}
-          className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.24em] text-[#5A554C]"
+          className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.24em] text-[#545A66]"
         >
           <span className="flex flex-col items-center gap-2">
             Scroll
@@ -675,19 +673,16 @@ export default function Home() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="block h-6 w-px bg-[#D97757]/60"
+              className="block h-6 w-px bg-[#7B8FE8]/60"
             />
           </span>
         </motion.div>
       </section>
 
-      {/* ================= PHOTO REVEAL ================= */}
       <PhotoReveal reduceMotion={reduceMotion} />
 
-      {/* ================= MARQUEE ================= */}
       <Marquee reduceMotion={reduceMotion} />
 
-      {/* ================= ABOUT ================= */}
       <section
         id="about"
         className="scroll-mt-20 border-b border-white/[0.06]"
@@ -696,10 +691,10 @@ export default function Home() {
           <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
             <Reveal>
               <SectionHeading kicker="A Little Bit" title="About Me" />
-              <div className="space-y-5 text-base leading-8 text-[#8E887B]">
+              <div className="space-y-5 text-base leading-8 text-[#858B99]">
                 <p>
                   I&apos;m{" "}
-                  <span className="text-[#F0EBE0]">Hasnain Shahriar</span>, an
+                  <span className="text-[#E7E9EE]">Hasnain Shahriar</span>, an
                   aspiring cybersecurity professional focused on penetration
                   testing, web application security, and reverse engineering.
                   My interests include vulnerability analysis, software
@@ -712,7 +707,7 @@ export default function Home() {
                   analytical thinking, continuous learning, and responsible
                   security practices.
                 </p>
-                <p className="text-[#C9C2B4]">
+                <p className="text-[#B5B9C4]">
                   My goal is to build systems — and an understanding of
                   systems — that are fast, reliable, and hard to break.
                 </p>
@@ -729,18 +724,18 @@ export default function Home() {
 
             <Reveal delay={0.15}>
               <div className="relative">
-                <div className="absolute -inset-4 rounded-[2rem] bg-[#D97757]/[0.06] blur-3xl" />
-                <div className="relative flex h-full items-center rounded-2xl border border-white/[0.07] bg-[#12100E] p-8 sm:p-10">
-                  <blockquote className="text-xl leading-9 text-[#C9C2B4] sm:text-2xl sm:leading-[2.6rem]">
-                    <span className="mr-2 font-mono text-3xl text-[#D97757]">
+                <div className="absolute -inset-4 rounded-[2rem] bg-[#7B8FE8]/[0.06] blur-3xl" />
+                <div className="relative flex h-full items-center rounded-2xl border border-white/[0.07] bg-[#12151A] p-8 sm:p-10">
+                  <blockquote className="text-xl leading-9 text-[#B5B9C4] sm:text-2xl sm:leading-[2.6rem]">
+                    <span className="mr-2 font-mono text-3xl text-[#7B8FE8]">
                       &ldquo;
                     </span>
                     Learn a concept. Practice it in a safe environment.
                     Document the result. Improve the process. Repeat.
-                    <span className="ml-2 font-mono text-3xl text-[#D97757]">
+                    <span className="ml-2 font-mono text-3xl text-[#7B8FE8]">
                       &rdquo;
                     </span>
-                    <footer className="mt-6 font-mono text-[11px] uppercase tracking-[0.22em] text-[#5A554C]">
+                    <footer className="mt-6 font-mono text-[11px] uppercase tracking-[0.22em] text-[#545A66]">
                       — My approach to security
                     </footer>
                   </blockquote>
@@ -751,10 +746,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= EXPERTISE ================= */}
       <section
         id="expertise"
-        className="scroll-mt-20 border-b border-white/[0.06] bg-[#0A0908]"
+        className="scroll-mt-20 border-b border-white/[0.06] bg-[#0A0C10]"
       >
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
           <Reveal>
@@ -763,7 +757,7 @@ export default function Home() {
               title="Expertise"
               count={`${expertise.length} Areas`}
             />
-            <p className="-mt-6 mb-12 max-w-2xl text-base leading-7 text-[#8E887B]">
+            <p className="-mt-6 mb-12 max-w-2xl text-base leading-7 text-[#858B99]">
               I combine security thinking with a builder&apos;s mindset —
               understanding how systems work, how they break, and how to make
               them resilient.
@@ -781,18 +775,18 @@ export default function Home() {
                   duration: reduceMotion ? 0 : 0.45,
                   delay: reduceMotion ? 0 : index * 0.05,
                 }}
-                className="group relative flex flex-col bg-[#0A0908] p-6 transition hover:bg-[#12100E] sm:p-7 lg:p-8"
+                className="group relative flex flex-col bg-[#0A0C10] p-6 transition hover:bg-[#12151A] sm:p-7 lg:p-8"
               >
-                <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#D97757]">
+                <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#7B8FE8]">
                   {item.category}
                 </span>
-                <h3 className="mt-4 text-xl font-semibold tracking-tight text-[#F0EBE0] transition group-hover:text-white sm:text-2xl">
+                <h3 className="mt-4 text-xl font-semibold tracking-tight text-[#E7E9EE] transition group-hover:text-white sm:text-2xl">
                   {item.title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-[#8E887B]">
+                <p className="mt-4 text-sm leading-7 text-[#858B99]">
                   {item.description}
                 </p>
-                <span className="mt-6 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/[0.08] text-[#5A554C] transition group-hover:border-[#D97757]/50 group-hover:text-[#E89B7B]">
+                <span className="mt-6 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/[0.08] text-[#545A66] transition group-hover:border-[#7B8FE8]/50 group-hover:text-[#98A7ED]">
                   <ArrowIcon className="h-3.5 w-3.5" />
                 </span>
               </motion.div>
@@ -801,7 +795,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= PROJECTS ================= */}
       <section
         id="projects"
         className="scroll-mt-20 border-b border-white/[0.06]"
@@ -820,29 +813,29 @@ export default function Home() {
             <div className="space-y-4">
               {projects.map((project, index) => (
                 <Reveal key={project.number} delay={index * 0.06}>
-                  <article className="rounded-2xl border border-white/[0.07] bg-[#12100E] p-6">
+                  <article className="rounded-2xl border border-white/[0.07] bg-[#12151A] p-6">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-3xl font-semibold text-[#D97757]">
+                      <span className="font-mono text-3xl font-semibold text-[#7B8FE8]">
                         /{project.number}
                       </span>
-                      <span className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-[#8E887B]">
+                      <span className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-[#858B99]">
                         {project.status}
                       </span>
                     </div>
-                    <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-[#E89B7B]">
+                    <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-[#98A7ED]">
                       {project.category}
                     </p>
-                    <h3 className="mt-2 text-2xl font-semibold text-[#F0EBE0]">
+                    <h3 className="mt-2 text-2xl font-semibold text-[#E7E9EE]">
                       {project.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-7 text-[#8E887B]">
+                    <p className="mt-3 text-sm leading-7 text-[#858B99]">
                       {project.description}
                     </p>
                     <div className="mt-4 flex flex-wrap gap-1.5">
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#8E887B]"
+                          className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#858B99]"
                         >
                           {tag}
                         </span>
@@ -850,7 +843,7 @@ export default function Home() {
                     </div>
                     <a
                       href={`/projects/${project.slug}`}
-                      className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#E89B7B]"
+                      className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#98A7ED]"
                     >
                       View details <ArrowIcon />
                     </a>
@@ -862,18 +855,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= CERTIFICATIONS ================= */}
       <Certifications />
 
-      {/* ================= EXPERIENCE ================= */}
       <section
         id="experience"
-        className="scroll-mt-20 border-b border-white/[0.06] bg-[#0A0908]"
+        className="scroll-mt-20 border-b border-white/[0.06] bg-[#0A0C10]"
       >
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
           <Reveal>
             <SectionHeading kicker="Career Path" title="Experience" />
-            <p className="-mt-6 mb-12 max-w-2xl text-base leading-7 text-[#8E887B]">
+            <p className="-mt-6 mb-12 max-w-2xl text-base leading-7 text-[#858B99]">
               A record of learning, labs, and building — focused on turning
               theory into repeatable practice.
             </p>
@@ -882,19 +873,19 @@ export default function Home() {
           <div className="space-y-5">
             {experience.map((item, index) => (
               <Reveal key={item.role} delay={index * 0.06}>
-                <article className="rounded-2xl border border-white/[0.07] bg-[#12100E] p-6 transition hover:border-[#D97757]/35 sm:p-8">
+                <article className="rounded-2xl border border-white/[0.07] bg-[#12151A] p-6 transition hover:border-[#7B8FE8]/35 sm:p-8">
                   <div className="flex flex-wrap items-start justify-between gap-4">
                     <div>
-                      <h3 className="text-xl font-semibold tracking-tight text-[#F0EBE0] sm:text-2xl">
+                      <h3 className="text-xl font-semibold tracking-tight text-[#E7E9EE] sm:text-2xl">
                         {item.role}
                       </h3>
-                      <p className="mt-1 text-sm text-[#E89B7B]">{item.org}</p>
+                      <p className="mt-1 text-sm text-[#98A7ED]">{item.org}</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-mono text-xs uppercase tracking-[0.16em] text-[#8E887B]">
+                      <p className="font-mono text-xs uppercase tracking-[0.16em] text-[#858B99]">
                         {item.period}
                       </p>
-                      <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-[#5A554C]">
+                      <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-[#545A66]">
                         {item.type} · {item.location}
                       </p>
                     </div>
@@ -903,10 +894,10 @@ export default function Home() {
                     {item.bullets.map((bullet) => (
                       <li
                         key={bullet}
-                        className="flex gap-3 text-sm leading-7 text-[#8E887B]"
+                        className="flex gap-3 text-sm leading-7 text-[#858B99]"
                       >
                         <span
-                          className="mt-3 h-1 w-1 shrink-0 rounded-full bg-[#D97757]"
+                          className="mt-3 h-1 w-1 shrink-0 rounded-full bg-[#7B8FE8]"
                           aria-hidden="true"
                         />
                         <span>{bullet}</span>
@@ -917,7 +908,7 @@ export default function Home() {
                     {item.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#8E887B]"
+                        className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#858B99]"
                       >
                         {tag}
                       </span>
@@ -930,13 +921,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= CONTACT ================= */}
       <section id="contact" className="scroll-mt-20">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
           <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
             <Reveal>
               <SectionHeading kicker="Say Hello" title="Contact" />
-              <p className="-mt-6 max-w-md text-base leading-7 text-[#8E887B]">
+              <p className="-mt-6 max-w-md text-base leading-7 text-[#858B99]">
                 Interested in cybersecurity, research, or building something
                 meaningful? Send a message or reach out through any of the
                 profiles below.
@@ -974,17 +964,17 @@ export default function Home() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center justify-between rounded-xl border border-white/[0.07] bg-[#12100E] px-4 py-3.5 transition hover:border-[#D97757]/40 hover:bg-[#1A1714]"
+                      className="group flex items-center justify-between rounded-xl border border-white/[0.07] bg-[#12151A] px-4 py-3.5 transition hover:border-[#7B8FE8]/40 hover:bg-[#1A1E24]"
                     >
                       <span className="flex items-center gap-4">
-                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#5A554C]">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#545A66]">
                           {link.label}
                         </span>
-                        <span className="text-sm text-[#C9C2B4] transition group-hover:text-white">
+                        <span className="text-sm text-[#B5B9C4] transition group-hover:text-white">
                           {link.handle}
                         </span>
                       </span>
-                      <ArrowIcon className="text-[#5A554C] transition group-hover:text-[#E89B7B]" />
+                      <ArrowIcon className="text-[#545A66] transition group-hover:text-[#98A7ED]" />
                     </motion.a>
                   </Magnetic>
                 ))}
@@ -999,13 +989,13 @@ export default function Home() {
             </Reveal>
 
             <Reveal delay={0.12}>
-              <div className="rounded-2xl border border-white/[0.07] bg-[#12100E] p-6 sm:p-8">
+              <div className="rounded-2xl border border-white/[0.07] bg-[#12151A] p-6 sm:p-8">
                 <div className="mb-6 flex items-center justify-between">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#5A554C]">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#545A66]">
                     // Send a message
                   </p>
-                  <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase text-[#7EA88A]">
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#7EA88A]" />
+                  <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase text-[#6BCBA4]">
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#6BCBA4]" />
                     Secure
                   </span>
                 </div>
@@ -1032,7 +1022,7 @@ export default function Home() {
                     />
                   </div>
 
-                  <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#8E887B]">
+                  <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#858B99]">
                     Name
                     <input
                       required
@@ -1046,12 +1036,12 @@ export default function Home() {
                           name: e.target.value,
                         })
                       }
-                      className="mt-2 w-full rounded-xl border border-white/[0.07] bg-[#0A0908] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#5A554C] focus:border-[#D97757] focus:ring-4 focus:ring-[#D97757]/10"
+                      className="mt-2 w-full rounded-xl border border-white/[0.07] bg-[#0A0C10] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#545A66] focus:border-[#7B8FE8] focus:ring-4 focus:ring-[#7B8FE8]/10"
                       placeholder="Your name"
                     />
                   </label>
 
-                  <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#8E887B]">
+                  <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#858B99]">
                     Email
                     <input
                       required
@@ -1065,12 +1055,12 @@ export default function Home() {
                           email: e.target.value,
                         })
                       }
-                      className="mt-2 w-full rounded-xl border border-white/[0.07] bg-[#0A0908] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#5A554C] focus:border-[#D97757] focus:ring-4 focus:ring-[#D97757]/10"
+                      className="mt-2 w-full rounded-xl border border-white/[0.07] bg-[#0A0C10] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#545A66] focus:border-[#7B8FE8] focus:ring-4 focus:ring-[#7B8FE8]/10"
                       placeholder="you@example.com"
                     />
                   </label>
 
-                  <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#8E887B]">
+                  <label className="block font-mono text-[10px] uppercase tracking-[0.2em] text-[#858B99]">
                     Message
                     <textarea
                       required
@@ -1084,7 +1074,7 @@ export default function Home() {
                           message: e.target.value,
                         })
                       }
-                      className="mt-2 w-full resize-y rounded-xl border border-white/[0.07] bg-[#0A0908] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#5A554C] focus:border-[#D97757] focus:ring-4 focus:ring-[#D97757]/10"
+                      className="mt-2 w-full resize-y rounded-xl border border-white/[0.07] bg-[#0A0C10] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#545A66] focus:border-[#7B8FE8] focus:ring-4 focus:ring-[#7B8FE8]/10"
                       placeholder="Tell me what you'd like to discuss..."
                     />
                   </label>
@@ -1093,7 +1083,7 @@ export default function Home() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full rounded-xl bg-[#D97757] px-5 py-3.5 font-mono text-[11px] uppercase tracking-[0.2em] text-[#0A0908] shadow-lg shadow-[#D97757]/10 transition hover:bg-[#E89B7B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E89B7B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#12100E] disabled:cursor-not-allowed disabled:opacity-50"
+                      className="w-full rounded-xl bg-[#7B8FE8] px-5 py-3.5 font-mono text-[11px] uppercase tracking-[0.2em] text-[#0A0C10] shadow-lg shadow-[#7B8FE8]/10 transition hover:bg-[#98A7ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#98A7ED] focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151A] disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {isSubmitting ? "Sending..." : "Send Message"}
                     </button>
@@ -1103,7 +1093,7 @@ export default function Home() {
                     <p
                       role="status"
                       aria-live="polite"
-                      className="rounded-xl border border-white/[0.07] bg-white/[0.03] px-4 py-3 text-sm text-[#C9C2B4]"
+                      className="rounded-xl border border-white/[0.07] bg-white/[0.03] px-4 py-3 text-sm text-[#B5B9C4]"
                     >
                       {contactStatus}
                     </p>
@@ -1115,18 +1105,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= FOOTER ================= */}
       <footer className="border-t border-white/[0.06]">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
-          <p className="flex items-center gap-3 text-xs text-[#5A554C]">
-            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#D97757] font-mono text-[10px] font-bold text-[#0A0908]">
+          <p className="flex items-center gap-3 text-xs text-[#545A66]">
+            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#7B8FE8] font-mono text-[10px] font-bold text-[#0A0C10]">
               R/
             </span>
-            <span className="font-mono uppercase tracking-[0.18em] text-[#C9C2B4]">
+            <span className="font-mono uppercase tracking-[0.18em] text-[#B5B9C4]">
               The Red Devil
             </span>
           </p>
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#5A554C]">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#545A66]">
             Independent Learning · Responsible Security Research
           </p>
         </div>
