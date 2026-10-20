@@ -10,13 +10,11 @@ import {
   useTransform,
 } from "motion/react";
 
-import CustomCursor from "./components/CustomCursor";
 import HorizontalProjects from "./components/HorizontalProjects";
 import Magnetic from "./components/Magnetic";
 import ScrambleText from "./components/ScrambleText";
 import SectionCounter from "./components/SectionCounter";
 import CopyEmail from "./components/CopyEmail";
-import CursorGlow from "./components/CursorGlow";
 import GrainOverlay from "./components/GrainOverlay";
 import CommandPalette from "./components/CommandPalette";
 import Certifications from "./components/Certifications";
@@ -494,8 +492,6 @@ export default function Home() {
       className="relative min-h-screen overflow-x-clip bg-[#0A0C10] text-[#E7E9EE] selection:bg-[#7B8FE8]/30 selection:text-white"
     >
       <GrainOverlay />
-      <CursorGlow />
-      <CustomCursor />
       <ScrollProgress />
       <SectionCounter />
       <CommandPalette />
