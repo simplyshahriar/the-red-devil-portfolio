@@ -33,13 +33,27 @@ const certifications: Certification[] = [
     title: "A Practical Introduction to Cloud Computing",
     issuer: "Codered Continuous Learning",
     issuedDate: "October 2026",
-    credentialUrl: "", // এখানে ভেরিফাই লিংক থাকলে দিতে পারো, না থাকলে খালি থাকুক
+    credentialUrl: "", 
     image: "/images/certifications/codered-cloud-computing.png",
     skills: [
       "Cloud Computing",
       "Cloud Architecture",
       "Virtualization",
       "Cloud Services",
+    ],
+  },
+  {
+    id: "codered-dark-web",
+    title: "Introduction to Dark Web, Anonymity, and Cryptocurrency",
+    issuer: "Codered Continuous Learning",
+    issuedDate: "October 2026",
+    credentialUrl: "", 
+    image: "/images/certifications/codered-dark-web.png",
+    skills: [
+      "Dark Web",
+      "Anonymity",
+      "Cryptocurrency",
+      "Cyber Threats",
     ],
   },
 ];
@@ -63,6 +77,7 @@ function ArrowIcon({ className = "" }: { className?: string }) {
   );
 }
 
+// ✅ এখানে export default ঠিক আছে কিনা চেক করা হয়েছে
 export default function Certifications() {
   const reduceMotion = useReducedMotion();
 
