@@ -19,14 +19,27 @@ const certifications: Certification[] = [
     title: "Introduction to Cybersecurity",
     issuer: "Cisco Networking Academy",
     issuedDate: "October 2026",
-    credentialUrl:
-      "https://www.credly.com/users/hasnain-shahriar/badges",
+    credentialUrl: "https://www.credly.com/users/hasnain-shahriar/badges",
     image: "/images/certifications/cisco-intro-cybersecurity.png",
     skills: [
       "Cyber Threat Landscape",
       "Online Safety",
       "Threat Protection",
       "Career Paths in Cybersecurity",
+    ],
+  },
+  {
+    id: "codered-cloud-computing",
+    title: "A Practical Introduction to Cloud Computing",
+    issuer: "Codered Continuous Learning",
+    issuedDate: "October 2026",
+    credentialUrl: "", // এখানে ভেরিফাই লিংক থাকলে দিতে পারো, না থাকলে খালি থাকুক
+    image: "/images/certifications/codered-cloud-computing.png",
+    skills: [
+      "Cloud Computing",
+      "Cloud Architecture",
+      "Virtualization",
+      "Cloud Services",
     ],
   },
 ];
@@ -115,8 +128,8 @@ export default function Certifications() {
                       {cert.issuedDate}
                     </span>
                     <span>
-                      <span className="text-[#858B99]">Level</span> · Student
-                      Credential
+                      <span className="text-[#858B99]">Level</span> · Course
+                      Completion
                     </span>
                   </div>
 
@@ -144,7 +157,7 @@ export default function Certifications() {
                         rel="noopener noreferrer"
                         className="group/link inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#98A7ED] transition hover:text-white"
                       >
-                        Verify on Credly
+                        Verify Credential
                         <ArrowIcon className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                       </a>
                     </div>
