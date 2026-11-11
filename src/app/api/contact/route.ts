@@ -1,5 +1,17 @@
 import { NextResponse } from "next/server";
+import { Redis } from "@upstash/redis";
+import { Ratelimit } from "@upstash/ratelimit";
 
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+});
+
+const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(5, "60 s"),
+  analytics: false,
+});
 
 type Body = {
   name?: unknown;
@@ -11,6 +23,20 @@ type Body = {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(req: Request) {
+  // Rate limiting
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "anonymous";
+  const { success: rateLimitOk } = await ratelimit.limit(ip);
+  if (!rateLimitOk) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Too many requests. Please wait a minute and try again.",
+      },
+      { status: 429 },
+    );
+  }
+
   let body: Body;
 
   try {
@@ -34,7 +60,10 @@ export async function POST(req: Request) {
 
   if (name.length < 2 || name.length > 80) {
     return NextResponse.json(
-      { success: false, message: "Please enter a name between 2 and 80 characters." },
+      {
+        success: false,
+        message: "Please enter a name between 2 and 80 characters.",
+      },
       { status: 400 },
     );
   }
@@ -46,38 +75,32 @@ export async function POST(req: Request) {
   }
   if (message.length < 10 || message.length > 3000) {
     return NextResponse.json(
-      { success: false, message: "Please enter a message between 10 and 3000 characters." },
+      {
+        success: false,
+        message: "Please enter a message between 10 and 3000 characters.",
+      },
       { status: 400 },
     );
   }
 
-  // ---------------------------------------------------------------
-  // OPTIONAL: Send email via Resend
-  // ---------------------------------------------------------------
-  // 1. `npm i resend`
-  // 2. Add RESEND_API_KEY + CONTACT_TO_EMAIL to .env.local
-  // 3. Uncomment below.
-  //
-  // try {
-  //   const { Resend } = await import("resend");
-  //   const resend = new Resend(process.env.RESEND_API_KEY);
-  //   await resend.emails.send({
-  //     from: "Portfolio <onboarding@resend.dev>", // replace with verified domain
-  //     to: process.env.CONTACT_TO_EMAIL!,
-  //     replyTo: email,
-  //     subject: `New message from ${name}`,
-  //     text: `From: ${name} <${email}>\n\n${message}`,
-  //   });
-  // } catch (err) {
-  //   console.error("Resend error:", err);
-  //   return NextResponse.json(
-  //     { success: false, message: "Unable to send your message right now." },
-  //     { status: 500 },
-  //   );
-  // }
-
-  // Dev fallback: log to server console
-  console.log("📩 Contact form:", { name, email, message });
+  // Send email via Resend
+  try {
+    const { Resend } = await import("resend");
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    await resend.emails.send({
+      from: "Portfolio Contact <onboarding@resend.dev>",
+      to: process.env.CONTACT_TO_EMAIL!,
+      replyTo: email,
+      subject: `New message from ${name}`,
+      text: `From: ${name} <${email}>\n\n${message}`,
+    });
+  } catch (err) {
+    console.error("Resend error:", err);
+    return NextResponse.json(
+      { success: false, message: "Unable to send your message right now." },
+      { status: 500 },
+    );
+  }
 
   return NextResponse.json({
     success: true,
