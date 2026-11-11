@@ -2,16 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useScroll, useReducedMotion } from "motion/react";
-
-type Project = {
-  number: string;
-  slug: string;
-  category: string;
-  title: string;
-  description: string;
-  status: string;
-  tags: string[];
-};
+import type { Project } from "../lib/data";
 
 function ArrowIcon() {
   return (

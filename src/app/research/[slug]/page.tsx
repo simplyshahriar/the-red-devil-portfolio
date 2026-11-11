@@ -1,34 +1,10 @@
-﻿
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-
-const data: Record<
-  string,
-  {
-    title: string;
-    description: string;
-  }
-> = {
-  "web-application-security": {
-    title: "Introduction to Web Application Security",
-    description:
-      "An introductory note covering web application security concepts, authorized testing, and responsible reporting.",
-  },
-  "osint-recon-fundamentals": {
-    title: "Reconnaissance and OSINT Fundamentals",
-    description:
-      "An introduction to passive reconnaissance, reliable public sources, and responsible OSINT practices.",
-  },
-  "responsible-security-research": {
-    title: "Responsible Security Research",
-    description:
-      "Notes on authorization, defining scope, documenting findings, and responsible vulnerability disclosure.",
-  },
-};
+import { getResearchNoteBySlug, researchNotes } from "../../lib/data";
 
 export function generateStaticParams() {
-  return Object.keys(data).map((slug) => ({ slug }));
+  return researchNotes.map((note) => ({ slug: note.slug }));
 }
 
 async function ResearchContent({
@@ -37,7 +13,7 @@ async function ResearchContent({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const item = data[slug];
+  const item = getResearchNoteBySlug(slug);
 
   if (!item) {
     notFound();

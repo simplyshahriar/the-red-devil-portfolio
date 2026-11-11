@@ -98,7 +98,15 @@ export const projects: Project[] = [
   },
 ];
 
-export const researchNotes = [
+export type ResearchNote = {
+  number: string;
+  slug: string;
+  category: string;
+  title: string;
+  description: string;
+};
+
+export const researchNotes: ResearchNote[] = [
   {
     number: "001",
     slug: "web-application-security",
@@ -127,4 +135,8 @@ export const researchNotes = [
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
+}
+
+export function getResearchNoteBySlug(slug: string): ResearchNote | undefined {
+  return researchNotes.find((n) => n.slug === slug);
 }
