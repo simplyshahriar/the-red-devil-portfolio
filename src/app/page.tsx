@@ -12,12 +12,12 @@ import {
 
 import HorizontalProjects from "./components/HorizontalProjects";
 import Magnetic from "./components/Magnetic";
-import ScrambleText from "./components/ScrambleText";
 import SectionCounter from "./components/SectionCounter";
 import CopyEmail from "./components/CopyEmail";
 import GrainOverlay from "./components/GrainOverlay";
 import CommandPalette from "./components/CommandPalette";
 import Certifications from "./components/Certifications";
+import CyberHero from "./components/CyberHero";
 import { projects } from "./lib/data";
 import profilePic from "../../public/images/profile.jpg";
 
@@ -291,7 +291,7 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
           className="relative z-10"
         >
           <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#858B99]">
-            // Operator
+            {"// Operator"}
           </p>
           <h2 className="mt-4 text-4xl font-semibold uppercase leading-[0.95] tracking-[-0.035em] text-[#E7E9EE] sm:text-5xl lg:text-6xl">
             Behind
@@ -382,7 +382,7 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
                   />
                   <div className="absolute bottom-5 left-5 right-5">
                     <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#98A7ED]">
-                      // The Red Devil
+                      {"// The Red Devil"}
                     </p>
                     <p className="mt-2 text-2xl font-semibold tracking-tight text-white">
                       Hasnain Shahriar
@@ -428,7 +428,6 @@ function Marquee({ reduceMotion }: { reduceMotion: boolean }) {
 export default function Home() {
   const reduceMotion = Boolean(useReducedMotion());
 
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
@@ -437,24 +436,6 @@ export default function Home() {
   });
   const [contactStatus, setContactStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroNameY = useTransform(heroProgress, [0, 1], [0, -120]);
-  const heroNameOpacity = useTransform(heroProgress, [0, 0.9], [1, 0]);
-  const heroNameScale = useTransform(heroProgress, [0, 1], [1, 0.92]);
-  const heroGlowScale = useTransform(heroProgress, [0, 1], [1, 1.4]);
-
-  const navigation = [
-    ["About", "#about"],
-    ["Expertise", "#expertise"],
-    ["Projects", "#projects"],
-    ["Certifications", "#certifications"],
-    ["Experience", "#experience"],
-  ];
 
   async function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -496,184 +477,12 @@ export default function Home() {
       <SectionCounter />
       <CommandPalette />
 
-      <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-[#0A0C10]/85 backdrop-blur-xl">
-        <nav
-          aria-label="Main navigation"
-          className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8"
-        >
-          <Magnetic strength={0.4}>
-            <a
-              href="#home"
-              onClick={() => setMobileNavOpen(false)}
-              className="flex items-center gap-2.5"
-            >
-              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#7B8FE8] font-mono text-xs font-bold text-[#0A0C10]">
-                R/
-              </span>
-              <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#E7E9EE]">
-                Red Devil
-              </span>
-            </a>
-          </Magnetic>
-
-          <div className="hidden items-center gap-7 lg:flex">
-            {navigation.map(([label, href]) => (
-              <a
-                key={href}
-                href={href}
-                className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#858B99] transition hover:text-[#E7E9EE]"
-              >
-                {label}
-              </a>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Magnetic strength={0.3}>
-              <a
-                href="#contact"
-                onClick={() => setMobileNavOpen(false)}
-                className="hidden rounded-md bg-[#7B8FE8] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0C10] transition hover:bg-[#98A7ED] sm:inline-flex"
-              >
-                Contact
-              </a>
-            </Magnetic>
-
-            <button
-              type="button"
-              aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileNavOpen}
-              onClick={() => setMobileNavOpen((open) => !open)}
-              className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 text-base lg:hidden"
-            >
-              {mobileNavOpen ? "✕" : "☰"}
-            </button>
-          </div>
-        </nav>
-
-        {mobileNavOpen && (
-          <div className="border-t border-white/[0.06] px-4 py-3 sm:px-6 lg:hidden">
-            {[...navigation, ["Contact", "#contact"]].map(([label, href]) => (
-              <a
-                key={href}
-                href={href}
-                onClick={() => setMobileNavOpen(false)}
-                className="flex items-center justify-between rounded-md px-3 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#B5B9C4] hover:bg-white/[0.04]"
-              >
-                {label}
-                <span className="text-[#98A7ED]">↗</span>
-              </a>
-            ))}
-          </div>
-        )}
-      </header>
-
-      <section
-        ref={heroRef}
-        className="relative isolate overflow-hidden border-b border-white/[0.06]"
-      >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(123,143,232,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(123,143,232,0.05) 1px, transparent 1px)",
-            backgroundSize: "72px 72px",
-            maskImage:
-              "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%)",
-          }}
-        />
-        <motion.div
-          aria-hidden="true"
-          style={{ scale: reduceMotion ? 1 : heroGlowScale }}
-          className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#7B8FE8]/[0.08] blur-[160px]"
-        />
-
-        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-36">
-          <motion.div
-            style={{
-              y: reduceMotion ? 0 : heroNameY,
-              opacity: reduceMotion ? 1 : heroNameOpacity,
-              scale: reduceMotion ? 1 : heroNameScale,
-            }}
-            initial={reduceMotion ? false : { opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.9, ease: "easeOut" }}
-            className="text-center"
-          >
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-[#6BCBA4]/25 bg-[#6BCBA4]/[0.06] px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-[#A8D4C0]">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#6BCBA4] opacity-60" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#6BCBA4]" />
-              </span>
-              Available for collaboration
-            </div>
-
-            <h1 className="mt-8 font-semibold uppercase leading-[0.82] tracking-[-0.055em] text-[#E7E9EE]">
-              <span className="block text-[clamp(4.5rem,17vw,15rem)]">
-                <ScrambleText text="HASNAIN" delay={200} />
-              </span>
-              <span className="block text-[clamp(4.5rem,17vw,15rem)] text-[#545A66]">
-                <ScrambleText text="SHAHRIAR" delay={600} />
-              </span>
-            </h1>
-
-            <div className="mx-auto mt-10 max-w-2xl">
-              <p className="text-2xl font-light tracking-tight text-[#B5B9C4] sm:text-3xl">
-                Breaking Beyond the Surface
-              </p>
-              <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.28em] text-[#545A66]">
-                A Little Bit
-              </p>
-            </div>
-
-            <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <Magnetic strength={0.4}>
-                <motion.a
-                  href="#projects"
-                  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-                  className="group inline-flex items-center gap-2 rounded-md bg-[#7B8FE8] px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#0A0C10] shadow-lg shadow-[#7B8FE8]/10 transition hover:bg-[#98A7ED]"
-                >
-                  View Work
-                  <ArrowIcon className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </motion.a>
-              </Magnetic>
-
-              <Magnetic strength={0.4}>
-                <motion.a
-                  href="#contact"
-                  className="group inline-flex items-center gap-2 rounded-md border border-white/12 px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#B5B9C4] transition hover:border-[#7B8FE8]/50 hover:text-[#E7E9EE]"
-                >
-                  Get in Touch
-                  <ArrowIcon className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </motion.a>
-              </Magnetic>
-            </div>
-          </motion.div>
-        </div>
-
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 0.6 }}
-          className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.24em] text-[#545A66]"
-        >
-          <span className="flex flex-col items-center gap-2">
-            Scroll
-            <motion.span
-              animate={reduceMotion ? undefined : { y: [0, 6, 0] }}
-              transition={{
-                duration: 1.6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="block h-6 w-px bg-[#7B8FE8]/60"
-            />
-          </span>
-        </motion.div>
-      </section>
+      <CyberHero
+        heroTitleLeft="RED"
+        heroTitleRight="DEVIL"
+        imageSrc="/images/hero-character.png"
+        versionText="V.2026"
+      />
 
       <PhotoReveal reduceMotion={reduceMotion} />
 
@@ -988,7 +797,7 @@ export default function Home() {
               <div className="rounded-2xl border border-white/[0.07] bg-[#12151A] p-6 sm:p-8">
                 <div className="mb-6 flex items-center justify-between">
                   <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#545A66]">
-                    // Send a message
+                    {"// Send a message"}
                   </p>
                   <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase text-[#6BCBA4]">
                     <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#6BCBA4]" />

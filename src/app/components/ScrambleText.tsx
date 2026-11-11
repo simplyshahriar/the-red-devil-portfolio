@@ -17,11 +17,12 @@ export default function ScrambleText({
   className?: string;
 }) {
   const reduceMotion = useReducedMotion();
-  const [display, setDisplay] = useState(reduceMotion ? text : "");
+  const [display, setDisplay] = useState("");
+
+  const effectiveDisplay = reduceMotion ? text : display;
 
   useEffect(() => {
     if (reduceMotion) {
-      setDisplay(text);
       return;
     }
     let frame = 0;
@@ -53,7 +54,7 @@ export default function ScrambleText({
 
   return (
     <span className={className} aria-label={text}>
-      {display || "\u00A0".repeat(text.length)}
+      {effectiveDisplay || "\u00A0".repeat(text.length)}
     </span>
   );
 }
