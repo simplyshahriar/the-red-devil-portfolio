@@ -91,17 +91,6 @@ export default function CommandPalette() {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        aria-label="Open command palette"
-        className="fixed bottom-6 left-6 z-40 hidden items-center gap-2 rounded-xl border border-white/[0.09] bg-[#18181B]/90 px-3.5 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#858B99] backdrop-blur-md transition hover:border-[#FF5C00]/40 hover:text-[#E7E9EE] sm:flex"
-      >
-        <span className="text-[#545A66]">⌘</span>
-        <span>K</span>
-        <span className="ml-1 hidden text-[#545A66] md:inline">· Menu</span>
-      </button>
-
       <AnimatePresence>
         {open && (
           <motion.div
