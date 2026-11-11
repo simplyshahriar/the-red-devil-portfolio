@@ -199,15 +199,13 @@ export default function CyberHero({
         </motion.div>
       </header>
 
-      {/* ================= 5. LEFT SIDEBAR (VERTICAL TEXT NAV - -90 DEG) ================= */}
-      <motion.aside
+      {/* ================= 5. LEFT SIDEBAR (VERTICAL NAV) ================= */}
+      <motion.nav
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-        className="hidden md:flex fixed left-6 lg:left-9 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-14"
+        className="hidden md:flex fixed left-6 lg:left-10 top-1/2 -translate-y-1/2 z-40 flex-col items-start gap-6"
       >
-        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-white/[0.07] -z-10" />
-
         {navItems.map((item) => {
           const isActive = activeNav === item.id;
           return (
@@ -215,25 +213,30 @@ export default function CyberHero({
               key={item.id}
               href={item.href}
               onClick={() => setActiveNav(item.id)}
-              className="group relative flex items-center justify-center py-2 transition-transform hover:scale-105"
+              className="group relative flex items-center gap-3 py-1 transition-transform duration-200 hover:translate-x-1"
             >
+              {/* Active indicator dot */}
               <span
-                className={`transform -rotate-90 origin-center whitespace-nowrap font-mono text-[11px] font-bold tracking-[0.28em] transition-all duration-300 ${
+                className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${
                   isActive
-                    ? "text-[#FF5C00] drop-shadow-[0_0_10px_#FF5C00]"
-                    : "text-[#A0A0A0] hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
+                    ? "bg-[#FF5C00] shadow-[0_0_10px_#FF5C00] scale-100"
+                    : "bg-white/20 scale-75 group-hover:bg-white/50 group-hover:scale-100"
+                }`}
+              />
+
+              <span
+                className={`font-mono text-[11px] font-bold tracking-[0.22em] transition-all duration-300 ${
+                  isActive
+                    ? "text-[#FF5C00]"
+                    : "text-[#A0A0A0] group-hover:text-white"
                 }`}
               >
                 {item.label}
               </span>
-
-              {isActive && (
-                <span className="absolute -right-3 w-1.5 h-1.5 rounded-full bg-[#FF5C00] shadow-[0_0_10px_#FF5C00]" />
-              )}
             </a>
           );
         })}
-      </motion.aside>
+      </motion.nav>
 
       {/* ================= 6. RIGHT SIDEBAR (VERTICAL PAGINATION DOTS) ================= */}
       <motion.aside
