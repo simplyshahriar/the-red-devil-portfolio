@@ -156,7 +156,7 @@ function ScrollProgress() {
     <motion.div
       aria-hidden="true"
       style={{ scaleX }}
-      className="fixed left-0 right-0 top-0 z-[60] h-[2px] origin-left bg-[#7B8FE8]"
+      className="fixed left-0 right-0 top-0 z-[60] h-[2px] origin-left bg-[#FF5C00]"
     />
   );
 }
@@ -235,7 +235,7 @@ function SkillBar({ label, value }: { label: string; value: number }) {
             duration: reduceMotion ? 0 : 1.2,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="h-full bg-[#7B8FE8]"
+          className="h-full bg-[#FF5C00]"
         />
       </div>
     </div>
@@ -278,11 +278,11 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
   return (
     <section
       ref={ref}
-      className="relative isolate overflow-hidden border-b border-white/[0.06] bg-[#0A0C10]"
+      className="relative isolate overflow-hidden border-b border-white/[0.06] bg-[#09090B]"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7B8FE8]/[0.07] blur-[140px]"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#FF5C00]/[0.07] blur-[140px]"
       />
 
       <div className="relative mx-auto grid min-h-[110vh] max-w-7xl items-center gap-14 px-4 py-24 sm:px-6 lg:grid-cols-[1fr_1.1fr] lg:gap-20 lg:px-8 lg:py-32">
@@ -304,7 +304,7 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
             path toward it.
           </p>
 
-          <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.04] sm:max-w-md">
+          <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.04] sm:max-w-md">
             {[
               ["Handle", "7H3R3dD3v1L"],
               ["Based in", "Bangladesh"],
@@ -313,7 +313,7 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
             ].map(([k, v]) => (
               <div
                 key={k}
-                className="bg-[#0A0C10] px-4 py-4 font-mono text-[11px]"
+                className="bg-[#09090B] px-4 py-4 font-mono text-[11px]"
               >
                 <p className="text-[#545A66]">{k}</p>
                 <p className="mt-1.5 text-[#B5B9C4]">{v}</p>
@@ -327,12 +327,12 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
             <motion.div
               aria-hidden="true"
               style={{ rotate: ringRotate, scale: ringScale }}
-              className="pointer-events-none absolute inset-[-8%] rounded-full border border-dashed border-[#7B8FE8]/25"
+              className="pointer-events-none absolute inset-[-8%] rounded-full border border-dashed border-[#FF5C00]/25"
             />
           )}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-[-3%] rounded-full border border-[#7B8FE8]/15"
+            className="pointer-events-none absolute inset-[-3%] rounded-full border border-[#FF5C00]/15"
           />
 
           <motion.div
@@ -344,14 +344,14 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
             }}
             className="relative origin-center"
           >
-            <div className="absolute -inset-6 rounded-[2rem] bg-[#7B8FE8]/[0.08] blur-3xl" />
-            <div className="relative rounded-[1.6rem] border border-white/[0.08] bg-[#12151A] p-2 shadow-2xl shadow-black/50">
-              <div className="overflow-hidden rounded-[1.2rem] border border-white/[0.05] bg-[#0A0C10]">
+            <div className="absolute -inset-6 rounded-[2rem] bg-[#FF5C00]/[0.08] blur-3xl" />
+            <div className="relative rounded-[1.6rem] border border-white/[0.08] bg-[#18181B] p-2 shadow-2xl shadow-black/50">
+              <div className="overflow-hidden rounded-[1.2rem] border border-white/[0.05] bg-[#09090B]">
                 <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3">
                   <div className="flex items-center gap-1.5" aria-hidden="true">
                     <span className="h-2.5 w-2.5 rounded-full bg-[#545A66]" />
                     <span className="h-2.5 w-2.5 rounded-full bg-[#545A66]" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#7B8FE8]/70" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#FF5C00]/70" />
                   </div>
                   <span className="font-mono text-[10px] tracking-[0.14em] text-[#545A66]">
                     reddevil@local
@@ -374,14 +374,14 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
                   />
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-[#7B8FE8] mix-blend-color opacity-[0.22]"
+                    className="pointer-events-none absolute inset-0 bg-[#FF5C00] mix-blend-color opacity-[0.22]"
                   />
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0A0C10]/20 via-transparent to-[#0A0C10]/70"
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#09090B]/20 via-transparent to-[#09090B]/70"
                   />
                   <div className="absolute bottom-5 left-5 right-5">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#98A7ED]">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#FF7A2E]">
                       {"// The Red Devil"}
                     </p>
                     <p className="mt-2 text-2xl font-semibold tracking-tight text-white">
@@ -403,7 +403,7 @@ function PhotoReveal({ reduceMotion }: { reduceMotion: boolean }) {
 function Marquee({ reduceMotion }: { reduceMotion: boolean }) {
   const items = [...marqueeItems, ...marqueeItems];
   return (
-    <section className="relative overflow-hidden border-b border-white/[0.06] bg-[#0A0C10] py-6">
+    <section className="relative overflow-hidden border-b border-white/[0.06] bg-[#09090B] py-6">
       <div
         className={`flex w-max gap-10 whitespace-nowrap ${
           reduceMotion ? "" : "animate-marquee"
@@ -415,7 +415,7 @@ function Marquee({ reduceMotion }: { reduceMotion: boolean }) {
             className="flex items-center gap-10 font-mono text-[11px] uppercase tracking-[0.3em] text-[#545A66]"
           >
             {item}
-            <span className="text-[#7B8FE8]">◆</span>
+            <span className="text-[#FF5C00]">◆</span>
           </span>
         ))}
       </div>
@@ -470,7 +470,7 @@ export default function Home() {
   return (
     <main
       id="home"
-      className="relative min-h-screen overflow-x-clip bg-[#0A0C10] text-[#E7E9EE] selection:bg-[#7B8FE8]/30 selection:text-white"
+      className="relative min-h-screen overflow-x-clip bg-[#09090B] text-[#E7E9EE] selection:bg-[#FF5C00]/30 selection:text-white"
     >
       <GrainOverlay />
       <ScrollProgress />
@@ -529,15 +529,15 @@ export default function Home() {
 
             <Reveal delay={0.15}>
               <div className="relative">
-                <div className="absolute -inset-4 rounded-[2rem] bg-[#7B8FE8]/[0.06] blur-3xl" />
-                <div className="relative flex h-full items-center rounded-2xl border border-white/[0.07] bg-[#12151A] p-8 sm:p-10">
+                <div className="absolute -inset-4 rounded-[2rem] bg-[#FF5C00]/[0.06] blur-3xl" />
+                <div className="relative flex h-full items-center rounded-2xl border border-white/[0.08] bg-[#18181B] p-8 sm:p-10">
                   <blockquote className="text-xl leading-9 text-[#B5B9C4] sm:text-2xl sm:leading-[2.6rem]">
-                    <span className="mr-2 font-mono text-3xl text-[#7B8FE8]">
+                    <span className="mr-2 font-mono text-3xl text-[#FF5C00]">
                       &ldquo;
                     </span>
                     Learn a concept. Practice it in a safe environment.
                     Document the result. Improve the process. Repeat.
-                    <span className="ml-2 font-mono text-3xl text-[#7B8FE8]">
+                    <span className="ml-2 font-mono text-3xl text-[#FF5C00]">
                       &rdquo;
                     </span>
                     <footer className="mt-6 font-mono text-[11px] uppercase tracking-[0.22em] text-[#545A66]">
@@ -553,7 +553,7 @@ export default function Home() {
 
       <section
         id="expertise"
-        className="scroll-mt-20 border-b border-white/[0.06] bg-[#0A0C10]"
+        className="scroll-mt-20 border-b border-white/[0.06] bg-[#09090B]"
       >
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
           <Reveal>
@@ -569,7 +569,7 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.05] sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.05] sm:grid-cols-2 lg:grid-cols-3">
             {expertise.map((item, index) => (
               <motion.div
                 key={item.title}
@@ -580,9 +580,9 @@ export default function Home() {
                   duration: reduceMotion ? 0 : 0.45,
                   delay: reduceMotion ? 0 : index * 0.05,
                 }}
-                className="group relative flex flex-col bg-[#0A0C10] p-6 transition hover:bg-[#12151A] sm:p-7 lg:p-8"
+                className="group relative flex flex-col bg-[#09090B] p-6 transition hover:bg-[#18181B] sm:p-7 lg:p-8"
               >
-                <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#7B8FE8]">
+                <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#FF5C00]">
                   {item.category}
                 </span>
                 <h3 className="mt-4 text-xl font-semibold tracking-tight text-[#E7E9EE] transition group-hover:text-white sm:text-2xl">
@@ -591,7 +591,7 @@ export default function Home() {
                 <p className="mt-4 text-sm leading-7 text-[#858B99]">
                   {item.description}
                 </p>
-                <span className="mt-6 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/[0.08] text-[#545A66] transition group-hover:border-[#7B8FE8]/50 group-hover:text-[#98A7ED]">
+                <span className="mt-6 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/[0.08] text-[#545A66] transition group-hover:border-[#FF5C00]/50 group-hover:text-[#FF7A2E]">
                   <ArrowIcon className="h-3.5 w-3.5" />
                 </span>
               </motion.div>
@@ -618,16 +618,16 @@ export default function Home() {
             <div className="space-y-4">
               {projects.map((project, index) => (
                 <Reveal key={project.number} delay={index * 0.06}>
-                  <article className="rounded-2xl border border-white/[0.07] bg-[#12151A] p-6">
+                  <article className="rounded-2xl border border-white/[0.08] bg-[#18181B] p-6">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-3xl font-semibold text-[#7B8FE8]">
+                      <span className="font-mono text-3xl font-semibold text-[#FF5C00]">
                         /{project.number}
                       </span>
                       <span className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-[#858B99]">
                         {project.status}
                       </span>
                     </div>
-                    <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-[#98A7ED]">
+                    <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-[#FF7A2E]">
                       {project.category}
                     </p>
                     <h3 className="mt-2 text-2xl font-semibold text-[#E7E9EE]">
@@ -640,7 +640,7 @@ export default function Home() {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#858B99]"
+                          className="rounded-md border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#858B99]"
                         >
                           {tag}
                         </span>
@@ -648,7 +648,7 @@ export default function Home() {
                     </div>
                     <a
                       href={`/projects/${project.slug}`}
-                      className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#98A7ED]"
+                      className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#FF7A2E]"
                     >
                       View details <ArrowIcon />
                     </a>
@@ -664,7 +664,7 @@ export default function Home() {
 
       <section
         id="experience"
-        className="scroll-mt-20 border-b border-white/[0.06] bg-[#0A0C10]"
+        className="scroll-mt-20 border-b border-white/[0.06] bg-[#09090B]"
       >
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
           <Reveal>
@@ -678,13 +678,13 @@ export default function Home() {
           <div className="space-y-5">
             {experience.map((item, index) => (
               <Reveal key={item.role} delay={index * 0.06}>
-                <article className="rounded-2xl border border-white/[0.07] bg-[#12151A] p-6 transition hover:border-[#7B8FE8]/35 sm:p-8">
+                <article className="rounded-2xl border border-white/[0.08] bg-[#18181B] p-6 transition hover:border-[#FF5C00]/50 sm:p-8">
                   <div className="flex flex-wrap items-start justify-between gap-4">
                     <div>
                       <h3 className="text-xl font-semibold tracking-tight text-[#E7E9EE] sm:text-2xl">
                         {item.role}
                       </h3>
-                      <p className="mt-1 text-sm text-[#98A7ED]">{item.org}</p>
+                      <p className="mt-1 text-sm text-[#FF7A2E]">{item.org}</p>
                     </div>
                     <div className="text-right">
                       <p className="font-mono text-xs uppercase tracking-[0.16em] text-[#858B99]">
@@ -702,7 +702,7 @@ export default function Home() {
                         className="flex gap-3 text-sm leading-7 text-[#858B99]"
                       >
                         <span
-                          className="mt-3 h-1 w-1 shrink-0 rounded-full bg-[#7B8FE8]"
+                          className="mt-3 h-1 w-1 shrink-0 rounded-full bg-[#FF5C00]"
                           aria-hidden="true"
                         />
                         <span>{bullet}</span>
@@ -713,7 +713,7 @@ export default function Home() {
                     {item.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#858B99]"
+                        className="rounded-md border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#858B99]"
                       >
                         {tag}
                       </span>
@@ -769,7 +769,7 @@ export default function Home() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center justify-between rounded-xl border border-white/[0.07] bg-[#12151A] px-4 py-3.5 transition hover:border-[#7B8FE8]/40 hover:bg-[#1A1E24]"
+                      className="group flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#18181B] px-4 py-3.5 transition hover:border-[#FF5C00]/50 hover:bg-[#27272A]"
                     >
                       <span className="flex items-center gap-4">
                         <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#545A66]">
@@ -779,7 +779,7 @@ export default function Home() {
                           {link.handle}
                         </span>
                       </span>
-                      <ArrowIcon className="text-[#545A66] transition group-hover:text-[#98A7ED]" />
+                      <ArrowIcon className="text-[#545A66] transition group-hover:text-[#FF7A2E]" />
                     </motion.a>
                   </Magnetic>
                 ))}
@@ -794,7 +794,7 @@ export default function Home() {
             </Reveal>
 
             <Reveal delay={0.12}>
-              <div className="rounded-2xl border border-white/[0.07] bg-[#12151A] p-6 sm:p-8">
+              <div className="rounded-2xl border border-white/[0.08] bg-[#18181B] p-6 sm:p-8">
                 <div className="mb-6 flex items-center justify-between">
                   <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#545A66]">
                     {"// Send a message"}
@@ -841,7 +841,7 @@ export default function Home() {
                           name: e.target.value,
                         })
                       }
-                      className="mt-2 w-full rounded-xl border border-white/[0.07] bg-[#0A0C10] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#545A66] focus:border-[#7B8FE8] focus:ring-4 focus:ring-[#7B8FE8]/10"
+                      className="mt-2 w-full rounded-xl border border-white/[0.08] bg-[#09090B] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#545A66] focus:border-[#FF5C00] focus:ring-4 focus:ring-[#FF5C00]/20"
                       placeholder="Your name"
                     />
                   </label>
@@ -860,7 +860,7 @@ export default function Home() {
                           email: e.target.value,
                         })
                       }
-                      className="mt-2 w-full rounded-xl border border-white/[0.07] bg-[#0A0C10] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#545A66] focus:border-[#7B8FE8] focus:ring-4 focus:ring-[#7B8FE8]/10"
+                      className="mt-2 w-full rounded-xl border border-white/[0.08] bg-[#09090B] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#545A66] focus:border-[#FF5C00] focus:ring-4 focus:ring-[#FF5C00]/20"
                       placeholder="you@example.com"
                     />
                   </label>
@@ -879,7 +879,7 @@ export default function Home() {
                           message: e.target.value,
                         })
                       }
-                      className="mt-2 w-full resize-y rounded-xl border border-white/[0.07] bg-[#0A0C10] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#545A66] focus:border-[#7B8FE8] focus:ring-4 focus:ring-[#7B8FE8]/10"
+                      className="mt-2 w-full resize-y rounded-xl border border-white/[0.08] bg-[#09090B] px-4 py-3 text-sm text-white outline-none transition placeholder:text-[#545A66] focus:border-[#FF5C00] focus:ring-4 focus:ring-[#FF5C00]/20"
                       placeholder="Tell me what you'd like to discuss..."
                     />
                   </label>
@@ -888,7 +888,7 @@ export default function Home() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full rounded-xl bg-[#7B8FE8] px-5 py-3.5 font-mono text-[11px] uppercase tracking-[0.2em] text-[#0A0C10] shadow-lg shadow-[#7B8FE8]/10 transition hover:bg-[#98A7ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#98A7ED] focus-visible:ring-offset-2 focus-visible:ring-offset-[#12151A] disabled:cursor-not-allowed disabled:opacity-50"
+                      className="w-full rounded-xl bg-[#FF5C00] px-5 py-3.5 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-black shadow-lg shadow-[#FF5C00]/20 transition hover:bg-[#FF7A2E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5C00] focus-visible:ring-offset-2 focus-visible:ring-offset-[#18181B] disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {isSubmitting ? "Sending..." : "Send Message"}
                     </button>
@@ -898,7 +898,7 @@ export default function Home() {
                     <p
                       role="status"
                       aria-live="polite"
-                      className="rounded-xl border border-white/[0.07] bg-white/[0.03] px-4 py-3 text-sm text-[#B5B9C4]"
+                      className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-[#B5B9C4]"
                     >
                       {contactStatus}
                     </p>
@@ -913,7 +913,7 @@ export default function Home() {
       <footer className="border-t border-white/[0.06]">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
           <p className="flex items-center gap-3 text-xs text-[#545A66]">
-            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#7B8FE8] font-mono text-[10px] font-bold text-[#0A0C10]">
+            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#FF5C00] font-mono text-[10px] font-bold text-black">
               R/
             </span>
             <span className="font-mono uppercase tracking-[0.18em] text-[#B5B9C4]">

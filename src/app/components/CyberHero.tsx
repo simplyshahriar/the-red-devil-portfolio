@@ -170,22 +170,21 @@ export default function CyberHero({
           </div>
         </motion.div>
 
-        {/* Right: Pill "SIGN IN" & Circular "EN" Toggle */}
+        {/* Right: Pill "CONTACT" & Circular "EN" Toggle */}
         <motion.div
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="flex items-center gap-3"
         >
-          {/* Pill Shaped SIGN IN Button with Orange Hover Glow */}
+          {/* Pill Shaped CONTACT Button with Orange Accent */}
           <a
             href="#contact"
-            className="relative group px-6 py-2 rounded-full border border-white/20 bg-white/[0.04] backdrop-blur-md text-xs sm:text-[13px] font-mono font-bold uppercase tracking-[0.18em] text-white hover:text-black hover:border-[#FF5C00] hover:shadow-[0_0_24px_#FF5C00] transition-all duration-300 overflow-hidden"
+            className="relative group px-6 py-2 rounded-full border border-[#FF5C00]/40 bg-[#FF5C00] backdrop-blur-md text-xs sm:text-[13px] font-mono font-bold uppercase tracking-[0.18em] text-black hover:bg-[#FF7A2E] hover:border-[#FF7A2E] hover:shadow-[0_0_24px_#FF5C00] transition-all duration-300 overflow-hidden"
           >
-            <span className="absolute inset-0 bg-[#FF5C00] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
             <span className="relative z-10 flex items-center gap-2">
-              SIGN IN
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF5C00] group-hover:bg-black transition-colors animate-pulse" />
+              CONTACT
+              <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
             </span>
           </a>
 

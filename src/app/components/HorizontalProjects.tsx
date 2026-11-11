@@ -24,9 +24,9 @@ function ArrowIcon() {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="group flex w-[min(72vw,600px)] shrink-0 flex-col rounded-2xl border border-white/[0.07] bg-[#12151A] p-8 transition hover:border-[#7B8FE8]/40 hover:bg-[#1A1E24] sm:p-10">
+    <article className="group flex w-[min(72vw,600px)] shrink-0 flex-col rounded-2xl border border-white/[0.08] bg-[#18181B] p-8 transition hover:border-[#FF5C00]/50 hover:bg-[#27272A] sm:p-10">
       <div className="flex items-start justify-between">
-        <span className="font-mono text-6xl font-semibold tracking-tight text-[#7B8FE8] lg:text-7xl">
+        <span className="font-mono text-6xl font-semibold tracking-tight text-[#FF5C00] lg:text-7xl">
           /{project.number}
         </span>
         <span className="rounded-full border border-white/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-[#858B99]">
@@ -34,7 +34,7 @@ function ProjectCard({ project }: { project: Project }) {
         </span>
       </div>
 
-      <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.22em] text-[#98A7ED]">
+      <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.22em] text-[#FF7A2E]">
         {project.category}
       </p>
       <h3 className="mt-3 text-3xl font-semibold tracking-tight text-[#E7E9EE] sm:text-4xl">
@@ -48,7 +48,7 @@ function ProjectCard({ project }: { project: Project }) {
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#858B99]"
+            className="rounded-md border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#858B99]"
           >
             {tag}
           </span>
@@ -57,7 +57,7 @@ function ProjectCard({ project }: { project: Project }) {
 
       <a
         href={`/projects/${project.slug}`}
-        className="group/link mt-auto inline-flex items-center gap-2 pt-10 font-mono text-[11px] uppercase tracking-[0.18em] text-[#98A7ED] transition hover:text-white"
+        className="group/link mt-auto inline-flex items-center gap-2 pt-10 font-mono text-[11px] uppercase tracking-[0.18em] text-[#FF7A2E] transition hover:text-white"
       >
         View details
         <ArrowIcon />
@@ -146,7 +146,7 @@ export default function HorizontalProjects({ projects }: { projects: Project[] }
           <div className="h-px w-full bg-white/[0.06]">
             <motion.div
               style={{ scaleX: progressWidth }}
-              className="h-px origin-left bg-[#7B8FE8]"
+              className="h-px origin-left bg-[#FF5C00]"
             />
           </div>
         </div>

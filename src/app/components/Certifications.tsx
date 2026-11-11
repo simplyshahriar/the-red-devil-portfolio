@@ -77,14 +77,13 @@ function ArrowIcon({ className = "" }: { className?: string }) {
   );
 }
 
-// ✅ এখানে export default ঠিক আছে কিনা চেক করা হয়েছে
 export default function Certifications() {
   const reduceMotion = useReducedMotion();
 
   return (
     <section
       id="certifications"
-      className="scroll-mt-20 border-b border-white/[0.06] bg-[#0A0C10]"
+      className="scroll-mt-20 border-b border-white/[0.06] bg-[#09090B]"
     >
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
@@ -117,13 +116,13 @@ export default function Certifications() {
                 duration: reduceMotion ? 0 : 0.5,
                 delay: reduceMotion ? 0 : index * 0.1,
               }}
-              className="group relative overflow-hidden rounded-2xl border border-white/[0.07] bg-[#12151A] transition hover:border-[#7B8FE8]/35"
+              className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#18181B] transition hover:border-[#FF5C00]/50"
             >
               <div className="grid gap-0 lg:grid-cols-[1.4fr_1fr]">
                 <div className="flex flex-col p-6 sm:p-8">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#98A7ED]">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#FF7A2E]">
                         {cert.issuer}
                       </p>
                       <h3 className="mt-3 text-2xl font-semibold tracking-tight text-[#E7E9EE] sm:text-3xl">
@@ -156,7 +155,7 @@ export default function Certifications() {
                       {cert.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#858B99]"
+                          className="rounded-md border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#858B99]"
                         >
                           {skill}
                         </span>
@@ -170,7 +169,7 @@ export default function Certifications() {
                         href={cert.credentialUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group/link inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#98A7ED] transition hover:text-white"
+                        className="group/link inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#FF7A2E] transition hover:text-white"
                       >
                         Verify Credential
                         <ArrowIcon className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
@@ -179,20 +178,20 @@ export default function Certifications() {
                   )}
                 </div>
 
-                <div className="relative min-h-[260px] border-t border-white/[0.06] bg-[#0A0C10] lg:border-l lg:border-t-0">
+                <div className="relative min-h-[260px] border-t border-white/[0.06] bg-[#09090B] lg:border-l lg:border-t-0">
                   <div
                     aria-hidden="true"
                     className="pointer-events-none absolute inset-0 opacity-30"
                     style={{
                       backgroundImage:
-                        "radial-gradient(rgba(123,143,232,0.15) 1px, transparent 1px)",
+                        "radial-gradient(rgba(255,92,0,0.15) 1px, transparent 1px)",
                       backgroundSize: "20px 20px",
                     }}
                   />
 
                   <div className="relative flex h-full items-center justify-center p-6 sm:p-8">
                     <div className="relative w-full max-w-sm">
-                      <div className="absolute -inset-3 rounded-lg bg-[#7B8FE8]/[0.06] blur-2xl" />
+                      <div className="absolute -inset-3 rounded-lg bg-[#FF5C00]/[0.06] blur-2xl" />
 
                       <div className="relative overflow-hidden rounded-lg border border-white/[0.08] bg-white shadow-2xl shadow-black/40">
                         <Image

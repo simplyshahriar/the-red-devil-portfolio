@@ -27,7 +27,7 @@ export default function CopyEmail({
       type="button"
       onClick={handleCopy}
       aria-label={`Copy email ${email}`}
-      className={`group flex items-center justify-between rounded-xl border border-white/[0.07] bg-[#12151A] px-4 py-3.5 text-left transition hover:border-[#7B8FE8]/40 hover:bg-[#1A1E24] ${className}`}
+      className={`group flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#18181B] px-4 py-3.5 text-left transition hover:border-[#FF5C00]/40 hover:bg-[#27272A] ${className}`}
     >
       <span className="flex items-center gap-4">
         <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#545A66]">
@@ -74,7 +74,7 @@ export default function CopyEmail({
               strokeWidth="1.8"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="text-[#545A66] transition group-hover:text-[#98A7ED]"
+              className="text-[#545A66] transition group-hover:text-[#FF7A2E]"
               aria-hidden="true"
             >
               <rect x="9" y="9" width="13" height="13" rx="2" />
@@ -91,7 +91,7 @@ export default function CopyEmail({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 4 }}
             transition={{ duration: 0.2 }}
-            className="pointer-events-none absolute -bottom-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-[#6BCBA4]/30 bg-[#0A0C10] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#6BCBA4]"
+            className="pointer-events-none absolute -bottom-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-[#6BCBA4]/30 bg-[#09090B] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#6BCBA4]"
           >
             Copied
           </motion.span>

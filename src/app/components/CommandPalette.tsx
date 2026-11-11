@@ -95,7 +95,7 @@ export default function CommandPalette() {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Open command palette"
-        className="fixed bottom-6 left-6 z-40 hidden items-center gap-2 rounded-xl border border-white/[0.09] bg-[#12151A]/90 px-3.5 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#858B99] backdrop-blur-md transition hover:border-[#7B8FE8]/40 hover:text-[#E7E9EE] sm:flex"
+        className="fixed bottom-6 left-6 z-40 hidden items-center gap-2 rounded-xl border border-white/[0.09] bg-[#18181B]/90 px-3.5 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#858B99] backdrop-blur-md transition hover:border-[#FF5C00]/40 hover:text-[#E7E9EE] sm:flex"
       >
         <span className="text-[#545A66]">⌘</span>
         <span>K</span>
@@ -109,7 +109,7 @@ export default function CommandPalette() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-[100] flex items-start justify-center bg-[#0A0C10]/70 px-4 pt-[15vh] backdrop-blur-md"
+            className="fixed inset-0 z-[100] flex items-start justify-center bg-[#09090B]/70 px-4 pt-[15vh] backdrop-blur-md"
             onClick={() => setOpen(false)}
           >
             <motion.div
@@ -122,7 +122,7 @@ export default function CommandPalette() {
             >
               <Command
                 label="Command menu"
-                className="overflow-hidden rounded-2xl border border-white/[0.09] bg-[#12151A] shadow-2xl shadow-black/50"
+                className="overflow-hidden rounded-2xl border border-white/[0.09] bg-[#18181B] shadow-2xl shadow-black/50"
               >
                 <div className="flex items-center gap-3 border-b border-white/[0.07] px-4 py-3">
                   <svg
@@ -166,7 +166,7 @@ export default function CommandPalette() {
                           <Command.Item
                             key={item.id}
                             onSelect={item.action}
-                            className="flex cursor-pointer items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm text-[#B5B9C4] transition data-[selected=true]:bg-white/[0.04] data-[selected=true]:text-white"
+                            className="flex cursor-pointer items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-sm text-[#B5B9C4] transition data-[selected=true]:bg-[#FF5C00]/10 data-[selected=true]:text-white data-[selected=true]:border-l-2 data-[selected=true]:border-[#FF5C00]"
                           >
                             <span>{item.label}</span>
                             {item.hint && (
