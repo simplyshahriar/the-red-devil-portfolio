@@ -1,87 +1,80 @@
-import Link from "next/link";
-
 export default function SecOpsFooter() {
   return (
-    <footer className="border-t border-[#00f2fe]/15 bg-[#081010] py-12 text-[#8fa3a3]">
+    <footer className="border-t border-[#00E5C3]/15 bg-[#0B1112] py-12 text-[#91A5A1]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-4 sm:grid-cols-2">
-          {/* Col 1: System info */}
+          
+          {/* Identity */}
           <div className="space-y-3">
-            <p className="flex items-center gap-2 font-mono text-sm font-bold text-[#e5f2f2]">
-              <span className="text-[#00f2fe]">&gt;_</span>
-              <span>SEC_OPS PLATFORM</span>
+            <p className="font-display text-base font-bold text-[#E8F1EF]">
+              Hasnain Shahriar
             </p>
-            <p className="text-xs leading-relaxed text-[#6c8585]">
-              Offensive Security Research, Technical Assessments, and Vulnerability Analysis by Hasnain Shahriar.
+            <p className="text-xs leading-relaxed text-[#91A5A1]">
+              Cybersecurity Researcher exploring Web Application Security, Reverse Engineering, Digital Forensics, and AI-assisted workflows.
             </p>
-            <div className="font-mono text-[10px] text-[#00f2fe]/70 pt-2 space-y-1">
-              <div>PROTOCOL: SSH-2.0-SEC_OPS</div>
-              <div>ENVIRONMENT: PRODUCTION_HARDENED</div>
-            </div>
+            <p className="font-mono text-[11px] text-[#00E5C3]">
+              Primary: Web Application Security
+            </p>
           </div>
 
-          {/* Col 2: Navigation */}
+          {/* Site Navigation */}
           <div className="space-y-2 font-mono text-xs">
-            <p className="font-semibold uppercase tracking-wider text-[#e5f2f2]">Navigation</p>
-            <ul className="space-y-1.5 text-[#8fa3a3]">
-              <li><Link href="#overview" className="hover:text-[#00f2fe]">/overview</Link></li>
-              <li><Link href="#expertise" className="hover:text-[#00f2fe]">/expertise</Link></li>
-              <li><Link href="#cases" className="hover:text-[#00f2fe]">/case-studies</Link></li>
-              <li><Link href="#contact" className="hover:text-[#00f2fe]">/secure-contact</Link></li>
+            <p className="font-bold uppercase tracking-wider text-[#E8F1EF]">Navigation</p>
+            <ul className="space-y-1.5">
+              <li><a href="#about" className="hover:text-[#00E5C3]">About Me</a></li>
+              <li><a href="#specializations" className="hover:text-[#00E5C3]">Specializations</a></li>
+              <li><a href="#stack" className="hover:text-[#00E5C3]">Technology Stack</a></li>
+              <li><a href="#projects" className="hover:text-[#00E5C3]">Projects & Labs</a></li>
+              <li><a href="#research" className="hover:text-[#00E5C3]">Research Journey</a></li>
             </ul>
           </div>
 
-          {/* Col 3: Policy & Security */}
+          {/* Focus Areas */}
           <div className="space-y-2 font-mono text-xs">
-            <p className="font-semibold uppercase tracking-wider text-[#e5f2f2]">Policy & Standards</p>
-            <ul className="space-y-1.5 text-[#8fa3a3]">
-              <li><a href="#safe-harbor" className="hover:text-[#00f2fe]">Responsible Disclosure</a></li>
-              <li><a href="#safe-harbor" className="hover:text-[#00f2fe]">Safe Harbor Terms</a></li>
-              <li><a href="#pgp" className="hover:text-[#00f2fe]">PGP Keyring (4096-bit)</a></li>
-              <li><span className="text-[#6c8585]">CVSS v3.1 / OWASP Top 10</span></li>
+            <p className="font-bold uppercase tracking-wider text-[#E8F1EF]">Core Pillars</p>
+            <ul className="space-y-1.5">
+              <li><span className="text-[#00E5C3]">Web Application Security</span></li>
+              <li><span>Reverse Engineering</span></li>
+              <li><span>Digital Forensics & IR</span></li>
+              <li><span>AI-Assisted Development</span></li>
             </ul>
           </div>
 
-          {/* Col 4: Network & Channels */}
+          {/* Channels */}
           <div className="space-y-2 font-mono text-xs">
-            <p className="font-semibold uppercase tracking-wider text-[#e5f2f2]">Communication Channels</p>
-            <ul className="space-y-1.5 text-[#8fa3a3]">
+            <p className="font-bold uppercase tracking-wider text-[#E8F1EF]">Connect</p>
+            <ul className="space-y-1.5">
               <li>
-                <a href="https://github.com/simplyshahriar" target="_blank" rel="noopener noreferrer" className="hover:text-[#00f2fe]">
-                  [GH] GitHub / simplyshahriar
+                <a href="https://github.com/simplyshahriar" target="_blank" rel="noopener noreferrer" className="hover:text-[#00E5C3]">
+                  GitHub / simplyshahriar ↗
                 </a>
               </li>
               <li>
-                <a href="https://www.linkedin.com/in/hasnainshahriar/" target="_blank" rel="noopener noreferrer" className="hover:text-[#00f2fe]">
-                  [LI] LinkedIn / hasnainshahriar
+                <a href="https://www.linkedin.com/in/hasnainshahriar/" target="_blank" rel="noopener noreferrer" className="hover:text-[#00E5C3]">
+                  LinkedIn / in/hasnainshahriar ↗
                 </a>
               </li>
               <li>
-                <a href="https://www.facebook.com/simplyshahriar" target="_blank" rel="noopener noreferrer" className="hover:text-[#00f2fe]">
-                  [FB] Facebook / simplyshahriar
+                <a href="https://www.facebook.com/simplyshahriar" target="_blank" rel="noopener noreferrer" className="hover:text-[#00E5C3]">
+                  Facebook / simplyshahriar ↗
                 </a>
               </li>
               <li>
-                <a href="https://www.instagram.com/simplyshahriar/" target="_blank" rel="noopener noreferrer" className="hover:text-[#00f2fe]">
-                  [IG] Instagram / @simplyshahriar
+                <a href="https://www.instagram.com/simplyshahriar/" target="_blank" rel="noopener noreferrer" className="hover:text-[#00E5C3]">
+                  Instagram / @simplyshahriar ↗
                 </a>
               </li>
             </ul>
           </div>
+
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[#00f2fe]/10 pt-6 text-[11px] font-mono sm:flex-row text-[#6c8585]">
-          <p>© 2026 Hasnain Shahriar. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5 text-[#00ff88]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#00ff88]" />
-              CIPHER: AES-256-GCM
-            </span>
-            <span>|</span>
-            <span>LATENCY: 14ms</span>
-            <span>|</span>
-            <span className="text-[#00f2fe]">TLS 1.3 READY</span>
+        {/* Bottom */}
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-6 font-mono text-xs sm:flex-row text-[#91A5A1]">
+          <p>© 2026 Hasnain Shahriar. Built with Next.js, Tailwind CSS &amp; TypeScript.</p>
+          <div className="flex items-center gap-2 text-[#00E5C3]">
+            <span className="h-2 w-2 rounded-full bg-[#00E5C3] animate-pulse" />
+            <span>Learning in Public · Responsible Security Research</span>
           </div>
         </div>
       </div>

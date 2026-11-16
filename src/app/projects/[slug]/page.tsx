@@ -16,7 +16,7 @@ export async function generateMetadata({
   const project = getProjectBySlug(slug);
   if (!project) return { title: "Project not found" };
   return {
-    title: `${project.title} — SEC_OPS Archive`,
+    title: `${project.title} — Hasnain Shahriar`,
     description: project.description,
   };
 }
@@ -31,42 +31,42 @@ export default async function ProjectPage({
   if (!project) notFound();
 
   return (
-    <main className="min-h-screen bg-[#081010] text-[#e5f2f2] font-mono py-16 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#0B1112] text-[#E8F1EF] py-16 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl space-y-8">
         
         {/* Navigation Breadcrumb */}
-        <div className="flex items-center justify-between border-b border-[#00f2fe]/20 pb-4 text-xs">
+        <div className="flex items-center justify-between border-b border-[#00E5C3]/15 pb-4 text-xs font-mono">
           <Link
-            href="/#cases"
-            className="inline-flex items-center gap-1.5 text-[#00f2fe] hover:underline"
+            href="/#projects"
+            className="inline-flex items-center gap-1.5 text-[#00E5C3] hover:underline"
           >
-            <span>&lt;_ RETURN_TO_ARCHIVE</span>
+            <span>← Return to Projects</span>
           </Link>
 
-          <span className="text-[#6c8585]">
-            RECORD_ID: {project.number} {"//"} {project.category}
+          <span className="text-[#91A5A1]">
+            PROJECT REF: {project.number} {"//"} {project.category}
           </span>
         </div>
 
         {/* Header Block */}
         <div>
-          <div className="inline-block rounded border border-[#00f2fe]/30 bg-[#00f2fe]/10 px-2 py-0.5 text-[10px] text-[#00f2fe] mb-3">
+          <div className="inline-block rounded bg-[#00E5C3]/10 border border-[#00E5C3]/30 px-2.5 py-0.5 text-xs font-mono text-[#00E5C3] mb-3">
             STATUS: {project.status}
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold uppercase text-[#e5f2f2]">
+          <h1 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-[#E8F1EF]">
             {project.title}
           </h1>
-          <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#8fa3a3]">
+          <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#91A5A1]">
             {project.description}
           </p>
         </div>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 font-mono text-xs">
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded border border-white/[0.08] bg-[#0d1515] px-2.5 py-1 text-xs text-[#00f2fe]"
+              className="rounded border border-white/[0.08] bg-[#142122] px-2.5 py-1 text-[#00E5C3]"
             >
               #{tag}
             </span>
@@ -76,25 +76,25 @@ export default async function ProjectPage({
         {/* Detailed Sections */}
         <div className="space-y-6 border-t border-white/[0.08] pt-6">
           {project.longDescription && (
-            <div className="rounded-lg border border-[#00f2fe]/15 bg-[#0d1515] p-6 space-y-2">
-              <h2 className="text-sm font-bold uppercase tracking-wider text-[#00f2fe]">
-                [SCOPE & OVERVIEW]
+            <div className="rounded-xl border border-white/[0.08] bg-[#142122] p-6 space-y-2">
+              <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#00E5C3]">
+                Project Scope &amp; Overview
               </h2>
-              <p className="text-xs sm:text-sm leading-relaxed text-[#8fa3a3]">
+              <p className="text-sm leading-relaxed text-[#91A5A1]">
                 {project.longDescription}
               </p>
             </div>
           )}
 
           {project.objectives && project.objectives.length > 0 && (
-            <div className="rounded-lg border border-white/[0.08] bg-[#0d1515] p-6 space-y-3">
-              <h2 className="text-sm font-bold uppercase tracking-wider text-[#00f2fe]">
-                [RESEARCH OBJECTIVES]
+            <div className="rounded-xl border border-white/[0.08] bg-[#142122] p-6 space-y-3">
+              <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#00E5C3]">
+                Core Objectives
               </h2>
-              <ul className="space-y-2 text-xs sm:text-sm text-[#8fa3a3]">
+              <ul className="space-y-2 text-sm text-[#91A5A1]">
                 {project.objectives.map((obj) => (
                   <li key={obj} className="flex gap-2">
-                    <span className="text-[#00ff88]">▸</span>
+                    <span className="text-[#00E5C3]">▸</span>
                     <span>{obj}</span>
                   </li>
                 ))}
@@ -102,15 +102,31 @@ export default async function ProjectPage({
             </div>
           )}
 
-          {project.findings && project.findings.length > 0 && (
-            <div className="rounded-lg border border-[#00ff88]/20 bg-[#0d1515] p-6 space-y-3">
-              <h2 className="text-sm font-bold uppercase tracking-wider text-[#00ff88]">
-                [VERIFIED FINDINGS & ARTIFACTS]
+          {project.approach && project.approach.length > 0 && (
+            <div className="rounded-xl border border-white/[0.08] bg-[#142122] p-6 space-y-3">
+              <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#35BDF2]">
+                Testing Approach &amp; Methodology
               </h2>
-              <ul className="space-y-2 text-xs sm:text-sm text-[#8fa3a3]">
+              <ul className="space-y-2 text-sm text-[#91A5A1]">
+                {project.approach.map((app) => (
+                  <li key={app} className="flex gap-2">
+                    <span className="text-[#35BDF2]">▸</span>
+                    <span>{app}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {project.findings && project.findings.length > 0 && (
+            <div className="rounded-xl border border-[#00E5C3]/20 bg-[#142122] p-6 space-y-3">
+              <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#00E5C3]">
+                Key Findings &amp; Outcomes
+              </h2>
+              <ul className="space-y-2 text-sm text-[#91A5A1]">
                 {project.findings.map((f) => (
                   <li key={f} className="flex gap-2">
-                    <span className="text-[#00ff88]">✓</span>
+                    <span className="text-[#00E5C3]">✓</span>
                     <span>{f}</span>
                   </li>
                 ))}
@@ -119,13 +135,13 @@ export default async function ProjectPage({
           )}
         </div>
 
-        {/* Footer Back */}
-        <div className="pt-8 border-t border-[#00f2fe]/20 text-center">
+        {/* Back Link */}
+        <div className="pt-8 border-t border-white/[0.08] text-center font-mono text-xs">
           <Link
-            href="/#cases"
-            className="inline-block rounded border border-[#00f2fe] bg-[#00f2fe] px-6 py-2.5 text-xs font-bold uppercase text-[#081010] hover:bg-[#4facfe]"
+            href="/#projects"
+            className="inline-block rounded border border-[#00E5C3] bg-[#00E5C3] px-6 py-2.5 font-semibold text-[#0B1112] hover:bg-[#35BDF2] hover:border-[#35BDF2]"
           >
-            Back to Case Studies & Audits
+            ← Back to Projects Showcase
           </Link>
         </div>
 

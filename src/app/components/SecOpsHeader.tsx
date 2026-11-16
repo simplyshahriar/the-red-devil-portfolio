@@ -4,9 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 
 const NAV_LINKS = [
-  { label: "Overview", href: "#overview" },
-  { label: "Expertise", href: "#expertise" },
-  { label: "Case Studies", href: "#cases" },
+  { label: "About", href: "#about" },
+  { label: "Specializations", href: "#specializations" },
+  { label: "Tech Stack", href: "#stack" },
+  { label: "Projects", href: "#projects" },
+  { label: "Research", href: "#research" },
+  { label: "Notes", href: "#notes" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -14,52 +17,62 @@ export default function SecOpsHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-[#00f2fe]/15 bg-[#081010]/85 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-[#00E5C3]/15 bg-[#0B1112]/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Brand mark */}
+        
+        {/* Brand Mark */}
         <Link
-          href="#overview"
-          className="group flex items-center gap-2 font-mono text-sm sm:text-base font-bold tracking-wider text-[#e5f2f2] transition-colors hover:text-[#00f2fe]"
+          href="#hero"
+          className="group flex items-center gap-2.5 font-display text-base font-bold tracking-tight text-[#E8F1EF] transition-colors hover:text-[#00E5C3]"
         >
-          <span className="text-[#00f2fe] font-extrabold">&gt;_</span>
-          <span>SEC_OPS</span>
-          <span className="inline-block h-3.5 w-1.5 bg-[#00f2fe] animate-pulse" />
+          <span className="flex h-7 w-7 items-center justify-center rounded border border-[#00E5C3]/30 bg-[#00E5C3]/10 font-mono text-xs text-[#00E5C3]">
+            HS
+          </span>
+          <span>Hasnain Shahriar</span>
+          <span className="hidden sm:inline-block rounded bg-[#00E5C3]/10 px-2 py-0.5 font-mono text-[10px] text-[#00E5C3]">
+            SEC_RESEARCH
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-[0.2em] text-[#8fa3a3]">
+        <nav className="hidden lg:flex items-center gap-6 font-mono text-xs uppercase tracking-wider text-[#91A5A1]">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.label}
               href={link.href}
-              className="transition-colors hover:text-[#00f2fe] hover:drop-shadow-[0_0_8px_rgba(0,242,254,0.6)]"
+              className="transition-colors hover:text-[#00E5C3]"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        {/* Header Right Status Pill & CTA */}
-        <div className="hidden sm:flex items-center gap-4">
-          <div className="flex items-center gap-2 rounded border border-[#00ff88]/30 bg-[#00ff88]/[0.06] px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-[#00ff88]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#00ff88] animate-pulse" />
-            <span>SYS_STATUS: SECURE</span>
-          </div>
+        {/* Right Action */}
+        <div className="hidden sm:flex items-center gap-3">
+          <a
+            href="https://github.com/simplyshahriar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 rounded border border-white/[0.08] bg-[#142122] px-3 py-1.5 font-mono text-xs text-[#91A5A1] transition-colors hover:border-[#00E5C3]/40 hover:text-[#E8F1EF]"
+          >
+            <span>GitHub</span>
+            <span className="text-[10px]">↗</span>
+          </a>
 
           <Link
             href="#contact"
-            className="group relative rounded border border-[#00f2fe]/40 bg-[#00f2fe]/10 px-3.5 py-1.5 font-mono text-xs uppercase tracking-[0.16em] text-[#00f2fe] transition-all hover:bg-[#00f2fe] hover:text-[#081010] hover:shadow-[0_0_16px_rgba(0,242,254,0.4)]"
+            className="rounded border border-[#00E5C3] bg-[#00E5C3] px-3.5 py-1.5 font-mono text-xs font-semibold text-[#0B1112] shadow-[0_0_15px_rgba(0,229,195,0.25)] transition-all hover:bg-[#35BDF2] hover:border-[#35BDF2]"
           >
-            <span>[ENCRYPTED CONTACT]</span>
+            Contact Me
           </Link>
         </div>
 
-        {/* Mobile menu toggle */}
+        {/* Mobile Toggle */}
         <button
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle navigation menu"
-          className="flex h-9 w-9 items-center justify-center rounded border border-[#00f2fe]/20 text-[#00f2fe] md:hidden focus:outline-none"
+          aria-label="Toggle navigation"
+          className="flex h-9 w-9 items-center justify-center rounded border border-[#00E5C3]/25 text-[#00E5C3] lg:hidden focus:outline-none"
         >
           <span className="font-mono text-sm">{mobileMenuOpen ? "✕" : "☰"}</span>
         </button>
@@ -67,26 +80,33 @@ export default function SecOpsHeader() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="border-b border-[#00f2fe]/15 bg-[#081010]/95 px-4 py-4 md:hidden backdrop-blur-lg">
-          <div className="flex flex-col space-y-3 font-mono text-xs uppercase tracking-[0.2em] text-[#8fa3a3]">
+        <div className="border-b border-[#00E5C3]/15 bg-[#0B1112]/98 px-4 py-4 lg:hidden backdrop-blur-xl">
+          <div className="flex flex-col space-y-3 font-mono text-xs uppercase tracking-wider text-[#91A5A1]">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-1.5 transition-colors hover:text-[#00f2fe]"
+                className="py-1 transition-colors hover:text-[#00E5C3]"
               >
                 &gt; {link.label}
               </Link>
             ))}
-            <div className="pt-2 border-t border-white/[0.08] flex items-center justify-between">
-              <span className="font-mono text-[10px] text-[#00ff88]">● SYS_STATUS: SECURE</span>
+            <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between">
+              <a
+                href="https://github.com/simplyshahriar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-[#00E5C3]"
+              >
+                GitHub Profile ↗
+              </a>
               <Link
                 href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="rounded border border-[#00f2fe]/40 bg-[#00f2fe]/10 px-3 py-1 font-mono text-[10px] text-[#00f2fe]"
+                className="rounded bg-[#00E5C3] px-3 py-1 text-xs font-semibold text-[#0B1112]"
               >
-                CONTACT
+                Contact
               </Link>
             </div>
           </div>
