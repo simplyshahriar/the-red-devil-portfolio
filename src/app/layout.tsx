@@ -4,42 +4,44 @@ import { sans, mono } from "./fonts";
 import "./globals.css";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://yourdomain.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://hasnainshahriar.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Hasnain Shahriar — The Red Devil | Cybersecurity Portfolio",
-    template: "%s — The Red Devil",
+    default: "Hasnain Shahriar — SEC_OPS | Offensive Security Researcher",
+    template: "%s — SEC_OPS",
   },
   description:
-    "Portfolio of Hasnain Shahriar — cybersecurity researcher focused on web application security, penetration testing, OSINT, and reverse engineering.",
+    "SEC_OPS — Terminal Portfolio of Hasnain Shahriar. Offensive Security Researcher & Penetration Tester specializing in Web Application Security, Cloud Penetration Testing, and Reverse Engineering.",
   keywords: [
     "Hasnain Shahriar",
-    "cybersecurity",
+    "SEC_OPS",
+    "ethical hacker",
+    "cybersecurity portfolio",
     "penetration testing",
     "web application security",
     "OSINT",
     "reverse engineering",
-    "The Red Devil",
+    "cloud security",
     "security research",
   ],
-  authors: [{ name: "Hasnain Shahriar" }],
+  authors: [{ name: "Hasnain Shahriar", url: "https://github.com/simplyshahriar" }],
   creator: "Hasnain Shahriar",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: SITE_URL,
-    siteName: "The Red Devil",
-    title: "Hasnain Shahriar — The Red Devil",
+    siteName: "SEC_OPS — Ethical Hacker Portfolio",
+    title: "Hasnain Shahriar — SEC_OPS | Offensive Security Researcher",
     description:
-      "Cybersecurity researcher focused on web application security, penetration testing, and OSINT.",
+      "Terminal-inspired cybersecurity portfolio of Hasnain Shahriar. Focused on offensive security, attack surface mapping, and responsible research.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hasnain Shahriar — The Red Devil",
+    title: "Hasnain Shahriar — SEC_OPS",
     description:
-      "Cybersecurity researcher focused on web application security, penetration testing, and OSINT.",
+      "Offensive Security Researcher & Penetration Tester | SEC_OPS Portfolio",
   },
   robots: { index: true, follow: true },
   icons: { icon: "/icon", apple: "/apple-icon" },
@@ -54,7 +56,7 @@ export default function RootLayout({
       className={`${sans.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
-      <body suppressHydrationWarning>
+      <body className="bg-[#081010] text-[#e5f2f2] font-mono selection:bg-[#00f2fe]/20 selection:text-[#00f2fe]" suppressHydrationWarning>
         {children}
         <Analytics />
       </body>

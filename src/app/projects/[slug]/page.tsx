@@ -1,4 +1,4 @@
-﻿import { notFound } from "next/navigation";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { projects, getProjectBySlug } from "../../lib/data";
@@ -16,27 +16,9 @@ export async function generateMetadata({
   const project = getProjectBySlug(slug);
   if (!project) return { title: "Project not found" };
   return {
-    title: `${project.title} — The Red Devil`,
+    title: `${project.title} — SEC_OPS Archive`,
     description: project.description,
   };
-}
-
-function ArrowIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M7 17 17 7M7 7h10v10" />
-    </svg>
-  );
 }
 
 export default async function ProjectPage({
@@ -49,145 +31,104 @@ export default async function ProjectPage({
   if (!project) notFound();
 
   return (
-    <main className="min-h-screen bg-[#0A0908] text-[#F0EBE0]">
-      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-        {/* back */}
-        <Link
-          href="/#projects"
-          className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-[#8E887B] transition hover:text-[#F0EBE0]"
-        >
-          <span aria-hidden="true">←</span> Back to portfolio
-        </Link>
+    <main className="min-h-screen bg-[#081010] text-[#e5f2f2] font-mono py-16 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl space-y-8">
+        
+        {/* Navigation Breadcrumb */}
+        <div className="flex items-center justify-between border-b border-[#00f2fe]/20 pb-4 text-xs">
+          <Link
+            href="/#cases"
+            className="inline-flex items-center gap-1.5 text-[#00f2fe] hover:underline"
+          >
+            <span>&lt;_ RETURN_TO_ARCHIVE</span>
+          </Link>
 
-        {/* header */}
-        <header className="mt-10 border-b border-white/[0.07] pb-10">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#E89B7B]">
-              {project.category}
-            </span>
-            <span className="rounded-full border border-white/10 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-[#8E887B]">
-              {project.status}
-            </span>
+          <span className="text-[#6c8585]">
+            RECORD_ID: {project.number} {"//"} {project.category}
+          </span>
+        </div>
+
+        {/* Header Block */}
+        <div>
+          <div className="inline-block rounded border border-[#00f2fe]/30 bg-[#00f2fe]/10 px-2 py-0.5 text-[10px] text-[#00f2fe] mb-3">
+            STATUS: {project.status}
           </div>
-
-          <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="text-3xl sm:text-5xl font-extrabold uppercase text-[#e5f2f2]">
             {project.title}
           </h1>
-
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-[#C9C2B4]">
+          <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#8fa3a3]">
             {project.description}
           </p>
+        </div>
 
-          <div className="mt-8 flex flex-wrap gap-1.5">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-[#8E887B]"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded border border-white/[0.08] bg-[#0d1515] px-2.5 py-1 text-xs text-[#00f2fe]"
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
 
-          {project.started && (
-            <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-[#5A554C]">
-              Started · {project.started}
-            </p>
-          )}
-        </header>
-
-        {/* body */}
-        <div className="mt-12 space-y-14">
+        {/* Detailed Sections */}
+        <div className="space-y-6 border-t border-white/[0.08] pt-6">
           {project.longDescription && (
-            <section>
-              <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
-                Overview
+            <div className="rounded-lg border border-[#00f2fe]/15 bg-[#0d1515] p-6 space-y-2">
+              <h2 className="text-sm font-bold uppercase tracking-wider text-[#00f2fe]">
+                [SCOPE & OVERVIEW]
               </h2>
-              <p className="mt-4 text-base leading-8 text-[#C9C2B4]">
+              <p className="text-xs sm:text-sm leading-relaxed text-[#8fa3a3]">
                 {project.longDescription}
               </p>
-            </section>
+            </div>
           )}
 
           {project.objectives && project.objectives.length > 0 && (
-            <section>
-              <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
-                Objectives
+            <div className="rounded-lg border border-white/[0.08] bg-[#0d1515] p-6 space-y-3">
+              <h2 className="text-sm font-bold uppercase tracking-wider text-[#00f2fe]">
+                [RESEARCH OBJECTIVES]
               </h2>
-              <ul className="mt-4 space-y-3">
-                {project.objectives.map((o) => (
-                  <li key={o} className="flex gap-3 text-base leading-8 text-[#C9C2B4]">
-                    <span className="mt-4 h-1 w-1 shrink-0 rounded-full bg-[#D97757]" />
-                    <span>{o}</span>
+              <ul className="space-y-2 text-xs sm:text-sm text-[#8fa3a3]">
+                {project.objectives.map((obj) => (
+                  <li key={obj} className="flex gap-2">
+                    <span className="text-[#00ff88]">▸</span>
+                    <span>{obj}</span>
                   </li>
                 ))}
               </ul>
-            </section>
-          )}
-
-          {project.approach && project.approach.length > 0 && (
-            <section>
-              <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
-                Approach
-              </h2>
-              <ul className="mt-4 space-y-3">
-                {project.approach.map((a) => (
-                  <li key={a} className="flex gap-3 text-base leading-8 text-[#C9C2B4]">
-                    <span className="mt-4 h-1 w-1 shrink-0 rounded-full bg-[#D97757]" />
-                    <span>{a}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
+            </div>
           )}
 
           {project.findings && project.findings.length > 0 && (
-            <section>
-              <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
-                Notes &amp; Findings
+            <div className="rounded-lg border border-[#00ff88]/20 bg-[#0d1515] p-6 space-y-3">
+              <h2 className="text-sm font-bold uppercase tracking-wider text-[#00ff88]">
+                [VERIFIED FINDINGS & ARTIFACTS]
               </h2>
-              <ul className="mt-4 space-y-3">
+              <ul className="space-y-2 text-xs sm:text-sm text-[#8fa3a3]">
                 {project.findings.map((f) => (
-                  <li key={f} className="flex gap-3 text-base leading-8 text-[#C9C2B4]">
-                    <span className="mt-4 h-1 w-1 shrink-0 rounded-full bg-[#D97757]" />
+                  <li key={f} className="flex gap-2">
+                    <span className="text-[#00ff88]">✓</span>
                     <span>{f}</span>
                   </li>
                 ))}
               </ul>
-            </section>
-          )}
-
-          {project.links && project.links.length > 0 && (
-            <section>
-              <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#8E887B]">
-                Links
-              </h2>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {project.links.map((l) => (
-                  <a
-                    key={l.href}
-                    href={l.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-xl border border-white/[0.07] bg-[#12100E] px-4 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-[#E89B7B] transition hover:border-[#D97757]/50 hover:text-white"
-                  >
-                    {l.label} <ArrowIcon />
-                  </a>
-                ))}
-              </div>
-            </section>
+            </div>
           )}
         </div>
 
-        {/* footer */}
-        <div className="mt-16 border-t border-white/[0.07] pt-8">
+        {/* Footer Back */}
+        <div className="pt-8 border-t border-[#00f2fe]/20 text-center">
           <Link
-            href="/#projects"
-            className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-[#E89B7B] transition hover:text-white"
+            href="/#cases"
+            className="inline-block rounded border border-[#00f2fe] bg-[#00f2fe] px-6 py-2.5 text-xs font-bold uppercase text-[#081010] hover:bg-[#4facfe]"
           >
-            ← Back to all projects
+            Back to Case Studies & Audits
           </Link>
         </div>
+
       </div>
     </main>
   );
