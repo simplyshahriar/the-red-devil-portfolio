@@ -82,20 +82,6 @@ export const certificatesData: Certificate[] = [
     ],
     type: "course",
   },
-  {
-    id: "goedu-web-security",
-    title: "Web Security & Development Courses",
-    issuer: "GoEdu",
-    recipient: "Hasnain Shahriar",
-    status: "Completed",
-    skills: [
-      "Web Development Fundamentals",
-      "Website Security Practices",
-      "Platform Interaction & Analysis",
-    ],
-    type: "course",
-    note: "Archived course completion on the GoEdu platform (digital credential image being processed)",
-  },
 ];
 
 export default function CertificationsGallery() {

@@ -363,7 +363,7 @@ export default function Home() {
               </h3>
 
               <p className="mt-3 text-sm leading-relaxed text-[#91A5A1]">
-                Systematic intelligence gathering using open-source data. Mapping an organization's public exposure, uncovering shadow assets, and automating discovery while maintaining strict ethical boundaries.
+                Systematic intelligence gathering using open-source data. Mapping an organization&apos;s public exposure, uncovering shadow assets, and automating discovery while maintaining strict ethical boundaries.
               </p>
 
               <div className="mt-6 border-t border-white/[0.08] pt-4">
