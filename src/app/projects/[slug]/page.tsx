@@ -75,6 +75,26 @@ export default async function ProjectPage({
 
         {/* Detailed Sections */}
         <div className="space-y-6 border-t border-white/[0.08] pt-6">
+          {project.target && (
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-xl border border-white/[0.08] bg-[#142122] p-5 space-y-1">
+                <span className="font-mono text-[10px] uppercase text-[#00E5C3]">Target Platform</span>
+                <p className="font-display text-base font-semibold text-[#E8F1EF]">{project.target}</p>
+              </div>
+              <div className="rounded-xl border border-white/[0.08] bg-[#142122] p-5 space-y-1">
+                <span className="font-mono text-[10px] uppercase text-[#35BDF2]">Assessment Activity</span>
+                <p className="font-display text-base font-semibold text-[#E8F1EF]">{project.activity}</p>
+              </div>
+            </div>
+          )}
+
+          {project.methodology && (
+            <div className="rounded-xl border border-white/[0.08] bg-[#142122] p-5 space-y-1">
+              <span className="font-mono text-[10px] uppercase text-[#00E5C3]">Testing Methodology</span>
+              <p className="text-sm text-[#E8F1EF]">{project.methodology}</p>
+            </div>
+          )}
+
           {project.longDescription && (
             <div className="rounded-xl border border-white/[0.08] bg-[#142122] p-6 space-y-2">
               <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#00E5C3]">
