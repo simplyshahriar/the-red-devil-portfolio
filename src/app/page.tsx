@@ -750,7 +750,7 @@ export default function Home() {
                 title: "Penetration Testing",
                 category: "PENETRATION TESTING",
                 status: "ACTIVE PRACTICE",
-                desc: "Practicing web application penetration testing through structured security labs, vulnerability assessment, and hands-on learning across OWASP Top 10 security concepts.",
+                desc: "Working web application penetration testing through structured security labs, vulnerability assessment, and Identify based on OWASP Top 10 security concepts.",
               },
               {
                 title: "System Hacking & Infrastructure Labs",
