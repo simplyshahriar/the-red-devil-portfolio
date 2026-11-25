@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
-import { projects, researchNotes } from "./lib/data";
+import { projects } from "./lib/data";
 import CertificationsGallery from "./components/CertificationsGallery";
 
 export default function Home() {
@@ -747,10 +747,10 @@ export default function Home() {
                 desc: "Analyzing obfuscated PHP web shells, infected core files, malicious cron jobs, and establishing hardened security configurations for WordPress deployments.",
               },
               {
-                title: "PortSwigger Web Security Academy Labs",
-                category: "PENTESTING LABS",
+                title: "Penetration Testing",
+                category: "PENETRATION TESTING",
                 status: "ACTIVE PRACTICE",
-                desc: "Systematically solving hands-on laboratories covering OWASP Top 10: SQL Injection, Broken Access Control, Authentication vulnerabilities, and SSRF.",
+                desc: "Practicing web application penetration testing through structured security labs, vulnerability assessment, and hands-on learning across OWASP Top 10 security concepts.",
               },
               {
                 title: "System Hacking & Infrastructure Labs",
@@ -798,160 +798,180 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= 8. NOTES & KNOWLEDGE BASE ================= */}
-      <section id="notes" className="py-20 border-b border-[#00E5C3]/15 bg-[#101A1B]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+      {/* ================= 8. CONTACT ================= */}
+      <section id="contact" className="py-24 bg-[#0B1112] relative overflow-hidden">
+        {/* Subtle background glow */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-1/4 top-1/2 -translate-y-1/2 h-[450px] w-[500px] rounded-full bg-[#00E5C3]/[0.03] blur-[140px]"
+        />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
-          <div className="mb-12">
-            <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#00E5C3]">
-              {"// Technical Write-ups & Docs"}
-            </p>
-            <h2 className="mt-2 font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#E8F1EF]">
-              Notes &amp; Knowledge Base
-            </h2>
-            <p className="mt-2 text-sm text-[#91A5A1]">
-              Technical summaries, testing methodologies, and architectural references written to reinforce understanding.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {researchNotes.map((n) => (
-              <div
-                key={n.number}
-                className="flex flex-col justify-between rounded-xl border border-white/[0.08] bg-[#142122] p-6 transition-all hover:border-[#35BDF2]/40 hover:bg-[#1B2B2D]"
-              >
-                <div>
-                  <div className="flex items-center justify-between font-mono text-xs text-[#91A5A1] border-b border-white/[0.06] pb-3">
-                    <span className="text-[#35BDF2]">DOC_REF: {n.number}</span>
-                    <span className="text-[10px] uppercase text-[#00E5C3]">{n.category}</span>
-                  </div>
-
-                  <h3 className="mt-4 font-display text-lg font-bold text-[#E8F1EF]">
-                    {n.title}
-                  </h3>
-
-                  <p className="mt-2 text-xs leading-relaxed text-[#91A5A1]">
-                    {n.description}
-                  </p>
-                </div>
-
-                <div className="mt-6 border-t border-white/[0.06] pt-4 font-mono text-xs">
-                  <Link
-                    href={`/research/${n.slug}`}
-                    className="inline-flex items-center gap-1.5 text-[#35BDF2] hover:underline"
-                  >
-                    <span>Read Note</span>
-                    <span>→</span>
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================= 9. CONTACT ================= */}
-      <section id="contact" className="py-20 bg-[#0B1112]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          
-          <div className="mb-12">
-            <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#00E5C3]">
-              {"// Get In Touch"}
-            </p>
-            <h2 className="mt-2 font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#E8F1EF]">
+          <div className="mb-14 max-w-3xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#00E5C3]/30 bg-[#00E5C3]/[0.08] px-3.5 py-1 font-mono text-xs text-[#00E5C3]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#00E5C3] animate-pulse" />
+              <span>DIRECT CHANNELS &amp; COMMUNICATIONS</span>
+            </div>
+            <h2 className="mt-4 font-display text-3xl sm:text-5xl font-bold tracking-tight text-[#E8F1EF]">
               Contact Me
             </h2>
-            <p className="mt-2 text-sm text-[#91A5A1]">
-              Open for professional inquiries, WordPress security cleanup, penetration testing discussions, and security research collaboration.
+            <p className="mt-3 text-base text-[#91A5A1] leading-relaxed">
+              Have a security project, collaboration idea, or professional inquiry? Let&apos;s connect. Open for WordPress security cleanup, penetration testing discussions, and authorized vulnerability assessments.
             </p>
           </div>
 
-          <div className="grid gap-12 lg:grid-cols-2">
+          <div className="grid gap-8 lg:grid-cols-12 items-start">
             
-            {/* Direct Connect Info */}
-            <div className="space-y-6">
-              <div className="rounded-xl border border-white/[0.08] bg-[#142122] p-6 space-y-4 font-mono text-xs">
-                <p className="font-bold text-[#E8F1EF] uppercase tracking-wider border-b border-white/[0.08] pb-2">
-                  Verified Contact Channels &amp; Profiles
-                </p>
+            {/* Direct Connect & Info Cards (5 Cols) */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="rounded-2xl border border-white/[0.08] bg-[#142122]/90 backdrop-blur-md p-6 sm:p-7 shadow-xl shadow-black/40">
+                <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
+                  <span className="font-mono text-xs font-bold text-[#E8F1EF] uppercase tracking-wider">
+                    Verified Contact Channels
+                  </span>
+                  <span className="font-mono text-[11px] text-[#00E5C3] flex items-center gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#00E5C3]" />
+                    ACTIVE
+                  </span>
+                </div>
 
-                <div className="space-y-3.5 text-[#91A5A1]">
-                  <div>
-                    <span className="text-[#00E5C3] block font-semibold mb-0.5">EMAIL:</span>
-                    <a
-                      href="mailto:hasnainshahriar2007@gmail.com"
-                      className="text-[#E8F1EF] hover:underline"
-                    >
-                      hasnainshahriar2007@gmail.com
-                    </a>
-                  </div>
+                <div className="mt-5 space-y-3 font-mono text-xs">
+                  {/* Email */}
+                  <a
+                    href="mailto:hasnainshahriar2007@gmail.com"
+                    className="group flex items-center justify-between rounded-xl border border-white/[0.05] bg-[#0B1112]/80 p-3.5 transition-all hover:border-[#00E5C3]/50 hover:bg-[#101A1B]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#00E5C3]/10 text-[#00E5C3] group-hover:bg-[#00E5C3] group-hover:text-[#0B1112] transition-colors">
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-[#91A5A1] uppercase tracking-wider block">Email</span>
+                        <span className="text-[#E8F1EF] group-hover:text-[#00E5C3] transition-colors font-sans text-xs">hasnainshahriar2007@gmail.com</span>
+                      </div>
+                    </div>
+                    <span className="text-[#91A5A1] group-hover:text-[#00E5C3] transition-transform group-hover:translate-x-0.5">→</span>
+                  </a>
 
-                  <div>
-                    <span className="text-[#00E5C3] block font-semibold mb-0.5">GITHUB:</span>
-                    <a
-                      href="https://github.com/simplyshahriar"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#E8F1EF] hover:underline"
-                    >
-                      github.com/simplyshahriar ↗
-                    </a>
-                  </div>
+                  {/* GitHub */}
+                  <a
+                    href="https://github.com/simplyshahriar"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between rounded-xl border border-white/[0.05] bg-[#0B1112]/80 p-3.5 transition-all hover:border-[#00E5C3]/50 hover:bg-[#101A1B]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#00E5C3]/10 text-[#00E5C3] group-hover:bg-[#00E5C3] group-hover:text-[#0B1112] transition-colors">
+                        <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                          <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-[#91A5A1] uppercase tracking-wider block">GitHub</span>
+                        <span className="text-[#E8F1EF] group-hover:text-[#00E5C3] transition-colors font-sans text-xs">github.com/simplyshahriar ↗</span>
+                      </div>
+                    </div>
+                    <span className="text-[#91A5A1] group-hover:text-[#00E5C3] transition-transform group-hover:translate-x-0.5">→</span>
+                  </a>
 
-                  <div>
-                    <span className="text-[#00E5C3] block font-semibold mb-0.5">LINKEDIN:</span>
-                    <a
-                      href="https://www.linkedin.com/in/hasnainshahriar/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#E8F1EF] hover:underline"
-                    >
-                      linkedin.com/in/hasnainshahriar ↗
-                    </a>
-                  </div>
+                  {/* LinkedIn */}
+                  <a
+                    href="https://www.linkedin.com/in/hasnainshahriar/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between rounded-xl border border-white/[0.05] bg-[#0B1112]/80 p-3.5 transition-all hover:border-[#00E5C3]/50 hover:bg-[#101A1B]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#00E5C3]/10 text-[#00E5C3] group-hover:bg-[#00E5C3] group-hover:text-[#0B1112] transition-colors">
+                        <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-[#91A5A1] uppercase tracking-wider block">LinkedIn</span>
+                        <span className="text-[#E8F1EF] group-hover:text-[#00E5C3] transition-colors font-sans text-xs">linkedin.com/in/hasnainshahriar ↗</span>
+                      </div>
+                    </div>
+                    <span className="text-[#91A5A1] group-hover:text-[#00E5C3] transition-transform group-hover:translate-x-0.5">→</span>
+                  </a>
 
-                  <div>
-                    <span className="text-[#00E5C3] block font-semibold mb-0.5">FACEBOOK:</span>
-                    <a
-                      href="https://www.facebook.com/simplyshahriar"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#E8F1EF] hover:underline"
-                    >
-                      facebook.com/simplyshahriar ↗
-                    </a>
-                  </div>
+                  {/* Facebook */}
+                  <a
+                    href="https://www.facebook.com/simplyshahriar"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between rounded-xl border border-white/[0.05] bg-[#0B1112]/80 p-3.5 transition-all hover:border-[#00E5C3]/50 hover:bg-[#101A1B]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#00E5C3]/10 text-[#00E5C3] group-hover:bg-[#00E5C3] group-hover:text-[#0B1112] transition-colors">
+                        <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-[#91A5A1] uppercase tracking-wider block">Facebook</span>
+                        <span className="text-[#E8F1EF] group-hover:text-[#00E5C3] transition-colors font-sans text-xs">facebook.com/simplyshahriar ↗</span>
+                      </div>
+                    </div>
+                    <span className="text-[#91A5A1] group-hover:text-[#00E5C3] transition-transform group-hover:translate-x-0.5">→</span>
+                  </a>
 
-                  <div>
-                    <span className="text-[#00E5C3] block font-semibold mb-0.5">INSTAGRAM:</span>
-                    <a
-                      href="https://www.instagram.com/simplyshahriar/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#E8F1EF] hover:underline"
-                    >
-                      instagram.com/simplyshahriar ↗
-                    </a>
-                  </div>
+                  {/* Instagram */}
+                  <a
+                    href="https://www.instagram.com/simplyshahriar/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between rounded-xl border border-white/[0.05] bg-[#0B1112]/80 p-3.5 transition-all hover:border-[#00E5C3]/50 hover:bg-[#101A1B]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#00E5C3]/10 text-[#00E5C3] group-hover:bg-[#00E5C3] group-hover:text-[#0B1112] transition-colors">
+                        <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-[#91A5A1] uppercase tracking-wider block">Instagram</span>
+                        <span className="text-[#E8F1EF] group-hover:text-[#00E5C3] transition-colors font-sans text-xs">@simplyshahriar ↗</span>
+                      </div>
+                    </div>
+                    <span className="text-[#91A5A1] group-hover:text-[#00E5C3] transition-transform group-hover:translate-x-0.5">→</span>
+                  </a>
                 </div>
               </div>
 
-              <div className="rounded-xl border border-[#00E5C3]/20 bg-[#142122] p-6 font-mono text-xs text-[#91A5A1] space-y-2">
-                <p className="text-[#00E5C3] font-bold">ETHICAL TESTING &amp; SAFE HARBOR PLEDGE</p>
+              {/* Ethical Testing Pledge */}
+              <div className="rounded-2xl border border-[#00E5C3]/20 bg-[#142122]/90 backdrop-blur-md p-6 font-mono text-xs text-[#91A5A1] space-y-2.5 shadow-lg">
+                <div className="flex items-center gap-2 text-[#00E5C3] font-bold">
+                  <span className="h-2 w-2 rounded-full bg-[#00E5C3]" />
+                  <span>ETHICAL TESTING &amp; SAFE HARBOR PLEDGE</span>
+                </div>
                 <p className="leading-relaxed text-[11px]">
                   All testing conducted during my learning and research is strictly authorized, bounded by platform terms or isolated virtual environments. I adhere strictly to responsible disclosure principles and never perform uncoordinated intrusive testing.
                 </p>
               </div>
             </div>
 
-            {/* Functional Contact Form */}
-            <div className="rounded-xl border border-white/[0.08] bg-[#142122] p-6 sm:p-8">
-              <h3 className="font-display text-xl font-bold text-[#E8F1EF] mb-4">
-                Send a Secure Message
-              </h3>
+            {/* Functional Contact Form Card (7 Cols) */}
+            <div className="lg:col-span-7 rounded-2xl border border-white/[0.08] bg-[#142122]/95 backdrop-blur-md p-6 sm:p-9 shadow-2xl shadow-black/50">
+              <div className="flex items-center justify-between border-b border-white/[0.08] pb-4 mb-6">
+                <div>
+                  <h3 className="font-display text-2xl font-bold text-[#E8F1EF]">
+                    Send a Secure Message
+                  </h3>
+                  <p className="font-mono text-[11px] text-[#91A5A1] mt-0.5">
+                    End-to-end encrypted dispatch with rate limiting
+                  </p>
+                </div>
+                <span className="hidden sm:inline-block rounded border border-[#00E5C3]/30 bg-[#00E5C3]/10 px-2.5 py-1 font-mono text-[10px] text-[#00E5C3]">
+                  HTTP POST /api/contact
+                </span>
+              </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
+              <form onSubmit={handleSubmit} className="space-y-5 font-mono text-xs">
                 {/* Honeypot */}
                 <div className="hidden">
                   <input
@@ -964,45 +984,47 @@ export default function Home() {
                   />
                 </div>
 
-                <div>
-                  <label className="block text-[#91A5A1] uppercase mb-1">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    minLength={2}
-                    maxLength={80}
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    placeholder="Enter your name"
-                    className="w-full rounded border border-white/[0.1] bg-[#0B1112] px-3.5 py-2.5 text-[#E8F1EF] outline-none placeholder:text-[#91A5A1]/50 focus:border-[#00E5C3]"
-                  />
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label className="block text-[#91A5A1] uppercase mb-1.5 font-semibold text-[10px] tracking-wider">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      minLength={2}
+                      maxLength={80}
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      placeholder="Enter your name"
+                      className="w-full rounded-lg border border-white/[0.1] bg-[#0B1112] px-4 py-3 text-[#E8F1EF] outline-none placeholder:text-[#91A5A1]/40 focus:border-[#00E5C3] focus:ring-1 focus:ring-[#00E5C3] transition-all"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[#91A5A1] uppercase mb-1.5 font-semibold text-[10px] tracking-wider">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      maxLength={254}
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      placeholder="you@example.com"
+                      className="w-full rounded-lg border border-white/[0.1] bg-[#0B1112] px-4 py-3 text-[#E8F1EF] outline-none placeholder:text-[#91A5A1]/40 focus:border-[#00E5C3] focus:ring-1 focus:ring-[#00E5C3] transition-all"
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-[#91A5A1] uppercase mb-1">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    maxLength={254}
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    placeholder="you@example.com"
-                    className="w-full rounded border border-white/[0.1] bg-[#0B1112] px-3.5 py-2.5 text-[#E8F1EF] outline-none placeholder:text-[#91A5A1]/50 focus:border-[#00E5C3]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[#91A5A1] uppercase mb-1">
+                  <label className="block text-[#91A5A1] uppercase mb-1.5 font-semibold text-[10px] tracking-wider">
                     Topic / Subject
                   </label>
                   <select
                     value={form.topic}
                     onChange={(e) => setForm({ ...form, topic: e.target.value })}
-                    className="w-full rounded border border-white/[0.1] bg-[#0B1112] px-3.5 py-2.5 text-[#E8F1EF] outline-none focus:border-[#00E5C3]"
+                    className="w-full rounded-lg border border-white/[0.1] bg-[#0B1112] px-4 py-3 text-[#E8F1EF] outline-none focus:border-[#00E5C3] focus:ring-1 focus:ring-[#00E5C3] transition-all"
                   >
                     <option value="WordPress Security & Malware Removal">WordPress Malware Removal &amp; Hardening</option>
                     <option value="Penetration Testing Inquiry">Web Application Penetration Testing</option>
@@ -1014,7 +1036,7 @@ export default function Home() {
                 </div>
 
                 <div>
-                  <label className="block text-[#91A5A1] uppercase mb-1">
+                  <label className="block text-[#91A5A1] uppercase mb-1.5 font-semibold text-[10px] tracking-wider">
                     Message
                   </label>
                   <textarea
@@ -1024,23 +1046,23 @@ export default function Home() {
                     rows={5}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    placeholder="Describe your inquiry, project scope, or message..."
-                    className="w-full rounded border border-white/[0.1] bg-[#0B1112] px-3.5 py-2.5 text-[#E8F1EF] outline-none placeholder:text-[#91A5A1]/50 focus:border-[#00E5C3]"
+                    placeholder="Describe your project, security inquiry, or request in detail..."
+                    className="w-full rounded-lg border border-white/[0.1] bg-[#0B1112] px-4 py-3 text-[#E8F1EF] outline-none placeholder:text-[#91A5A1]/40 focus:border-[#00E5C3] focus:ring-1 focus:ring-[#00E5C3] transition-all leading-relaxed"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full rounded border border-[#00E5C3] bg-[#00E5C3] py-3 text-xs font-semibold text-[#0B1112] shadow-[0_0_15px_rgba(0,229,195,0.2)] transition-all hover:bg-[#35BDF2] hover:border-[#35BDF2] disabled:opacity-50"
+                  className="w-full rounded-lg border border-[#00E5C3] bg-[#00E5C3] py-3.5 text-xs font-semibold text-[#0B1112] shadow-[0_0_20px_rgba(0,229,195,0.25)] transition-all hover:bg-[#35BDF2] hover:border-[#35BDF2] hover:shadow-[0_0_25px_rgba(53,189,242,0.35)] disabled:opacity-50 cursor-pointer"
                 >
-                  {submitting ? "Sending Message..." : "Send Message →"}
+                  {submitting ? "Transmitting Message..." : "Send Message →"}
                 </button>
 
                 {status && (
                   <div
                     role="status"
-                    className="rounded border border-[#00E5C3]/30 bg-[#00E5C3]/10 p-3 text-xs text-[#00E5C3]"
+                    className="rounded-lg border border-[#00E5C3]/40 bg-[#00E5C3]/10 p-3.5 text-xs text-[#00E5C3]"
                   >
                     {status}
                   </div>
